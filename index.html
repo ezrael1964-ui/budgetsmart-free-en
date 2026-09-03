@@ -207,6 +207,15 @@ a{color:inherit}
 .w-36 {width:9rem}
 .w-full {width:100%}
 .max-w-xs {max-width:20rem}
+/* V-35 - these were used in the markup but never defined in the local CSS bundle,
+   so the upgrade modal rendered full-width instead of a centred 28rem card, with no
+   dimmed backdrop. Reported from a screenshot; the same gap exists in both languages. */
+.max-w-md {max-width:28rem}
+.max-w-\[160px\] {max-width:160px}
+.inset-0 {top:0;right:0;bottom:0;left:0}
+.bg-black\/60 {background-color:rgba(0,0,0,.6)}
+.rounded-2xl {border-radius:1rem}
+.z-40 {z-index:40}
 .max-w-2xl {max-width:42rem}
 .max-w-3xl {max-width:48rem}
 .max-w-4xl {max-width:56rem}
@@ -2320,7 +2329,7 @@ html[dir="ltr"] .absolute.left-3 { left: .75rem; right: auto; }
  <div class="max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3">
  <p class="text-xs text-slate-300 text-left leading-relaxed">
  🔒 <strong>Data security:</strong>
- Your financial data is processed on this device and stays <strong>only on your device</strong>. The free edition loads Google Analytics to measure usage — no financial data is included.
+ Your data stays <strong>on this device only</strong>. The free edition loads Google Analytics to measure usage — no financial data.
  <a href="#" onclick="document.getElementById('privacy-modal').style.display='flex'" 
  class="text-blue-400 underline mr-1">More information</a>
  </p>
@@ -2387,7 +2396,7 @@ html[dir="ltr"] .absolute.left-3 { left: .75rem; right: auto; }
  </div>
  <p class="text-center text-[11px] text-slate-400 mb-4">Perpetual license for the purchased version, for a single user · one year of updates included. The purchased version stays usable afterwards; future upgrades may be offered separately. Your data stays on your computer.</p>
 
- <a id="upgrade-cta" href="https://www.ezraeliezer.com/budgetsmart-pro" target="_blank" rel="noopener"
+ <a id="upgrade-cta" href="https://www.ezraeliezer.com/en/budgetsmart-pro" target="_blank" rel="noopener"
  class="block w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg text-sm text-center transition-all mb-2">
  Upgrade to Pro →
  </a>
@@ -3087,11 +3096,24 @@ html[dir="ltr"] .absolute.left-3 { left: .75rem; right: auto; }
                 // must not open a free user straight into the locked view.
                 S.actualsBasis = (data.actualsBasis === 'cash' && APP_PLAN === 'pro') ? 'cash' : 'accrual';
 
- S.adjustments = Object.assign({
- dso: null, dio: null, dpo: null, wcMode: 'annual',
+ // V-35 - ported from HE (V-34). Object.assign copied values verbatim, so a work
+ // file holding ar:"100" and inv:"50" string-concatenated into "10050" and corrupted
+ // the adjusted valuation - no error, just a wrong number. Every numeric field is
+ // now coerced, and wcMode is whitelisted.
+ S.adjustments = (function(o){
+ o = (o && typeof o === 'object') ? o : {};
+ const out = { dso: null, dio: null, dpo: null, wcMode: 'annual',
  ar: null, inv: null, ap: null, wcMonthly: Array(12).fill(null),
- debt: null, cash: null, addAmt: null, addLabel: '', subAmt: null, subLabel: ''
- }, data.adjustments || {});
+ debt: null, cash: null, addAmt: null, addLabel: '', subAmt: null, subLabel: '' };
+ ['dso','dio','dpo','ar','inv','ap','debt','cash','addAmt','subAmt'].forEach(k => {
+ const n = Number(o[k]);
+ out[k] = (o[k] === null || o[k] === undefined || o[k] === '' || !Number.isFinite(n)) ? null : n;
+ });
+ out.wcMode = (o.wcMode === 'monthly') ? 'monthly' : 'annual';
+ out.wcMonthly = arr12(o.wcMonthly, null).map(v => { const n = Number(v); return Number.isFinite(n) ? n : null; });
+ out.addLabel = o.addLabel; out.subLabel = o.subLabel;
+ return out;
+ })(data.adjustments);
  // V-34 — a work file bypasses the field entirely, so sanitise on load too.
  S.adjustments.addLabel = _cleanAdjLabel(S.adjustments.addLabel);
  S.adjustments.subLabel = _cleanAdjLabel(S.adjustments.subLabel);
@@ -3370,7 +3392,18 @@ html[dir="ltr"] .absolute.left-3 { left: .75rem; right: auto; }
  if(!requirePro('Loading work from a file')) { if(event && event.target) event.target.value = ''; return; }
  const file = event.target.files[0];
  if(!file) return;
+ // V-35 - ported from HE (V-34). The size was checked AFTER readAsText had already
+ // read the whole file, and a failed or cancelled read left the user with no feedback.
+ if(file.size > 5 * 1024 * 1024) {
+ showToastNotification('This file is larger than 5MB and does not look like a BudgetSmart work file');
+ event.target.value = '';
+ return;
+ }
  const reader = new FileReader();
+ reader.onerror = reader.onabort = function() {
+ showToastNotification('Could not read the file - try again or choose another file');
+ event.target.value = '';
+ };
  reader.onload = function(e) {
  // ── V-32 fix (2.2) — safe ordering ──
  // Until V-31 localStorage was overwritten BEFORE anything was verified, so a corrupt file was
@@ -5221,8 +5254,35 @@ html[dir="ltr"] .absolute.left-3 { left: .75rem; right: auto; }
  try {
  recalcAllInner();
  // Sanity gate: even without a throw, a non-finite output must not be rendered.
- if(typeof cachedOutput !== 'undefined' && cachedOutput && !Number.isFinite(cachedOutput.totalRev)) {
- throw new Error('totalRev is not a finite number');
+ // V-35 - ported from HE (V-34). This gate checked totalRev ONLY, so valid revenue
+ // with a broken profit, tax, cash flow, IRR or DSCR passed straight through to the
+ // report and the export. Widened to the annual totals, the per-month fields and,
+ // on the feasibility track, the deal metrics.
+ if(typeof cachedOutput !== 'undefined' && cachedOutput) {
+ const _bad = ['totalRev','totalGross','totalEbitda','totalEbit','annualTax']
+ .find(k => cachedOutput[k] !== null && cachedOutput[k] !== undefined && !Number.isFinite(cachedOutput[k]));
+ if(_bad) throw new Error(_bad + ' is not a finite number');
+ if(Array.isArray(cachedOutput.monthsData)) {
+ for(const m of cachedOutput.monthsData) {
+ const k = ['revenue','costOfGoods','ebitda','netIncome','taxCash']
+ .find(f => m[f] !== null && m[f] !== undefined && !Number.isFinite(m[f]));
+ if(k) throw new Error('monthly ' + k + ' is not a finite number');
+ }
+ }
+ // feasibilitySummary is a const inside another function and is out of scope here,
+ // so the summary is recomputed rather than referenced - guarding it by typeof
+ // would silently skip the whole check.
+ if(S.appMode === 'new' && Array.isArray(cachedOutput.monthsData)) {
+ const _fs = computeInvestmentSummary(
+ cachedOutput.monthsData.reduce((t, m) => t + (m.netIncome || 0), 0),
+ cachedOutput.monthsData);
+ if(_fs) {
+ const _fk = ['unleveragedIrrPct','irrPct','projectRoiPct','equityRoiPct',
+ 'dscr','dscrEffective','dealValueNpv4','bandLow','bandHigh','exitValue']
+ .find(f => _fs[f] !== null && _fs[f] !== undefined && !Number.isFinite(_fs[f]));
+ if(_fk) throw new Error('feasibility ' + _fk + ' is not a finite number');
+ }
+ }
  }
  calculationValid = true;
  showCalcErrorBanner(false);
