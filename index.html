@@ -6,23 +6,23 @@ Provided under a single-user, non-transferable license. Copying,
 distribution, resale, publication, modification, or creation of derivative works,
 and removal or alteration of copyright or license notices, are prohibited
 without prior written permission.
-License: FREE-EDITION
+License: FREE
 -->
 <html lang="en" dir="ltr">
 <head>
  <!-- BudgetSmart Pro English version generated from the Hebrew source file. Formulas and logic were not intentionally changed. -->
  <!-- Section -->
  <script>
- // GA4 - free edition only. PRIVACY: journey events only. NEVER pass revenue,
- // payroll, margin, valuation or any numeric business value to gaEvent.
- function gaEvent(name, params) {
-   try { if(typeof gtag === 'function') gtag('event', name, params || {}); } catch(e) {}
+ // ── מהדורה חינמית בלבד — מדידת המסע, לעולם לא ערכים עסקיים ──
+ // כלל פרטיות: אין להעביר ל-gaEvent מחזור, שכר, מרווח, שווי או כל
+ // ערך עסקי מספרי. נמדדים שלבים ולחיצות בלבד. עטוף ב-try/catch —
+ // מדידה לעולם לא תשבור את התוכנה.
+ function gaEvent(action, category, label) {
+     try { if (typeof gtag === 'function') gtag('event', action, { event_category: category, event_label: label }); } catch (e) {}
  }
  </script>
  <meta charset="UTF-8">
  <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <script async src="https://www.googletagmanager.com/gtag/js?id=G-NGB6JB9MYM"></script>
- <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-NGB6JB9MYM',{anonymize_ip:true});</script>
  <meta name="description" content="BudgetSmart Pro is professional software for annual budgeting, cash-flow forecasting, investment feasibility analysis, and business valuation—all in one local file. Built by a CFO with more than 30 years of experience.">
  <title>BudgetSmart Pro — Budgeting, Forecasting, Feasibility & Business Valuation</title>
  <link rel="icon" type="image/png" id="app-favicon">
@@ -733,6 +733,13 @@ html[dir="ltr"] .absolute.left-3 { left: .75rem; right: auto; }
   // Pro: the one-time install card is suppressed — the delivery email
   //  explains installing, and an in-app prompt adds nothing for a paying user.
 })();
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NGB6JB9MYM"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag("js", new Date());
+gtag("config", "G-NGB6JB9MYM", { anonymize_ip: true });
 </script>
 </head>
 <body class="bg-gray-50 text-gray-800 min-h-screen flex flex-col">
@@ -2284,6 +2291,18 @@ html[dir="ltr"] .absolute.left-3 { left: .75rem; right: auto; }
  </div>
 
  <!-- Section -->
+ <!-- ── V-36 — free-edition notice, BEFORE data entry rather than after.
+ Shown through the existing CSS: .plan-free [data-free-only]{display:block} -->
+ <div data-free-only class="mb-4 bg-amber-50 border border-amber-200 rounded-xl px-4 py-3">
+ <div class="flex items-start gap-2">
+ <i data-lucide="lock" class="w-4 h-4 text-amber-600 flex-shrink-0 mt-0.5"></i>
+ <p class="text-xs leading-relaxed text-amber-900">
+ <strong>Actual-performance tracking is a Pro feature.</strong> You can enter data and see the shape of the table,
+ but the comparison against the forecast, the year-end estimate and the profit-to-cash bridge are available in the full edition only.
+ </p>
+ </div>
+ </div>
+
  <div id="actual-input-wrap" class="overflow-x-auto -mx-2 px-2"></div>
  <p class="text-[11px] text-slate-500 mt-2 leading-relaxed">
  <strong>Basis:</strong> enter <strong>actual receipts, excluding VAT</strong> — what reached the account this month. The comparison against the forecast is made on a cash basis: the forecast is translated into collections and supplier payments using the credit terms you set (DSO/DPO), so both sides sit on the same basis.<br><strong>What is based on estimates:</strong> depreciation, interest, principal repayments and the tax rate come from the forecast assumptions — not from actuals. The net profit and cash flow shown are therefore <strong>estimates</strong>.
@@ -2296,7 +2315,7 @@ html[dir="ltr"] .absolute.left-3 { left: .75rem; right: auto; }
  </div>
 
  <!-- Section -->
- <div id="actual-results" class="mt-6 hidden"></div>
+ <div id="actual-results" class="mt-6 hidden" data-pro-lock="Actual performance — monthly tracking against the forecast, year-end estimate and the profit-to-cash bridge"></div>
 
  <div class="mt-6 pt-4 border-t border-gray-100 flex flex-col sm:flex-row gap-3 justify-between">
  <button onclick="goToStep(6)" class="w-full sm:w-auto bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold px-5 py-2 rounded-lg transition-all flex items-center justify-center gap-2 cursor-pointer">
@@ -2329,7 +2348,7 @@ html[dir="ltr"] .absolute.left-3 { left: .75rem; right: auto; }
  <div class="max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3">
  <p class="text-xs text-slate-300 text-left leading-relaxed">
  🔒 <strong>Data security:</strong>
- Your data stays <strong>on this device only</strong>. The free edition loads Google Analytics to measure usage — no financial data.
+ All financial data entered into BudgetSmart is stored <strong>only on your device</strong>. The application processes this data locally and does not transmit it to our servers.
  <a href="#" onclick="document.getElementById('privacy-modal').style.display='flex'" 
  class="text-blue-400 underline mr-1">More information</a>
  </p>
@@ -2349,8 +2368,7 @@ html[dir="ltr"] .absolute.left-3 { left: .75rem; right: auto; }
  <h3 class="text-lg font-bold text-slate-900">Privacy Policy — Budget Planning Software</h3>
  <div class="text-sm text-slate-700 space-y-3 leading-relaxed">
  <p><strong>What the software does:</strong> BudgetSmart Pro helps you prepare budgets and financial forecasts, assess investment feasibility, and estimate business value based on the data and assumptions you enter.</p>
- <p><strong>What data is stored:</strong> All data (revenue, expenses, forecasts) is stored <strong>only in your browser</strong> using localStorage. Your financial data is never sent to Ezra Eliezer or to any third party.</p>
- <p><strong>Usage analytics (free edition):</strong> This free edition loads Google Analytics, which records that the page was opened and which screens were used, with the IP address anonymized. Only navigation events are sent — never revenue, costs, margins, valuations or any other figure you enter. The Pro edition contains no analytics and makes no automatic connection to the internet.</p>
+ <p><strong>What data is stored:</strong> All data (revenue, expenses, forecasts) is stored <strong>only in your browser</strong> using localStorage. The data is not sent to any external server.</p>
  <p><strong>Contact form:</strong> If you submit the contact form, the contact details you provide are transmitted through our form service to Ezra Eliezer so that he can respond to your request.</p>
  <p><strong>Excel export:</strong> The file is generated directly in your browser and downloaded to your computer — it does not pass through a server.</p>
  </div>
@@ -2459,7 +2477,7 @@ html[dir="ltr"] .absolute.left-3 { left: .75rem; right: auto; }
  <span id="app-version-indicator"></span>
  </p>
  <p class="block text-center text-[11px] text-slate-500">
- © 2026 Ezra Eliezer — All rights reserved · Licensed copy · License FREE-EDITION · Licensed copies receive updates for the first year
+ © 2026 Ezra Eliezer — All rights reserved · Free edition · personal use FREE · Licensed copies receive updates for the first year
  </p>
  </div>
  </div>
@@ -2467,7 +2485,7 @@ html[dir="ltr"] .absolute.left-3 { left: .75rem; right: auto; }
 
  <script>
 
- const APP_VERSION = 'V-35';
+ const APP_VERSION = 'V-36';
  // V-35 - the forecast year was stated three different ways: the screen and the PDF
  // said "next year", while Excel stamped new Date().getFullYear() - the CURRENT year.
  // A client could receive a PDF saying "next year" beside a workbook named 2026 for a
@@ -2502,7 +2520,7 @@ html[dir="ltr"] .absolute.left-3 { left: .75rem; right: auto; }
         const arr12 = (v, d = 0) => { const a = Array.isArray(v) ? v.slice(0, 12) : [];
             while (a.length < 12) a.push(d);
             return a.map(x => (x === null ? null : num(x, d))); };
- const APP_BUILD_DATE = '01.09.2026';
+ const APP_BUILD_DATE = '16.09.2026';
  const APP_PLAN = 'free';
 
 
@@ -3487,8 +3505,43 @@ html[dir="ltr"] .absolute.left-3 { left: .75rem; right: auto; }
  initLucideIcons();
  }
 
- function parseAndFormatInput(inputElement) {
+ // ── V-36 (BS35-QA-01) — the sign is detected BEFORE the strip, not after ──
+//  raw.replace(/[^0-9.]/g,'') removed the minus, so the `num < 0` guard below
+//  never fired: pasting -100 into a revenue field entered silently as +100 and
+//  inverted the figure, which then rolled into the budget, the cash flow, the
+//  DSCR and the valuation. (100), 100- and 1-00 all entered positive too.
+//  Every field routed through here is non-negative by nature, so the value is
+//  REJECTED rather than silently absolute-valued. Typing cannot trigger this
+//  (oninput clears a lone '-'); pasting can — hence '-' with no digits is not
+//  treated as negative input.
+function _inputLooksNegative(raw) {
+ const t = String(raw == null ? '' : raw).trim();
+ if (!/[0-9]/.test(t)) return false;
+ return t.indexOf('-') >= 0 || t.indexOf('\u2212') >= 0 || /^\(.*\)$/.test(t);
+}
+function _flagNegativeInput(inputElement) {
+ try {
+ inputElement.classList.add('border-red-500', 'ring-2', 'ring-red-300');
+ let note = inputElement.nextElementSibling;
+ if (!note || !note.classList || !note.classList.contains('js-neg-note')) {
+ note = document.createElement('div');
+ note.className = 'js-neg-note';
+ note.setAttribute('style', 'font-size:11.5px;font-weight:700;color:#9f1239;margin-top:4px');
+ inputElement.insertAdjacentElement('afterend', note);
+ }
+ note.textContent = 'A negative value is not valid in this field — enter a positive number.';
+ clearTimeout(inputElement._negNoteTimer);
+ inputElement._negNoteTimer = setTimeout(function () {
+ try {
+ inputElement.classList.remove('border-red-500', 'ring-2', 'ring-red-300');
+ if (note && note.parentNode) note.parentNode.removeChild(note);
+ } catch (e) {}
+ }, 5000);
+ } catch (e) {}
+}
+function parseAndFormatInput(inputElement) {
  const raw = inputElement.value;
+ if (_inputLooksNegative(raw)) { inputElement.value = ''; _flagNegativeInput(inputElement); return 0; }
  let cleanVal = raw.replace(/[^0-9.]/g, '');
  if (cleanVal === '' || isNaN(cleanVal)) { inputElement.value = ''; return 0; }
  let num = parseFloat(cleanVal);
@@ -5292,7 +5345,7 @@ html[dir="ltr"] .absolute.left-3 { left: .75rem; right: auto; }
  showCalcErrorBanner(true, err);
  }
  }
-        function recalcAllInner() {
+        function recalcAllInner() { 
  if(typeof applyModeVisibility === 'function') applyModeVisibility();
  if(typeof applyModeCopy === 'function') applyModeCopy();
  if(typeof updateInvestmentBreakdownUI === 'function') updateInvestmentBreakdownUI(false);
@@ -5924,6 +5977,29 @@ html[dir="ltr"] .absolute.left-3 { left: .75rem; right: auto; }
  return (low + high) / 2;
  }
 
+ // V-36 (BS35-QA-03) — wording for the missing IRR, for the card and the report.
+ //  NOTE: the 'numeric' text deliberately does NOT assert that several
+ //  solutions exist — a stream such as [-100, 50, -100] has no real root at
+ //  all. Nor does it claim that grace repays principal in one go; that is true
+ //  of a bullet only. It states what is actually known: no root in range.
+ function irrUnavailableNote(reason) {
+ switch(reason) {
+ case 'no-equity':
+ return 'No equity was contributed — the metric is defined only when the investor puts in equity.';
+ case 'no-data':
+ case 'no-investment':
+ return 'Investment or cash-flow data is missing.';
+ case 'no-positive-cash-flow':
+ return 'There is no positive cash flow to the owner across the period — there is no return to measure.';
+ case 'debt-shortfall':
+ return 'The debt outstanding at exit exceeds the sale value: equity value at exit is negative, so the metric is undefined.';
+ case 'numeric':
+ return 'No IRR solution was found within the search range. The owner stream changes sign more than once — a situation in which several solutions may exist, and in which there may be none at all. A single figure is therefore not shown, as it could mislead. Review the DSCR and the cash balance instead.';
+ default:
+ return 'No IRR solution was found within the search range. Review the cash flows and the financing assumptions.';
+ }
+ }
+
  function formatPctValue(value, digits = 1) {
  if(value === null || value === undefined || !isFinite(value)) return 'N/A';
  return value.toFixed(digits) + '%';
@@ -6321,6 +6397,18 @@ html[dir="ltr"] .absolute.left-3 { left: .75rem; right: auto; }
 
  const irrRate = equityInvestment> 0 ? calculateIRR(equityFlows) : null;
  const irrPct = (irrRate === null || equityNotComputable) ? null : irrRate * 100;   // V-34
+ // ── V-36 (BS35-QA-03) — say WHY there is no IRR ──
+ //  With a bullet loan large relative to EBIT the owner stream changes sign
+ //  twice (-equity, +interest-only x4, -full principal in year 5). Such a
+ //  stream has no single IRR and the solver returns null. That is the correct
+ //  behaviour — reporting one IRR on a multi-root stream is professionally
+ //  wrong. What was wrong was the silence: the card read "N/A" with no reason.
+ //  The reason was captured for unleveragedIrrFailure in V-34 and not here.
+ //  Condition order matters: with no equity the solver was never called and
+ //  lastFailure still holds the result of the previous (project IRR) call.
+ const equityIrrFailure = equityInvestment <= 0 ? 'no-equity'
+ : (irrRate === null ? (calculateIRR.lastFailure || 'numeric')
+ : (equityNotComputable ? 'debt-shortfall' : null));
  // ── Cumulative ROI: deliberately excludes the exit value (the card is labelled that way).
  //    It answers "how much profit accumulated", while IRR measures economic return including the sale. ──
  const projectRoiPct = investment> 0 ? (((totalEbit * projectHorizonYears) - investment) / investment) * 100 : null;
@@ -6934,6 +7022,7 @@ html[dir="ltr"] .absolute.left-3 { left: .75rem; right: auto; }
  equityRoiPct,
  unleveragedRoiPct,
  irrPct,
+ equityIrrFailure,   // V-36 (BS35-QA-03)
  unleveragedIrrPct,
  discountRatePct,
  feasModelLabel,
@@ -7263,8 +7352,21 @@ html[dir="ltr"] .absolute.left-3 { left: .75rem; right: auto; }
  return escapeHtml(value);
  }
 
- function calcMonthlyCashFlowForPdf(m) {
- return (m.revenue || 0) - (m.costOfGoods || 0) - (m.mktCost || 0) - (m.payrollCost || 0) - (m.fixedCost || 0) - (m.financing || 0) - (m.taxCash || 0) - (m.loanPrincipal || 0);
+ // ── V-36 (BS35-QA-02) — one source of truth for the report's monthly cash ──
+ //  calcMonthlyCashFlowForPdf ran on accrual revenue and COGS, while
+ //  buildPdfCashFlowTable, the screen, Excel and computeExistingBusinessSummary
+ //  all run on computeCashTiming. The same report showed two red months in the
+ //  cash table and counted zero negative months on the conclusions page.
+ //  Methodology §15.6 and §15.13 state explicitly that collections and supplier
+ //  payments are timed through the credit-days engine and not taken on an
+ //  accrual basis, so this restores compliance rather than changing the model.
+ //  The old function is deliberately deleted: leaving it invites the same bug.
+ function monthlyTimedCashFlow(monthsData) {
+ const _t = computeCashTiming(monthsData);
+ return monthsData.map((m, i) =>
+ (_t.collections[i] || 0) - (_t.supplierPayments[i] || 0) - (m.mktCost || 0)
+ - (m.payrollCost || 0) - (m.fixedCost || 0) - (m.financing || 0)
+ - (m.taxCash || 0) - (m.loanPrincipal || 0));
  }
 
  function moneyPdf(value) {
@@ -7285,8 +7387,12 @@ html[dir="ltr"] .absolute.left-3 { left: .75rem; right: auto; }
  const totalRev = summary.totalRev || cachedOutput?.totalRev || monthsData.reduce((s,m)=>s+(m.revenue||0),0);
  const marginGross = summary.marginGrossPct || (totalRev> 0 ? (summary.totalGross || 0) / totalRev * 100 : 0);
  const marginEbitda = summary.marginEbitdaPct || (totalRev> 0 ? (summary.totalEbitda || 0) / totalRev * 100 : 0);
- const monthlyCash = monthsData.map(calcMonthlyCashFlowForPdf);
- const negativeCashMonths = monthlyCash.filter(v => v < 0).length;
+ //  computeExistingBusinessSummary already computes this on the correct timed
+ //  basis; use it, and fall back to a local computation only when it is absent
+ //  (the "new business" mode, where the object is built differently).
+ const negativeCashMonths = Number.isFinite(summary.monthsNegativeCashFlow)
+ ? summary.monthsNegativeCashFlow
+ : monthlyTimedCashFlow(monthsData).filter(v => v < 0).length;
 
  if(S.appMode === 'new') {
  const dv = summary.dealValueNpv4;
@@ -7409,7 +7515,7 @@ html[dir="ltr"] .absolute.left-3 { left: .75rem; right: auto; }
  rows.push({ label:'Deal IRR', value:pctPdf(summary.selectedIrrPct), status: summary.selectedIrrPct === null ? 'Warning' : (summary.selectedIrrPct>= (summary.requiredRoi ?? 15) ? 'OK' : 'Warning'), note:'Internal rate of return on a 5-year operating cash-flow stream versus the personal benchmark (non-disqualifying reference line).' });
  rows.push({ label:'Payback period', value:summary.paybackOpTxt || 'N/A', status:'Info', note:'Informational metric only — does not determine GO/NO-GO by itself.' });
  rows.push({ label:'Cumulative ROI (undiscounted)', value:pctPdf(summary.projectRoiPct), status:'Info', note:'Informational metric only — not discounted and does not determine GO/NO-GO.' });
- rows.push({ label:'IRR on equity', value:pctPdf(summary.irrPct), status:summary.irrPct === null ? 'Warning' : (summary.irrPct> 0 ? 'OK' : 'Risk'), note:'Investor return test after financing structure.' });
+ rows.push({ label:'IRR on equity', value:pctPdf(summary.irrPct), status:summary.irrPct === null ? 'Warning' : (summary.irrPct> 0 ? 'OK' : 'Risk'), note:(summary.irrPct === null || !isFinite(summary.irrPct)) ? irrUnavailableNote(summary.equityIrrFailure) : 'Investor return test after financing structure.' });
  rows.push({ label:'Leverage effect', value:pctPdf(summary.leverageEffectPct), status:'Info', note:'Gap between equity IRR and deal IRR.' });
  rows.push({ label:'Equity payback period', value:summary.paybackTxt || 'N/A', status:'Info', note:'Equity ÷ annual cash flow to owners.' });
  rows.push({ label:'DSCR', value:summary.dscrTxt || 'No debt', status:(summary.dscrEffective === null || summary.dscrEffective === undefined) ? 'OK' : (summary.dscrEffective < DSCR_RED ? 'Risk' : (summary.dscrEffective < DSCR_WARN ? 'Warning' : 'OK')), note:'Debt-service capacity based on available cash flow.' });
@@ -7457,7 +7563,17 @@ html[dir="ltr"] .absolute.left-3 { left: .75rem; right: auto; }
  function getModelAssumptionItems(summary) {
  const pctPdf = v => (Number(v) || 0) + '%';
  const moneyPdf2 = v => '$' + fmtILS(Math.round(v || 0));
- const seasonality = document.querySelector('input[name="seasonality-profile"]:checked')?.value || 'stable';
+ // ── V-36 — the description derives from the MODEL, not the UI ──
+ //  This was the only place in the software that read the seasonality
+ //  assumption from the radio button rather than from S.seasonalityProfile.
+ //  The calculation (computeMonthlyWeights) and the Excel assumptions sheet
+ //  both read the state; only the PDF assumptions page read the DOM. The radio
+ //  block is rendered conditionally, so when nothing was checked the expression
+ //  fell through to 'stable' and printed "Even spread" while the calculation
+ //  ran on 'past' — two documents from one export describing different
+ //  assumptions. Same failure class as BS35-QA-02: a display layer reading a
+ //  different source from the one that feeds the calculation.
+ const seasonality = S.seasonalityProfile || 'stable';
  const labels = { past:'Based on history (average of monthly revenue patterns / manual edit)', stable:'Even spread', summer:'Mid-Year Peak (months 6–8)', winter:'Turn-of-Year Peak (months 11–1)', q4_peak:'Year-End Peak (months 10–12)' };
  const _tax = S.taxRate ?? 23;
  const items = [];
@@ -7608,9 +7724,9 @@ html[dir="ltr"] .absolute.left-3 { left: .75rem; right: auto; }
  c.rows.forEach(r => {
  const [label, a, pv, e, fy, hg, isPct] = r;
  const dev = isPct ? (a - pv) : (pv ? ((a - pv) / Math.abs(pv) * 100) : 0);
- const ok = hg ? (a >= pv) : (a <= pv);
+ const _st = devStatus(dev, a, pv, hg);   // V-36 — same threshold as the screen
  rows += `<tr><td>${htmlEscapePdfReport(label)}</td><td>${isPct?p(a):f(a)}</td><td>${isPct?p(pv):f(pv)}</td>`
- +  `<td>${dev>=0?'+':''}${dev.toFixed(1)}${isPct?' pts':'%'}</td><td>${ok?'Favorable':'Adverse'}</td>`
+ +  `<td>${devText(dev, isPct)}</td><td>${DEV_WORD[_st]}</td>`
  +  `<td>${isPct?p(e):f(e)}</td><td>${isPct?p(fy):f(fy)}</td></tr>`;
  });
  out += `<section class="page"><h1 class="section-title">${htmlEscapePdfReport(c.title)}</h1>
@@ -7679,8 +7795,8 @@ function generateProfessionalPdfReportDirect() {
  @page{size:A4;margin:16mm}*{box-sizing:border-box}body{direction:ltr;font-family:Arial,Helvetica,sans-serif;color:#0f172a;margin:0;background:#fff}.page{min-height:265mm;page-break-after:always;padding:0}.page:last-child{page-break-after:auto}.cover{display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;border:2px solid #e2e8f0;border-radius:18px;min-height:260mm;background:linear-gradient(180deg,#f8fafc,#fff)}.brand-logo{width:86px;height:86px;display:block;margin:0 0 10px}.brand{font-size:34px;font-weight:800;color:#0f172a;letter-spacing:.5px}.subtitle{font-size:15px;color:#475569;margin-top:8px}.report-title{font-size:28px;font-weight:800;color:#1e3a8a;margin:35px 0 14px}.meta-line{font-size:14px;color:#334155;margin:6px}.prepared{margin-top:36px;color:#475569}.section-title{font-size:22px;font-weight:800;color:#0f172a;border-bottom:3px solid #1e3a8a;padding-bottom:8px;margin:0 0 18px}.footer{position:fixed;bottom:7mm;left:16mm;right:16mm;text-align:center;font-size:9px;color:#64748b;border-top:1px solid #e2e8f0;padding-top:5px}.status-box{border:2px solid ${statusCfg.border || '#2563eb'};background:${statusCfg.bg || '#eff6ff'};color:${statusCfg.fg || '#1e3a8a'};border-radius:14px;padding:16px;margin:16px 0}.status-box h2{margin:0 0 6px;font-size:20px}.summary-grid,.kpi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.summary-item,.kpi-card{border:1px solid #e2e8f0;background:#f8fafc;border-radius:12px;padding:12px;text-align:center}.summary-item span,.kpi-label{display:block;color:#64748b;font-size:11px;font-weight:700;margin-bottom:6px}.summary-item strong,.kpi-value{font-size:16px;font-weight:800;color:#0f172a}.kpi-card{background:#fff;box-shadow:0 1px 4px rgba(15,23,42,.08)}.report-table{width:100%;border-collapse:collapse;font-size:9.2px;margin-top:10px}.report-table th{background:#0f172a;color:#fff;font-weight:700;padding:7px;border:1px solid #cbd5e1}.report-table td{padding:6px;border:1px solid #cbd5e1;text-align:center}.report-table td:first-child{font-weight:700;text-align:left;background:#f8fafc}.total-cell{font-weight:800;background:#e2e8f0!important}.negative-row td{background:#fff1f2;color:#9f1239;font-weight:700}.compact{max-width:560px}.assumption-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.assumption-grid div{border:1px solid #e2e8f0;border-radius:10px;padding:10px;background:#f8fafc}.assumption-grid span{display:block;font-size:11px;color:#64748b}.assumption-grid strong{font-size:13px;color:#0f172a}.insights{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}.insight-box{border:1px solid #e2e8f0;border-radius:12px;padding:12px;background:#fff}.insight-box h3{margin:0 0 8px;color:#1e3a8a;font-size:15px}.insight-box ul{margin:0;padding-left:18px;font-size:12px;line-height:1.6}.disclaimer{margin-top:18px;background:#f8fafc;border:1px solid #cbd5e1;border-radius:12px;padding:12px;font-size:11px;line-height:1.6;color:#475569}.note{font-size:12px;line-height:1.7;color:#475569}`;
 
  const html = `<!doctype html><html lang="en" dir="ltr"><head><meta charset="utf-8"><title>${htmlEscapePdfReport(title)} - ${htmlEscapePdfReport(company)}</title><style>${css}</style></head><body>
- <div class="footer">BudgetSmart · Ezra Eliezer — External CFO and Financial Consultant · +972 50-290-0102 · ezra@ezraeliezer.com · ezraeliezer.com · License FREE-EDITION</div>
- <section class="page cover"><img class="brand-logo" src="${APP_ICON}" alt="BudgetSmart"><div class="brand">BudgetSmart</div><div class="subtitle">Financial planning, budgeting and feasibility analysis system</div><div class="report-title">${htmlEscapePdfReport(title)}</div><div class="meta-line"><strong>Business name:</strong> ${htmlEscapePdfReport(company)}</div><div class="meta-line"><strong>Project:</strong> ${htmlEscapePdfReport(project)}</div><div class="meta-line"><strong>Forecast year:</strong> ${FORECAST_YEAR}</div><div class="meta-line"><strong>Generated on:</strong> ${htmlEscapePdfReport(today)}</div><div class="prepared">Prepared by<br><strong>${htmlEscapePdfReport(preparedBy)}</strong><br>External CFO and Financial Consultant<br>050-2900102 · ezra@ezraeliezer.com · ezraeliezer.com</div></section>
+ <div class="footer">BudgetSmart · Ezra Eliezer — External CFO and Financial Consultant · +972 50-290-0102 · ezra@ezraeliezer.com · ezraeliezer.com · License FREE</div>
+ <section class="page cover"><img class="brand-logo" src="${APP_ICON}" alt="BudgetSmart"><div class="brand">BudgetSmart</div><div class="subtitle">Financial planning, budgeting and feasibility analysis system</div><div class="report-title">${htmlEscapePdfReport(title)}</div><div class="meta-line"><strong>Business name:</strong> ${htmlEscapePdfReport(company)}</div><div class="meta-line"><strong>Project:</strong> ${htmlEscapePdfReport(project)}</div><div class="meta-line"><strong>Forecast year:</strong> ${FORECAST_YEAR}</div><div class="meta-line"><strong>Generated on:</strong> ${htmlEscapePdfReport(today)}</div><div class="meta-line" style="margin-top:10px;font-size:12px;color:#475569;line-height:1.6">This is a <strong>summary report</strong>. The full detail — every line, every month, and the tax and pre-tax profit rows — is in the Excel file exported from the same data.</div><div class="prepared">Prepared by<br><strong>${htmlEscapePdfReport(preparedBy)}</strong><br>External CFO and Financial Consultant<br>050-2900102 · ezra@ezraeliezer.com · ezraeliezer.com</div></section>
  <section class="page"><h1 class="section-title">Executive Summary</h1><div class="status-box"><h2>${htmlEscapePdfReport(statusTitle)}</h2><div>${htmlEscapePdfReport(summary.conclusion || '')}</div></div><div class="summary-grid">${executiveRows.map(([k,v])=>`<div class="summary-item"><span>${htmlEscapePdfReport(k)}</span><strong>${htmlEscapePdfReport(v)}</strong></div>`).join('')}</div><p class="note">This summary presents the key results only and is based on the data and assumptions entered.</p></section>
  ${S.appMode === 'new' ? `<section class="page"><h1 class="section-title">Valuation</h1>${buildPdfValuation(summary)}</section>` : ''}
  <section class="page"><h1 class="section-title">Key KPIs</h1><div class="kpi-grid">${buildPdfKpiCards(summary)}</div></section>
@@ -7689,7 +7805,7 @@ function generateProfessionalPdfReportDirect() {
  ${buildPdfActualsSection()}
  <section class="page"><h1 class="section-title">Cash Flow</h1>${buildPdfCashFlowTable(monthsData)}<p class="note">Negative months are highlighted in red for early detection of cash-flow pressure.</p></section>
  <section class="page"><h1 class="section-title">Model Assumptions</h1>${buildPdfAssumptions(summary)}</section>
- <section class="page"><h1 class="section-title">Conclusions and Next Steps</h1><div class="insights"><div class="insight-box"><h3>Strengths</h3><p class="note">${insights.strengths.length} business strengths were identified based on the entered data.</p></div><div class="insight-box"><h3>Points for Attention</h3><p class="note">${insights.risks.length} points require deeper review.</p></div><div class="insight-box"><h3>Action Recommendations</h3><p class="note">${insights.recommendations.length} implementation recommendations, to be reviewed in a personal consultation.</p></div></div><div class="status-box" style="border-color:#1e3a8a;background:#eff6ff;color:#1e3a8a;margin-top:18px"><h2>Want to understand what the numbers say about your business?</h2><div>A deeper interpretation — identifying risks, leveraging strengths and finding ways to improve — is reviewed together in an initial consultation at no cost.<br><strong>Ezra Eliezer — External CFO and Financial Consultant</strong><br>050-2900102 · ezra@ezraeliezer.com · ezraeliezer.com</div></div><div class="disclaimer"><strong>Professional disclaimer:</strong> This report is based on the data and assumptions entered into BudgetSmart and does not constitute financial, business, legal, or investment advice. Actual results may differ from the forecast shown. We recommend reviewing the data with a qualified professional before making business or financial decisions.</div><div class="disclaimer" style="margin-top:6px">Generated with BudgetSmart Pro · Licensed copy · License FREE-EDITION · © Ezra Eliezer</div></section>
+ <section class="page"><h1 class="section-title">Conclusions and Next Steps</h1><div class="insights"><div class="insight-box"><h3>Strengths</h3><p class="note">${insights.strengths.length} business strengths were identified based on the entered data.</p></div><div class="insight-box"><h3>Points for Attention</h3><p class="note">${insights.risks.length} points require deeper review.</p></div><div class="insight-box"><h3>Action Recommendations</h3><p class="note">${insights.recommendations.length} implementation recommendations, to be reviewed in a personal consultation.</p></div></div><div class="status-box" style="border-color:#1e3a8a;background:#eff6ff;color:#1e3a8a;margin-top:18px"><h2>Want to understand what the numbers say about your business?</h2><div>A deeper interpretation — identifying risks, leveraging strengths and finding ways to improve — is reviewed together in an initial consultation at no cost.<br><strong>Ezra Eliezer — External CFO and Financial Consultant</strong><br>050-2900102 · ezra@ezraeliezer.com · ezraeliezer.com</div></div><div class="disclaimer"><strong>Professional disclaimer:</strong> This report is based on the data and assumptions entered into BudgetSmart and does not constitute financial, business, legal, or investment advice. Actual results may differ from the forecast shown. We recommend reviewing the data with a qualified professional before making business or financial decisions.</div><div class="disclaimer" style="margin-top:6px">Generated with BudgetSmart Pro · Free edition · personal use FREE · © Ezra Eliezer</div></section>
  
 
 
@@ -7905,7 +8021,7 @@ function generateProfessionalPdfReportDirect() {
  ${kpiCard('Deal IRR', formatPctValue(summary.selectedIrrPct) + adjMini(summary.unleveragedIrrAdjPct !== null ? formatPctValue(summary.unleveragedIrrAdjPct) : null), (summary.selectedIrrPct !== null && isFinite(summary.selectedIrrPct)) ? `versus (${summary.requiredRoi ?? 15}%) — ` : 'Operating return over the 5-year horizon', (summary.selectedIrrPct !== null && isFinite(summary.selectedIrrPct) && summary.selectedIrrPct < (summary.requiredRoi ?? 15)) ? { border:'#f59e0b', fg:'#92400e' } : { border:'#10b981', fg:'#065f46' })}
  ${kpiCard(`Cumulative ${summary.projectHorizonYears}-year ROI (undiscounted)`, formatPctValue(summary.projectRoiPct) + adjMini(summary.projectRoiAdjPct !== null ? formatPctValue(summary.projectRoiAdjPct) : null), `Information only — (cumulative ${summary.projectHorizonYears}-year EBIT − investment) ÷ investment. Intentionally excludes exit value: it measures how much profit accumulated, not how much it is worth to sell`, roiColor)}
  ${kpiCard(`${summary.projectHorizonYears}-year return on equity (incl. sale, net of debt)`, formatPctValue(summary.equityRoiPct), `Cumulative and undiscounted: the owner's cash flow over ${summary.projectHorizonYears} years, plus the sale value net of the outstanding debt, divided by equity invested. ${(summary.irrPct !== null && isFinite(summary.irrPct)) ? `The annual, discounted version of the same stream is the equity IRR — ${formatPctValue(summary.irrPct)}. Do not divide the figure above by the number of years` : 'The annual version of the same stream is the equity IRR'}`, equityRoiColor)}
- ${kpiCard('IRR on equity', formatPctValue(summary.irrPct), `IRR on cash flows to equity holders after debt service`, irrColor)}
+ ${kpiCard('IRR on equity', formatPctValue(summary.irrPct), (summary.irrPct === null || !isFinite(summary.irrPct)) ? irrUnavailableNote(summary.equityIrrFailure) : `IRR on cash flows to equity holders after debt service`, irrColor)}
  ${kpiCard('Leverage effect', formatPctValue(summary.leverageEffectPct), 'Difference between equity IRR and deal IRR', getInvestmentColor(summary.leverageEffectPct, 'irr'))}
  ${kpiCard('DSCR', summary.dscrTxt, summary.dscr === null ? 'No loan required' : (summary.dscrMin !== null && summary.dscrMinYear && summary.dscrMin < summary.dscr - 0.005 ? `Scanned across the whole loan life — governing year ${summary.dscrMinYear}, versus ${summary.dscrYear1Txt} in year 1` : 'Cash flow available for debt service ÷ annual debt service'), dscrColor)}
  </div>
@@ -8741,7 +8857,17 @@ function generateProfessionalPdfReportDirect() {
 
  put1(31,1,'Opening Balance', st('F0FDF4','166534',{bold:true,sz:10,alH:'left'}));
  ob.forEach((v,i)=> put1(31,2+i, Math.round(v), st('F0FDF4','166534',{bold:true,sz:10}), NUM));
- put1(31,14, Math.round(ob[ob.length-1]), st('F0FDF4','166534',{bold:true,sz:10}), NUM);
+ // ── V-36 — the "Total / Annual" column of the balance row ──
+ //  ob[ob.length-1] — December's OPENING balance — was printed under a header
+ //  that reads Annual, while row 40 already did the right thing and showed
+ //  December's CLOSING balance, i.e. the year's close. One column held two
+ //  conventions for balances, and the identity every cash-flow reader performs
+ //  broke: opening + net = closing. With a zero opening year the sheet printed
+ //  364,210 + 397,320 net against a 397,320 close, so a reasonable reader
+ //  concluded the year generated 33,110 instead of 397,320.
+ //  A balance is not a flow and is not summed; the annual column of an opening
+ //  row is January's opening, ob[0] — the same figure already in the January cell.
+ put1(31,14, Math.round(ob[0]), st('F0FDF4','166534',{bold:true,sz:10}), NUM);
  const _rowArr = (r, label, arr, bg, fg) => {
  put1(r,1,label, st(bg,fg,{bold:false,sz:10,alH:'left'}));
  let s2=0; arr.forEach((v,i)=>{ s2+=v; put1(r,2+i, Math.round(v), st(bg,fg,{sz:10}), NUM); });
@@ -8915,14 +9041,14 @@ function generateProfessionalPdfReportDirect() {
                 rr++;
                 evRows.forEach(([label,a,pv,eac,fAnn,hg,isPct])=>{
                     const dev = pv? (isPct?(a-pv):((a-pv)/Math.abs(pv)*100)) : 0;
-                    const good = hg?(a>=pv):(a<=pv);
+                    const _st = devStatus(dev, a, pv, hg);   // V-36 — same threshold as screen and PDF
                     const vac = eac-fAnn; const vacGood = hg?(vac>=0):(vac<=0);
                     const fmtV = isPct?PCT:NUM;
                     const rnd = x => isPct ? (Math.round(x*10)/1000) : Math.round(x);
                     put3(rr,1,label, st('F8FAFC','0F172A',{bold:true,sz:10,alH:'left'}));
                     put3(rr,2, rnd(a), st('FFFFFF','0F172A',{sz:10}), fmtV);
                     put3(rr,3, rnd(pv), st('FFFFFF','0F172A',{sz:10}), fmtV);
-                    put3(rr,4, (dev>=0?'+':'')+ (Math.round(dev*10)/10) + (isPct?' pts':'%'), st('FFFFFF', (dev>=0)===hg?'166534':'DC2626', {sz:10}));
+                    put3(rr,4, devText(dev, isPct), st('FFFFFF', devColorHex(dev, hg).slice(1).toUpperCase(), {sz:10}));   // V-36
                     put3(rr,5, good?'Favorable':'Adverse', st(good?'16A34A':'DC2626','FFFFFF',{bold:true,sz:10}));
                     put3(rr,6, rnd(eac), st('F0FDFA','134E4A',{bold:true,sz:10}), fmtV);
                     put3(rr,7, rnd(fAnn), st('F0FDFA','134E4A',{sz:10}), fmtV);
@@ -8995,7 +9121,7 @@ function generateProfessionalPdfReportDirect() {
  });
  r++;
  });
- put(r,1,'License: FREE-EDITION · © Ezra Eliezer · ezraeliezer.com', st('FFFFFF','94A3B8',{sz:9,alH:'left'}));
+ put(r,1,'License: FREE · © Ezra Eliezer · ezraeliezer.com', st('FFFFFF','94A3B8',{sz:9,alH:'left'}));
  for(let c=2;c<=6;c++) put(r,c,'', st('FFFFFF','94A3B8',{}));
  merges.push({s:{r:r-1,c:0},e:{r:r-1,c:5}});
  r++;
@@ -9211,7 +9337,22 @@ function generateProfessionalPdfReportDirect() {
  ['Key metric', 'EBITDA'],
  ['Annual metrics', 'EBITDA %, Cash Flow, Net Profit, Monthly break-even revenue, Revenue, Gross Profit'],
  ['Actual vs. forecast', 'Enter actual performance against the forecast'],
- ['', 'Customer / supplier fields are available in the software.']
+ // ── V-36 — this row carried an empty label and said only that the fields
+ //  "are available". The customer entered Net 90, watched the whole cash
+ //  forecast move, and then read an assumptions sheet that told them nothing.
+ //  Now the values actually used are reported.
+ ['Customer credit days (DSO)', (Number(S.dsoDays) || 0) > 0
+ ? 'Net ' + (Number(S.dsoDays) || 0) + ' days — receipts are timed on revenue'
+ : 'Cash (0 days) — revenue is collected in the month of recognition'],
+ ['Supplier credit days (DPO)', (Number(S.dpoDays) || 0) > 0
+ ? 'Net ' + (Number(S.dpoDays) || 0) + ' days — payments are timed on COGS only, not payroll or SG&A'
+ : 'Cash (0 days) — COGS is paid in the month it arises'],
+ ['Opening receivables', (Number(S.adjustments && S.adjustments.ar) > 0)
+ ? 'Entered in the adjustments panel and drives collections in the opening months'
+ : (S.appMode === 'new'
+ ? 'None — a new business has no opening receivables, so the early shortfall is real'
+ : 'Not entered — opening-month collections are estimated from last year\'s revenue')],
+ ['Scope', 'All figures exclude VAT or sales tax. Credit days time cash only and are not a full receivables ledger.']
  ]}
  );
  }
@@ -9803,6 +9944,45 @@ function generateProfessionalPdfReportDirect() {
  //  With two bases that would have become four implementations — near-certain drift.
  //  Screen, PDF and Excel all call this function and only this one.
  // ══════════════════════════════════════════════════════════════
+ // ── V-36 (BS35-QA-04) — a zero variance is not an exception ──
+ //  (dev>=0)===higherGood returned RED at exactly zero variance on expense
+ //  rows (higherGood=false), while the flag on the same row — running on
+ //  a<=pv — returned GREEN. "SG&A 80,000 vs 80,000" printed as +0.0% in red
+ //  beside a green flag. The same expression was duplicated in the Excel
+ //  export, so the bug travelled into the sheet. The correct shape already
+ //  existed in the adjacent VAC column; this column simply never got it.
+ //  The threshold is the display resolution (one decimal): a difference that
+ //  rounds to 0.0% is not shown as an exception, and zero carries no sign.
+ //  ── and one materiality threshold for colour, flag and word ──
+ //  Two cases deliberately stay on the raw comparison so no real signal is
+ //  lost: a dev that is not finite, and a zero forecast against a non-zero
+ //  actual — there is no percentage to derive there, but overrunning a zero
+ //  budget is an overrun all the same.
+ const DEV_FLAT_EPS = 0.05;
+ function devIsFlat(dev) {
+ return dev === null || dev === undefined || !isFinite(dev) || Math.abs(dev) < DEV_FLAT_EPS;
+ }
+ function devColorHex(dev, higherGood) {
+ if(devIsFlat(dev)) return '#64748b';
+ return ((dev >= 0) === higherGood) ? '#166534' : '#dc2626';
+ }
+ function devText(dev, isPct) {
+ if(dev === null || dev === undefined || !isFinite(dev)) return '—';
+ const unit = isPct ? ' pts' : '%';
+ if(devIsFlat(dev)) return '0.0' + unit;
+ return (dev > 0 ? '+' : '') + dev.toFixed(1) + unit;
+ }
+ const DEV_FLAG = { flat: '⚪', ok: '🟢', off: '🔴' };
+ const DEV_WORD = { flat: 'No variance', ok: 'Favorable', off: 'Adverse' };
+ const DEV_XLFILL = { flat: '64748B', ok: '16A34A', off: 'DC2626' };
+ function devStatus(dev, a, pv, higherGood) {
+ const _raw = () => (higherGood ? (a >= pv) : (a <= pv)) ? 'ok' : 'off';
+ if(dev === null || dev === undefined || !isFinite(dev)) return _raw();
+ if(!pv && a !== pv) return _raw();
+ if(devIsFlat(dev)) return 'flat';
+ return ((dev >= 0) === higherGood) ? 'ok' : 'off';
+ }
+
  function buildActualsComparison(elapsed, lastIdx, d, basisOverride) {
  const A = S.actuals, F = cachedOutput.monthsData;
  const fixedDefault = S.inputs.fixed || 0;
@@ -9863,6 +10043,31 @@ function generateProfessionalPdfReportDirect() {
  const pct = (g,r)=> r? (g/r*100) : 0;
  const aMargin=pct(aGross,aRev), pMargin=pct(pGross,pRev), eMargin=pct(eGross,eRev), fMargin=pct(fGross,fRev);
 
+ // ── V-36 — the row that closes the account ──
+ //  The table deducted depreciation, finance and tax from the bottom line
+ //  without showing them on any row. The user added the rows by eye, reached
+ //  operating profit, and saw a bottom line tens of thousands lower with no
+ //  source. It is derived as a RESIDUAL from rows already computed — the total
+ //  less what sits above it — so it is correct by construction, adds no new
+ //  assumption or formula, and cannot drift from the bottom line even if that
+ //  changes later. On the cash basis there is no depreciation (not a cash
+ //  movement), so the label differs.
+ //  ⚠️ The three components are not from the same source, and the software says
+ //  so beneath the table: tax is computed from the actual profit entered, while
+ //  depreciation and finance are taken from the FORECAST — they have no actuals
+ //  input. Depreciation is known from the depreciation schedule and finance from
+ //  the amortization schedule, so there is nothing to measure. Product limit: if
+ //  the debt structure changes mid-year, the finance row keeps showing forecast.
+ const _belowOp = (gross, mkt, pay, fix, net) => gross - (mkt + pay + fix) - net;
+ const aOther = _belowOp(aGross, aMkt, aPay, aFix, aNet);
+ const pOther = _belowOp(pGross, pMkt, pPay, pFix, pNet);
+ const eOther = _belowOp(eGross, eMkt, ePay, eFix, eNet);
+ const fOther = _belowOp(fGross, fMkt, fPay, fFix, fNet);
+ const otherLabel = _isAcc ? 'Depreciation, finance and tax' : 'Finance and tax paid';
+ const sourceNote = _isAcc
+ ? 'Depreciation and finance are shown from the forecast — they have no separate actuals input. Tax is computed from the actual profit you entered.'
+ : 'Finance is shown from the forecast — it has no separate actuals input. Tax is computed from the actual profit you entered.';
+
  const rows = [
  [L.rev, aRev, pRev, eRev, fRev, true, false],
  [L.cogs, aCogs, pCogs, eCogs, fCogs, false, false],
@@ -9871,9 +10076,10 @@ function generateProfessionalPdfReportDirect() {
  ['Marketing', aMkt, pMkt, eMkt, fMkt, false, false],
  ['Payroll', aPay, pPay, ePay, fPay, false, false],
  ['SG&A expenses (excluding payroll and marketing)', aFix, pFix, eFix, fFix, false, false],
+ [otherLabel, aOther, pOther, eOther, fOther, false, false],   // V-36 — closes the account
  [L.bottom, aNet, pNet, eNet, fNet, true, false],
  ];
- return { rows, labels: L, title: L.title, basis: _isAcc ? 'accrual' : 'cash',
+ return { rows, labels: L, title: L.title, basis: _isAcc ? 'accrual' : 'cash', sourceNote,
  values: { aRev,aCogs,aGross,aNet, pRev,pCogs,pGross,pNet, fRev,fCogs,fGross,fNet, eRev,eCogs,eGross,eNet,
  aMkt,aPay,aFix, pMkt,pPay,pFix, fMkt,fPay,fFix, eMkt,ePay,eFix, aMargin,pMargin,eMargin,fMargin } };
  }
@@ -9944,6 +10150,37 @@ function generateProfessionalPdfReportDirect() {
  </div>`;
  }
 
+ // ── V-36 — actuals teaser for the free edition ──
+ //  Draws the table skeleton only: the same headers and the same row labels as
+ //  the real table, with dashes instead of values. No invented numbers.
+ //  ⚠️ Lesson from the first attempt at this lock: #actual-results is empty and
+ //  hidden until a full month is entered, and a data-pro-lock on an empty
+ //  container looks like nothing at all. Returns immediately in Pro.
+ function renderActualsTeaser() {
+ if(APP_PLAN === 'pro') return false;
+ const results = document.getElementById('actual-results');
+ if(!results) return false;
+ const cols = ['Actual to date','Forecast to date','Variance','Flag','Year-end estimate (EAC)','Annual forecast'];
+ const labels = ['Revenue','COGS','Gross margin %','Gross profit','Marketing','Payroll',
+ 'SG&A expenses (excluding payroll and marketing)','Depreciation, finance and tax','Net profit'];
+ let h = `<h3 style="font-size:15px;font-weight:800;color:#0f172a;margin-bottom:4px">Actual vs. forecast</h3>
+ <p style="font-size:12px;color:#64748b;margin-bottom:12px">This is how the comparison will look once actual data is entered.</p>
+ <div style="overflow-x:auto"><table style="border-collapse:collapse;width:100%;direction:ltr;font-size:13px">
+ <thead><tr><th style="padding:8px;border:1px solid #e2e8f0;background:#0f172a;color:#fff;text-align:left;min-width:130px">Line item</th>`;
+ cols.forEach(c => { h += `<th style="padding:8px;border:1px solid #e2e8f0;background:#0f172a;color:#fff">${c}</th>`; });
+ h += `</tr></thead><tbody>`;
+ labels.forEach(lb => {
+ h += `<tr><td style="padding:7px 8px;border:1px solid #e2e8f0;text-align:left;font-weight:600;color:#334155">${lb}</td>`;
+ cols.forEach(() => { h += `<td style="padding:7px 8px;border:1px solid #e2e8f0;text-align:center;color:#cbd5e1">—</td>`; });
+ h += `</tr>`;
+ });
+ h += `</tbody></table></div>`;
+ results.innerHTML = h;
+ results.classList.remove('hidden');
+ applyProLocks();
+ return true;
+ }
+
  function renderActualsResults(elapsed, lastIdx, d) {
  const results = document.getElementById('actual-results');
  const missNote = document.getElementById('actual-missing-note');
@@ -9961,13 +10198,16 @@ function generateProfessionalPdfReportDirect() {
  } else {
  if(missNote) missNote.classList.add('hidden');
  }
- if(lastIdx < 0){ results.classList.add('hidden'); return; }
+ // V-36 — in the free edition show the locked skeleton instead of nothing.
+ if(lastIdx < 0){ if(renderActualsTeaser()) return; results.classList.add('hidden'); return; }
  results.classList.remove('hidden');
 
  const _cmp = buildActualsComparison(elapsed, lastIdx, d);
  const rows = _cmp.rows, L = _cmp.labels;
  const { eNet, fNet } = _cmp.values;
- const flag=(a,pv,hg)=> (hg?(a>=pv):(a<=pv))?'🟢':'🔴';
+ // V-36 — the flag derives from the same dev as the colour. With no cumulative
+ // actuals it falls back to the annual estimate versus forecast, as before.
+ const flagFor = (dev,a,pv,hg) => DEV_FLAG[devStatus(dev,a,pv,hg)];
  let h = `<h3 style="font-size:15px;font-weight:800;color:#0f172a;margin-bottom:4px">${L.title}</h3>
  <p style="font-size:12px;color:#64748b;margin-bottom:12px">The projected year-end result is based on the actual run rate: revenue and COGS are extrapolated using the forecast seasonality, while marketing, payroll and SG&amp;A use a flat monthly run rate. Variance is Actual YTD less Forecast YTD; whether it is favorable depends on the line - higher revenue or profit is favorable, lower costs are favorable.${elapsed < 3 ? ` <strong style="color:#b45309">With fewer than three months entered the projection may be volatile, because one unusual month can materially affect the full-year estimate.</strong>` : ''}</p>
  <div style="overflow-x:auto"><table style="border-collapse:collapse;width:100%;direction:ltr;font-size:13px">
@@ -9984,8 +10224,9 @@ function generateProfessionalPdfReportDirect() {
  rows.forEach(([label,a,pv,eac,fAnn,hg,isPct])=>{
  const hasCum=a!==null;
  const dev = hasCum&&pv ? (isPct ? (a-pv) : ((a-pv)/Math.abs(pv)*100)) : null;
- const devTxt = dev===null?'—':(isPct ? `${dev>=0?'+':''}${dev.toFixed(1)} pts` : `${dev>=0?'+':''}${dev.toFixed(1)}%`);
- const flg = hasCum?flag(a,pv,hg):flag(eac,fAnn,hg);
+ const devTxt = devText(dev, isPct);   // V-36 (BS35-QA-04)
+ const _devAlt = fAnn ? (isPct ? (eac-fAnn) : ((eac-fAnn)/Math.abs(fAnn)*100)) : null;
+ const flg = hasCum ? flagFor(dev,a,pv,hg) : flagFor(_devAlt,eac,fAnn,hg);   // V-36
  const vac = eac-fAnn; const vacGood = hg?(vac>=0):(vac<=0);
  const fmtCell = v => isPct ? `${v.toFixed(1)}%` : _actFmt0(v);
  const vacTxt = isPct ? `${vac>=0?'+':''}${vac.toFixed(1)} pts` : `${vac>=0?'+':''}${_actFmt0(vac)}`;
@@ -9993,7 +10234,7 @@ function generateProfessionalPdfReportDirect() {
  <td style="padding:7px;border:1px solid #e2e8f0;text-align:left;font-weight:600;position:sticky;left:0;background:#fff;z-index:1;min-width:130px;${isPct?'color:#64748b;font-style:italic':''}">${label}</td>
  <td style="padding:7px;border:1px solid #e2e8f0;text-align:center;direction:ltr">${hasCum?fmtCell(a):'—'}</td>
  <td style="padding:7px;border:1px solid #e2e8f0;text-align:center;direction:ltr">${hasCum?fmtCell(pv):'—'}</td>
- <td style="padding:7px;border:1px solid #e2e8f0;text-align:center;direction:ltr;color:${dev===null?'#64748b':(((dev>=0)===hg)?'#166534':'#dc2626')}">${devTxt}</td>
+ <td style="padding:7px;border:1px solid #e2e8f0;text-align:center;direction:ltr;color:${devColorHex(dev, hg)}">${devTxt}</td>
  <td style="padding:7px;border:1px solid #e2e8f0;text-align:center;font-size:15px">${flg}</td>
  <td style="padding:7px;border:1px solid #e2e8f0;text-align:center;direction:ltr;font-weight:700;background:#f0fdfa">${fmtCell(eac)}</td>
  <td style="padding:7px;border:1px solid #e2e8f0;text-align:center;direction:ltr;background:#f0fdfa">${fmtCell(fAnn)}</td>
@@ -10001,10 +10242,12 @@ function generateProfessionalPdfReportDirect() {
  </tr>`;
  });
  h += '</tbody></table></div>';
+ h += `<p style="margin-top:8px;font-size:11.5px;color:#64748b;line-height:1.6">${_cmp.sourceNote}</p>`;   // V-36
  h += `<p style="margin-top:12px;font-size:13px;color:#134e4a;font-weight:600">Estimated year-end ${L.bottom.toLowerCase()}: <strong>${_actFmt(eNet)}</strong> versus Forecast ${_actFmt(fNet)}.</p>`;
  h += buildActualsBridge(d, lastIdx);   // V-34
  results.innerHTML = h;
  results.classList.remove('hidden');
+ applyProLocks();   // V-36 — the block is rewritten on every keystroke and wipes the lock layer
  }
 
 
