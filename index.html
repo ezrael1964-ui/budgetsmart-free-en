@@ -1168,7 +1168,7 @@ gtag("config", "G-NGB6JB9MYM", { anonymize_ip: true });
 
 
  <div class="mb-8 bg-slate-50 border border-slate-200 p-5 rounded-xl">
- <h3 class="text-sm font-bold text-slate-700 mb-4">Marketing and advertising investment and its impact on revenue</h3>
+ <h3 class="text-sm font-bold text-slate-700 mb-4">Marketing and advertising expense and its impact on revenue</h3>
  
  <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center mb-4">
  <div>
@@ -1206,6 +1206,8 @@ gtag("config", "G-NGB6JB9MYM", { anonymize_ip: true });
  <div class="flex justify-between px-3 py-1.5"><span class="text-slate-600">Incremental Annual Marketing Cost</span><span id="mkt-roi-cost" class="font-semibold text-rose-600"></span></div>
  <div class="flex justify-between px-3 py-1.5"><span class="text-slate-600">Estimated Incremental Revenue</span><span id="mkt-roi-rev" class="font-semibold text-slate-800"></span></div>
  <div class="flex justify-between px-3 py-1.5"><span class="text-slate-600">Incremental Gross Profit</span><span id="mkt-roi-gross" class="font-semibold text-slate-800"></span></div>
+ <!-- V-39 (EN-06) — the assumption behind the card, made visible -->
+ <p style="font-size:11px;color:#64748b;line-height:1.55;padding:8px 12px 0;margin:0">The calculation assumes the gross margin on the incremental revenue equals the average margin, and excludes any additional operating costs the growth may bring.</p>
  <div class="flex justify-between px-3 py-1.5" id="mkt-roi-ebitda-row"><span class="font-bold text-slate-700">Estimated EBITDA Impact</span><span id="mkt-roi-ebitda" class="font-bold"></span></div>
  </div>
  </div>
@@ -1763,7 +1765,7 @@ gtag("config", "G-NGB6JB9MYM", { anonymize_ip: true });
  <ul class="text-[11.5px] leading-relaxed mt-1.5 pr-4" style="color:#78350f;list-style:disc">
  <li><strong>Owner salary versus market salary</strong> — the most important adjustment, in both directions: if the owner drew $25k per month while a hired manager would cost $50k, profit is overstated by $300k per year and should be reduced; if the owner drew more than market salary, profit is understated and should be added back.</li>
  <li><strong>Family member payroll</strong> — employees who do not actually work in the business, or employees paid above/below a realistic market salary.</li>
- <li><strong>Related-party rent</strong> — an owner-owned property leased to the business above or below market price.</li>
+ <li><strong>Related-party rent</strong> — an property owned by the business owner leased to the business above or below market price.</li>
  <li><strong>Private expenses in the business</strong> — vehicle, travel, communications and hospitality expenses that do not serve the business activity.</li>
  <li><strong>One-time items</strong> — grants, insurance proceeds, gain on sale of an asset, lawsuit proceeds or unusual expenses that will not recur.</li>
  <li><strong>Related-party transactions</strong> — purchases or sales at non-market prices.</li>
@@ -2412,7 +2414,7 @@ gtag("config", "G-NGB6JB9MYM", { anonymize_ip: true });
  <span class="text-xs text-slate-600 text-right">Software + one-on-one Zoom guidance</span>
  </div>
  </div>
- <p class="text-center text-[11px] text-slate-400 mb-4">Perpetual license for the purchased version, for a single user · one year of updates included. The purchased version stays usable afterwards; future upgrades may be offered separately. Your data stays on your computer.</p>
+ <p class="text-center text-[11px] text-slate-400 mb-4">Perpetual license for the purchased version — personal to the purchaser and the business they own, with no limit on the number of projects · one year of updates included. The purchased version stays usable afterwards; future upgrades may be offered separately. Your data stays on your computer.</p>
 
  <a id="upgrade-cta" href="https://www.ezraeliezer.com/en/budgetsmart-pro" target="_blank" rel="noopener"
  class="block w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg text-sm text-center transition-all mb-2">
@@ -2470,7 +2472,7 @@ gtag("config", "G-NGB6JB9MYM", { anonymize_ip: true });
  License (summary):
  </p>
  <p class="block text-slate-400 font-normal">
- The software is provided under a single-user, non-transferable license. The purchaser may use it for an unlimited number of budgets, forecasts, feasibility analyses and valuations, including work performed for clients. The software file itself may not be copied, shared, distributed, resold, sublicensed, published, rebranded or modified, and copyright or license notices may not be removed. All intellectual property rights remain with Ezra Eliezer. The tool is intended for information and self-assessment only and is not a substitute for professional advice — see the legal disclaimer above. Violation of these terms terminates the license.
+ The software is provided under a personal license to the purchaser and the business they own, with no limit on the number of projects. The license is non-transferable. The software file itself may not be copied, shared, distributed, resold, sublicensed, published, rebranded or modified, and copyright or license notices may not be removed. All intellectual property rights remain with Ezra Eliezer. The tool is intended for information and self-assessment only and is not a substitute for professional advice — see the legal disclaimer above. Violation of these terms terminates the license.
  </p>
  <p class="block text-center text-[11px] text-slate-500 pt-3 border-t border-slate-800/60 mt-3">
  <span class="font-semibold text-slate-400">BudgetSmart Pro</span>
@@ -2485,7 +2487,7 @@ gtag("config", "G-NGB6JB9MYM", { anonymize_ip: true });
 
  <script>
 
- const APP_VERSION = 'V-36';
+ const APP_VERSION = 'V-54';
  // V-35 - the forecast year was stated three different ways: the screen and the PDF
  // said "next year", while Excel stamped new Date().getFullYear() - the CURRENT year.
  // A client could receive a PDF saying "next year" beside a workbook named 2026 for a
@@ -2520,7 +2522,7 @@ gtag("config", "G-NGB6JB9MYM", { anonymize_ip: true });
         const arr12 = (v, d = 0) => { const a = Array.isArray(v) ? v.slice(0, 12) : [];
             while (a.length < 12) a.push(d);
             return a.map(x => (x === null ? null : num(x, d))); };
- const APP_BUILD_DATE = '16.09.2026';
+ const APP_BUILD_DATE = '20.09.2026';
  const APP_PLAN = 'free';
 
 
@@ -2711,9 +2713,9 @@ gtag("config", "G-NGB6JB9MYM", { anonymize_ip: true });
 
  try {
  const manifest = {
- name: "BudgetSmart Pro — Budget Planning and Forecast Control by Ezra Eliezer CFO",
+ name: "BudgetSmart Pro — Budgeting, Forecasting and Performance Tracking by Ezra Eliezer CFO",
  short_name: "Budget Forecast",
- description: "Professional business budget forecasting software",
+ description: "Financial planning software for business budgeting, forecasting and investment analysis",
  start_url: "/",
  display: "standalone",
  background_color: "#0f172a",
@@ -2966,7 +2968,7 @@ gtag("config", "G-NGB6JB9MYM", { anonymize_ip: true });
  requiredRoi: S.requiredRoi,
  discountRate: S.discountRate,
  mktGrowth: S.mktGrowth,
- mktElasticity: parseFloat(document.getElementById('input-mkt-elasticity')?.value) || 5,
+ mktElasticity: _numOr(document.getElementById('input-mkt-elasticity')?.value, 5),   /* V-36a EN-05 */
  manpower: S.manpower,
  adjustments: S.adjustments,
  currentStep: S.currentStep,
@@ -3098,7 +3100,16 @@ gtag("config", "G-NGB6JB9MYM", { anonymize_ip: true });
  S.taxRate = Math.min(100, Math.max(0, num(data.taxRate, 23)));
  S.taxTiming = data.taxTiming || 'monthly';
  S.actuals = (function(o){
-                    if(!o || typeof o !== 'object') return S.actuals || null;
+                    //  V-41 fix (HE-01) — a load must always reset.
+                    //  This returned S.actuals, explicitly KEEPING the previous project's
+                    //  actuals when the loaded file had none — so one client's performance
+                    //  data could appear in another client's report.
+                    if(!o || typeof o !== 'object') {
+                        const empty = {};
+                        ['revenue','cogs','marketing','payroll','fixed','receipts','payments','orders','pipeline']
+                            .forEach(k => { empty[k] = Array(12).fill(null); });
+                        return empty;
+                    }
                     const out = {};
                     // V-35 — receipts/payments were added to the engine and to ensureActualsState
                     // but NOT to this normaliser, so every reload or file load silently deleted the
@@ -3128,7 +3139,14 @@ gtag("config", "G-NGB6JB9MYM", { anonymize_ip: true });
  out[k] = (o[k] === null || o[k] === undefined || o[k] === '' || !Number.isFinite(n)) ? null : n;
  });
  out.wcMode = (o.wcMode === 'monthly') ? 'monthly' : 'annual';
- out.wcMonthly = arr12(o.wcMonthly, null).map(v => { const n = Number(v); return Number.isFinite(n) ? n : null; });
+ //  תיקון V-41 (HE-02) — Number(null)=0 הפך חודש ריק לאפס, והוריד
+     //  את הממוצע. 120,000 בחודש אחד הפכו לממוצע 10,000 — פער של
+     //  110,000 שעובר להתאמת השווי. השורה שמעל כבר בודקת null כך.
+     out.wcMonthly = arr12(o.wcMonthly, null).map(v => {
+         if(v === null || v === undefined || v === '') return null;
+         const n = Number(v);
+         return Number.isFinite(n) ? n : null;
+     });
  out.addLabel = o.addLabel; out.subLabel = o.subLabel;
  return out;
  })(data.adjustments);
@@ -3172,7 +3190,7 @@ gtag("config", "G-NGB6JB9MYM", { anonymize_ip: true });
  Number.isFinite(_tg) && _tg !== 0 ? Math.min(100, Math.max(-99, _tg)) : (data.targetGrowthPct || '');
  }
  if(document.getElementById('gross-margin-pct')) document.getElementById('gross-margin-pct').value = (data.grossMarginPct ?? '');
- if(document.getElementById('input-mkt-elasticity')) document.getElementById('input-mkt-elasticity').value = data.mktElasticity || 5;
+ if(document.getElementById('input-mkt-elasticity')) document.getElementById('input-mkt-elasticity').value = _numOr(data.mktElasticity, 5);   /* V-36a EN-05 */
  if(document.getElementById('slider-mkt-growth')) {
  document.getElementById('slider-mkt-growth').value = S.mktGrowth;
  document.getElementById('ui-mkt-growth-val').innerText = S.mktGrowth + '%';
@@ -3243,7 +3261,18 @@ gtag("config", "G-NGB6JB9MYM", { anonymize_ip: true });
  const capexEl = document.getElementById('input-capex-value');
  const rateEl = document.getElementById('input-capex-rate');
  if(capexEl) capexEl.value = S.capex.value> 0 ? S.capex.value.toLocaleString('en-US') : '';
- if(rateEl) rateEl.value = S.capex.rate || 15;
+                    }
+
+ //  ── V-42 (HE-05) — report details were never restored on load in EN ──
+ //  The HE V-39 fix was never ported: loadSavedData did not touch
+ //  S.reportMeta at all, so the previous client's business name
+ //  survived into the next project's report. Always reset to
+ //  defaults, then copy only the allowed keys from the file.
+ S.reportMeta = { companyName:'', projectName:'', industry:'', preparedBy:'', notes:'' };
+ if(data.reportMeta && typeof data.reportMeta === 'object') {
+     ['companyName','projectName','industry','preparedBy','notes'].forEach(k => {
+         if(typeof data.reportMeta[k] === 'string') S.reportMeta[k] = data.reportMeta[k];
+     });
  }
 
  const totalDA = S.inputs.depreciation + S.inputs.amortization;
@@ -3539,6 +3568,17 @@ function _flagNegativeInput(inputElement) {
  }, 5000);
  } catch (e) {}
 }
+//  תיקון V-36a (EN-05) — 0 הוא ערך תקין ואינו "חסר ערך".
+//  ‎|| 5 החליף כל ערך falsy, ובכלל זה 0, בברירת המחדל 5. מקדם תגובה 0 אומר
+//  "השיווק אינו מזיז מכירות", וזו הנחה לגיטימית שהמשתמש בחר במפורש —
+//  ‎|| בלע אותה והציג תוספת הכנסות שהוא ביקש שלא תהיה. הפגם היה בשלושה
+//  מקומות: החישוב, השמירה והטעינה, ולכן הערך לא שרד גם בקובץ העבודה.
+function _numOr(v, dflt) {
+    if (v === null || v === undefined || v === '') return dflt;
+    const n = Number(v);
+    return Number.isFinite(n) ? n : dflt;
+}
+
 function parseAndFormatInput(inputElement) {
  const raw = inputElement.value;
  if (_inputLooksNegative(raw)) { inputElement.value = ''; _flagNegativeInput(inputElement); return 0; }
@@ -4039,8 +4079,15 @@ function parseAndFormatInput(inputElement) {
  // tracks. Only when it is missing do we fall back to an estimate: an existing business
  // to last year's revenue reversed, a new business to zero (it has no customers yet).
  // ⚠️ The split assumes the balance is current; overdue debt collects more slowly.
- const arRaw = Number(S.adjustments && S.adjustments.ar);
- if(Number.isFinite(arRaw) && arRaw > 0) {
+ //  תיקון V-41 (HE-03) — יתרה שהוזנה כאפס היא מדידה, לא היעדר נתון.
+ //  התנאי > 0 דרס אפס מפורש ונפל לאומדן מההיסטוריה: AR=0 עם DSO=30
+ //  הפיק גביית פתיחה של 100,000 במקום 0.
+ //  ⚠️ אי אפשר פשוט >= 0: Number(null) הוא 0, ולכן "לא הוזן" היה
+ //  הופך לאפס. הבדיקה היא על הערך הגולמי, לפני ההמרה.
+ const arRawIn = S.adjustments ? S.adjustments.ar : null;
+ const arRaw = Number(arRawIn);
+ const arRawGiven = arRawIn !== null && arRawIn !== undefined && arRawIn !== '' && Number.isFinite(arRaw);
+ if(arRawGiven && arRaw >= 0) {
  const dso = Math.min(120, Math.max(0, Number(S.dsoDays) || 0));
  if(dso > 0) {
  const monthlyBill = arRaw / (dso / 30);   // the monthly billing the balance implies
@@ -4067,8 +4114,15 @@ function parseAndFormatInput(inputElement) {
  // a new business gets zero. Until now the supplier balance reduced VALUE but never
  // funded PAYMENTS, so cash and DSCR were both overstated.
  function priorSupplierSeed(cogsRatio, priorRev) {
- const apRaw = Number(S.adjustments && S.adjustments.ap);
- if(Number.isFinite(apRaw) && apRaw > 0) {
+ //  תיקון V-41 (HE-03) — יתרה שהוזנה כאפס היא מדידה, לא היעדר נתון.
+ //  התנאי > 0 דרס אפס מפורש ונפל לאומדן מההיסטוריה: AR=0 עם DSO=30
+ //  הפיק גביית פתיחה של 100,000 במקום 0.
+ //  ⚠️ אי אפשר פשוט >= 0: Number(null) הוא 0, ולכן "לא הוזן" היה
+ //  הופך לאפס. הבדיקה היא על הערך הגולמי, לפני ההמרה.
+ const apRawIn = S.adjustments ? S.adjustments.ap : null;
+ const apRaw = Number(apRawIn);
+ const apRawGiven = apRawIn !== null && apRawIn !== undefined && apRawIn !== '' && Number.isFinite(apRaw);
+ if(apRawGiven && apRaw >= 0) {
  const dpo = Math.min(120, Math.max(0, Number(S.dpoDays) || 0));
  if(dpo > 0) {
  const monthlyCost = apRaw / (dpo / 30);
@@ -5355,7 +5409,7 @@ function parseAndFormatInput(inputElement) {
  S.financingCost = computeFinancing().year1Interest;
  }
  S.grossMarginPct = parseFloat(document.getElementById('gross-margin-pct')?.value) || 0;
- S.mktElasticity = parseFloat(document.getElementById('input-mkt-elasticity')?.value) || 5;
+ S.mktElasticity = _numOr(document.getElementById('input-mkt-elasticity')?.value, 5);   /* V-36a EN-05 */
  // V-35 — the growth rate was left off the V-34 import-clamp list, so the field's
  // max attribute was the only gate: a hand-edited work file fed any value straight
  // into annualBase = baseYear x (1 + g/100). Enforced here, at the read that feeds
@@ -5771,7 +5825,12 @@ function parseAndFormatInput(inputElement) {
  beSub.textContent = `No break-even point — the contribution margin ${contributionPct.toFixed(1)}% is not positive`;
  beSub.style.color = '#dc2626';
  } else {
- beSub.textContent = monthsBelowBE> 0 ? `${monthsBelowBE} months below break-even point` : 'All months are above the break-even point';
+ //  V-39 (EN-04) — disclosure, not a change: the formula is identical,
+ //  the note only states what it includes.
+ const _beMktNote = (S.appMode !== 'new' && S.mktGrowth> 0 && S.inputs.marketing> 0)
+ ? ` · excludes the marketing uplift (${S.mktGrowth}%) as a growth driver`
+ : '';
+ beSub.textContent = (monthsBelowBE> 0 ? `${monthsBelowBE} months below break-even point` : 'All months are above the break-even point') + _beMktNote;
  beSub.style.color = '';
  }
  }
@@ -5851,11 +5910,20 @@ function parseAndFormatInput(inputElement) {
  const netBurnMonths = [];    // months where NET flow is negative - after tax, interest and principal
  let annualOperatingFlow = 0; // operating, before financing (revenue less cash expenses)
  let annualNetFlow = 0;       // net, after tax and debt service
+ //  V-51 — net flow with tax removed, and the months negative on that basis.
+ //  This is the test that separates real erosion — operations or debt service
+ //  that do not cover themselves — from a profitable business whose balance
+ //  shrinks simply because it pays tax.
+ let annualPreTaxFlow = 0;
+ const preTaxBurnMonths = [];
  const _tmw = computeCashTiming(months);
  months.forEach((m, i) => {
  const netCF = (_tmw.collections[i]||0) - (_tmw.supplierPayments[i]||0) - m.mktCost - m.payrollCost - m.fixedCost - (m.financing||0) - (m.taxCash||0) - (m.loanPrincipal||0);
  bal += netCF;
  annualNetFlow += netCF;
+ const netCFpreTax = netCF + (m.taxCash || 0);   // V-51
+ annualPreTaxFlow += netCFpreTax;
+ if(netCFpreTax < 0) preTaxBurnMonths.push(m.monthName);
  annualOperatingFlow += (m.revenue || 0) - (m.cashExpenses || 0);
  if(netCF < 0) netBurnMonths.push(m.monthName);
  if(bal < minBal) { minBal = bal; minBalIdx = i; }
@@ -5915,14 +5983,35 @@ function parseAndFormatInput(inputElement) {
  //  expenses only. A business whose operations are positive while the repayments
  //  drain the account passed it silently - and if the opening balance covered the
  //  gap, it was shown a green all-clear.
- if (!anyNeg && (annualNetFlow < 0 || netBurnMonths.length > 0)) {
+ // ── Cash-erosion warning ──
+ //  What it catches: the business ended the year with less cash than it began,
+ //  without the balance ever going below zero — so no other alert fires. The
+ //  buffer is being consumed, and at this rate it runs out.
+ //
+ //  All three conditions must hold, and each was added after a failure:
+ //    !anyNeg             — the balance never went negative (otherwise a more
+ //                          serious alert applies)
+ //    annualNetFlow < 0   — the year as a whole closed negative. Added in V-53
+ //                          after the test fired on a business that closed
+ //                          millions in surplus merely because two months were
+ //                          weak. Seasonality is not erosion.
+ //    annualPreTaxFlow<0  — the shortfall survives removing tax. Added in V-51
+ //                          after the test fired on a profitable business
+ //                          paying tax lawfully.
+ //
+ //  ⚠️ The rule both failures produced: a year-level conclusion requires a
+ //  year-level condition. A single-month trigger belongs to alerts that name
+ //  the months — burnMonths and belowBEMonths above — not to a claim about
+ //  the whole year.
+ if (!anyNeg && annualNetFlow < 0 && annualPreTaxFlow < 0) {
  const div = document.createElement('div');
  div.className = "p-3 bg-amber-50 border border-amber-200 text-amber-900 rounded-lg text-sm flex items-start gap-2 font-medium";
  const _fmtFlow = v => (v < 0 ? '−' : '') + '$' + Math.round(Math.abs(v)).toLocaleString('en-US');
  div.innerHTML = `<i data-lucide="trending-down" class="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5"></i>
- <div><strong>Cash erosion — the balance stayed positive but the account is shrinking</strong><br>
+ <div><strong>Cash erosion — the year closed with less cash than it started</strong><br>
  <span class="font-normal">
  Operating cash flow before financing: <strong>${_fmtFlow(annualOperatingFlow)}</strong> per year.<br>
+ Net cash flow excluding tax: <strong>${_fmtFlow(annualPreTaxFlow)}</strong> per year — the erosion is therefore not driven by the tax payment.<br>
  Net cash flow after tax and debt service: <strong>${_fmtFlow(annualNetFlow)}</strong> per year.<br>
  ${netBurnMonths.length > 0 ? `Months negative on a net basis: <strong>${netBurnMonths.join(', ')}</strong>.<br>` : ''}
  The balance stayed above zero only because of the opening balance. The operation itself may be healthy — it is the repayments that drain the account.</span></div>`;
@@ -5994,7 +6083,7 @@ function parseAndFormatInput(inputElement) {
  case 'debt-shortfall':
  return 'The debt outstanding at exit exceeds the sale value: equity value at exit is negative, so the metric is undefined.';
  case 'numeric':
- return 'No IRR solution was found within the search range. The owner stream changes sign more than once — a situation in which several solutions may exist, and in which there may be none at all. A single figure is therefore not shown, as it could mislead. Review the DSCR and the cash balance instead.';
+ return 'No IRR solution was found within the search range. This is typical of an owner stream that changes sign more than once — a bullet loan, for example — where several mathematical solutions may exist, or none at all. A single figure is therefore not shown, as it could mislead. Review the DSCR and the cash balance instead.';
  default:
  return 'No IRR solution was found within the search range. Review the cash flows and the financing assumptions.';
  }
@@ -6153,18 +6242,20 @@ function parseAndFormatInput(inputElement) {
  // Normal working-capital days - expressed in revenue terms so they stay
  // comparable with actualDays, which is computed on the same base.
  const normalDays = (normalWC !== null && totalRev> 0) ? (normalWC * 365 / totalRev) : null;
- let actualWC = null, actualSrc = '', monthsFilled = 0;
+ let actualWC = null, actualSrc = '', actualSrcKind = '', monthsFilled = 0;
  if(a.wcMode === 'monthly') {
  const vals = (a.wcMonthly || []).filter(v => v !== null && isFinite(v));
  monthsFilled = vals.length;
  if(vals.length> 0) {
  actualWC = vals.reduce((s, v) => s + v, 0) / vals.length;
  actualSrc = `Average of ${vals.length} monthly balances`;
+ actualSrcKind = 'monthly';   // V-49 (EN-012) — structured field, not string matching
  }
  } else {
  if(a.ar !== null || a.inv !== null || a.ap !== null) {
  actualWC = (a.ar || 0) + (a.inv || 0) - (a.ap || 0);
  actualSrc = 'Year-end balance sheet (point in time)';
+ actualSrcKind = 'balance';   // V-49 (EN-012)
  }
  }
  const wcActive = normalWC !== null && actualWC !== null;
@@ -6176,7 +6267,7 @@ function parseAndFormatInput(inputElement) {
  const stockAdj = wcAdj + netDebtAdj + manualAdj;
  const active = wcActive || netDebtActive || manualActive;
  const actualDays = (actualWC !== null && totalRev> 0) ? (actualWC * 365 / totalRev) : null;
- return { active, hasDays, normalDays, normalWC, normalAR, normalInv, normalAP, actualWC, actualSrc, monthsFilled,
+ return { active, hasDays, actualSrcKind, normalDays, normalWC, normalAR, normalInv, normalAP, actualWC, actualSrc, monthsFilled,
  wcActive, wcAdj, netDebtActive, netDebtAdj, manualActive, manualAdj,
  stockAdj, actualDays,
  addLabel: a.addLabel || '', subLabel: a.subLabel || '' };
@@ -6607,9 +6698,9 @@ function parseAndFormatInput(inputElement) {
  const _asFg = dealValueAdj === null ? '#3730a3' : (_adjPos ? '#065f46' : '#92400e');
  _adjStrip = `
  <div class="rounded-xl border-2 p-3.5 mt-2" style="background:${_asBg};border-color:${_asBd}">
- <div class="text-xs font-bold" style="color:${_asFg}">Conservative value gap vs. the investment — adjusted (4x multiple)Including Balance Sheet Adjustments (Δ ${(adj.stockAdj>= 0 ? '+' : '−')}$${fmtILS(Math.abs(Math.round(adj.stockAdj)))})</div>
+ <div class="text-xs font-bold" style="color:${_asFg}">Value gap after balance sheet adjustments (4× EBIT) — including (Δ ${(adj.stockAdj>= 0 ? '+' : '−')}$${fmtILS(Math.abs(Math.round(adj.stockAdj)))})</div>
  <div class="font-extrabold" style="color:${_asFg};font-size:1.6rem;line-height:1.2">${_adjDealTxt}</div>
- <p class="text-[11px] mt-1" style="color:${_asFg}">${parts.join(' · ')} — "Balance Sheet Adjustments" . Price.</p>
+ <p class="text-[11px] mt-1" style="color:${_asFg}">${parts.join(' · ')} — these balance sheet adjustments are included in the adjusted valuation shown above.</p>
  </div>`;
  }
  const _cleanNote = `<p style="font-size:10.5px;color:#94a3b8;margin-top:12px;line-height:1.6">The valuation assumes a <strong>clean transaction</strong>: handover with normal working capital, no financial debt or excess cash inside the business and no surplus assets — all balance-sheet adjustments are zero.${adj.active ? ' <strong>Adjustments were entered</strong> — the adjusted value is shown above.' : ' You can refine this in the "Balance sheet adjustments" panel further down the page.'}</p>`;
@@ -6734,7 +6825,7 @@ function parseAndFormatInput(inputElement) {
  </div>` : ''}
  <div style="margin-top:11px;padding-top:9px;border-top:1px solid #f1f5f9;display:flex;align-items:flex-start;gap:7px">
  <span style="color:#94a3b8;font-size:13px;line-height:1.2;margin-top:1px">ⓘ</span>
- <p class="text-[11px] text-slate-500" style="margin:0;line-height:1.6">The three estimates create a practical valuation range — Estimate 3 is the floor, while the Gordon model is the upper benchmark. They are enterprise values and are not affected by how the acquisition is financed.${_hasFinancing ? '' : ' A “Present value to the owner” line will appear here automatically when financing is entered.'}</p>
+ <p class="text-[11px] text-slate-500" style="margin:0;line-height:1.6">The three estimates create a practical valuation range — These estimates use different assumptions and serve as cross-checks, not as fixed lower and upper bounds — their order can change with the inputs. They are enterprise values and are not affected by how the acquisition is financed.${_hasFinancing ? '' : ' A “Present value to the owner” line will appear here automatically when financing is entered.'}</p>
  </div>
  </div>`;
 
@@ -6872,9 +6963,9 @@ function parseAndFormatInput(inputElement) {
                 blocked: { emoji:'⛔', bg:'#fff1f2', border:'#f43f5e', fg:'#9f1239' }
             };
             const axisTitles = {
-                A: { green:'The business is operationally profitable', yellow:'Depreciation swallows the operating profit', red:'The business is not operationally profitable', blocked:'Missing data' },
+                A: { green:'The business is operationally profitable', yellow:'EBITDA is positive, but EBIT is not', red:'The business is not operationally profitable', blocked:'Missing data' },
                 B: { green:'The deal works at the price entered', yellow:'Deal economics need review', red:'The price does not support the deal', blocked:'Missing data' },
-                C: { green: annualDebtService > 0 ? 'Financing structure OK' : 'No external debt — cash flow stands on its own', yellow:'Borderline financing structure', red:'The financing structure does not support the investment', blocked:'Loan terms not entered' }
+                C: { green: annualDebtService > 0 ? 'Financing structure OK' : 'No external debt — the cash-flow forecast meets the financing criteria of the model', yellow:'Borderline financing structure', red:'The financing structure does not support the investment', blocked:'Loan terms not entered' }
             };
             const axes = [
                 { key:'A', label:'Business health',       level:axisA, notes:axisANotes, title:axisTitles.A[axisA], cfg:axisCfg[axisA] },
@@ -6915,7 +7006,7 @@ function parseAndFormatInput(inputElement) {
                 // (conditional) and a negative return (disqualifying). Now separated.
                 decisionLevel = ((projIrr !== null && isFinite(projIrr) && projIrr <= 0)
                                  || unleveragedIrrFailure === 'no-positive-cash-flow') ? 'deal_nogo' : 'price_high';   // V-34
-                decisionTitle = decisionLevel === 'deal_nogo' ? 'The business is profitable, but at this price the investment does not return' : 'The business is profitable, but the price does not support the deal';
+                decisionTitle = decisionLevel === 'deal_nogo' ? 'The business is profitable, but at this price the investment is not recovered under the model assumptions' : 'The business is profitable, but the price does not support the deal';
             } else if(axisC === 'red') {
                 // ── V-34 — same class already fixed for price_high, recurring here ──
                 // A RED financing axis carried the label "CONDITIONAL GO", which is a
@@ -7070,6 +7161,7 @@ function parseAndFormatInput(inputElement) {
  dscrMin, dscrMinYear,
  dscrMinTxt: dscrMin === null ? 'No debt' : dscrMin.toFixed(2),
  breakEvenPoint: cachedOutput ? cachedOutput.breakEvenPoint : 0,
+ beUnreachable: cachedOutput ? !!cachedOutput.beUnreachable : false,   // V-44 (43-01)
  dealLevel,
  dealCfg,
  financingLevel,
@@ -7112,6 +7204,22 @@ function parseAndFormatInput(inputElement) {
  return netCF < 0;
  }).length;
  const monthsBelowBE = breakEvenPoint> 0 ? monthsData.filter(m => (m.revenue || 0) < breakEvenPoint).length : 0;
+ // ── V-38 (EN-09) — the cash BALANCE, not only the flow ──
+ //  The summary looked only at monthly flow. A business with a negative
+ //  opening balance can show a positive annual flow while the bank account
+ //  stays overdrawn all year. Positive flow is not liquidity.
+ //  statusLevel is deliberately unchanged — a negative balance is not
+ //  insolvency when an approved facility exists. Only the fact is added.
+ let _bal = effectiveOpeningBalance(), _minBal = _bal, _minBalMonth = 0, _monthsNegBal = 0;
+ monthsData.forEach((m, i) => {
+     const netCF = (_act.collections[i] || 0) - (_act.supplierPayments[i] || 0) - (m.mktCost || 0)
+         - (m.payrollCost || 0) - (m.fixedCost || 0) - (m.financing || 0) - (m.taxCash || 0) - (m.loanPrincipal || 0);
+     _bal += netCF;
+     if(_bal < 0) _monthsNegBal++;
+     if(_bal < _minBal) { _minBal = _bal; _minBalMonth = i + 1; }
+ });
+ const minCashBalance = _minBal, minCashMonth = _minBalMonth, monthsNegativeBalance = _monthsNegBal;
+ 
  let statusLevel = 'stable';
  if(totalEbitda <= 0 || totalNet <= 0 || annualCashFlow <= 0 || monthsNegativeCashFlow>= 4) statusLevel = 'risk';
  else if(monthsNegativeCashFlow> 0 || monthsBelowBE> 0) statusLevel = 'watch';
@@ -7120,11 +7228,15 @@ function parseAndFormatInput(inputElement) {
  watch: { emoji:'🟡', title:'Stable forecast with items to monitor', bg:'#fffbeb', border:'#f59e0b', fg:'#92400e' },
  risk: { emoji:'🔴', title:'Financial review required', bg:'#fff1f2', border:'#f43f5e', fg:'#9f1239' }
  }[statusLevel];
- const conclusion = statusLevel === 'stable'
+ //  V-38 (EN-09) — stated explicitly when the bank is overdrawn, even on positive flow.
+ const _balNote = minCashBalance < 0
+ ? ` Note: the cash balance is expected to be negative in ${monthsNegativeBalance} month(s), with a low of ${fmtILS(Math.round(minCashBalance))} ${minCashMonth === 0 ? 'already at the opening balance' : `in month ${minCashMonth}`}. This implies a credit facility of at least that size. A negative balance is not necessarily a problem where an approved facility exists — but it must exist and be sufficient.`
+ : '';
+ const conclusion = (statusLevel === 'stable'
  ? 'The forecast shows positive profitability and cash flow. Based on the entered data, the business is expected to operate above break-even at a stable level.'
  : (statusLevel === 'risk'
  ? 'The forecast shows weakness in profitability or cash flow. Review revenue assumptions and expense structure before making management decisions.'
- : 'The forecast is generally positive, but there are points to monitor. Review weak months, expense levels and break-even point versus forecast sales.');
+ : 'The forecast is generally positive, but there are points to monitor. Review weak months, expense levels and break-even point versus forecast sales.')) + _balNote;
  return {
  totalRev,
  totalGross,
@@ -7132,10 +7244,12 @@ function parseAndFormatInput(inputElement) {
  totalNet,
  annualCashFlow,
  breakEvenPoint,
+ beUnreachable: !!(cachedOutput && cachedOutput.beUnreachable),   // V-44 (43-01)
  marginGrossPct,
  marginEbitdaPct,
  marginNetPct,
  monthsNegativeCashFlow,
+ minCashBalance, minCashMonth, monthsNegativeBalance,   // V-38 (EN-09)
  monthsBelowBE,
  statusCfg,
  conclusion
@@ -7214,7 +7328,7 @@ function parseAndFormatInput(inputElement) {
  ${row(`Deal IRR - estimated on EBIT basis`, formatPctValue(summary.selectedIrrPct))}
  ${row('Payback period', summary.paybackOpTxt)}
  ${row('Cumulative ROI (undiscounted)', formatPctValue(summary.projectRoiPct))}
- ${row('Return on equity (incl. sale, net of debt)', formatPctValue(summary.equityRoiPct))}
+ ${row('Cumulative equity ROI (including exit proceeds, net of debt)', formatPctValue(summary.equityRoiPct))}
  ${row('IRR on equity', formatPctValue(summary.irrPct))}
  ${row('Leverage effect', formatPctValue(summary.leverageEffectPct))}
  ${row('Equity payback period', summary.paybackTxt)}
@@ -7229,7 +7343,7 @@ function parseAndFormatInput(inputElement) {
  </p>` : ''}
  ${(S.loanRepayMode === 'grace' || S.loanRepayMode === 'bullet') ? `
  <p class="text-[10.5px] mt-2 px-1 leading-relaxed" style="color:#92400e">
- &#9888;&#65039; DSCR is computed on year one only. ${S.loanRepayMode === 'grace' ? 'During the grace period only interest is paid - year one flatters, and the real DSCR will be tested when full repayment begins.' : 'A bullet loan pays interest only - the DSCR ignores the full principal repayment at maturity, which is the central risk of this structure.'}
+ &#9888;&#65039; DSCR is assessed across the full loan term, and the governing year is the hardest one. ${S.loanRepayMode === 'grace' ? 'During the grace period only interest is paid, so year 1 flatters the deal - review the year in which full repayment begins.' : 'A bullet loan pays interest only until maturity, when the whole principal falls due - review that year, which carries the central risk of this structure.'}
  </p>` : ''}
  </div>
 
@@ -7237,7 +7351,7 @@ function parseAndFormatInput(inputElement) {
  <div class="flex items-start gap-3">
  <span class="text-3xl">${summary.decisionCfg.emoji}</span>
  <div>
- <h4 class="text-base font-extrabold" style="color:${summary.decisionCfg.fg}"> automatic</h4>
+ <h4 class="text-base font-extrabold" style="color:${summary.decisionCfg.fg}">Automated assessment</h4>
  <p class="text-sm leading-relaxed mt-1" style="color:${summary.decisionCfg.fg}">${summary.conclusion}</p>
  </div>
  </div>
@@ -7281,7 +7395,7 @@ function parseAndFormatInput(inputElement) {
  <div class="rounded-xl border border-slate-200 p-4 bg-slate-50">
  <h4 class="text-sm font-bold text-slate-700 mb-2">Cash Flow & Control Points</h4>
  ${row('Forecast annual cash flow', '$' + fmtILS(summary.annualCashFlow))}
- ${row('Monthly break-even revenue', '$' + fmtILS(summary.breakEvenPoint))}
+ ${row(beDisplay(summary).label, beDisplay(summary).text)}
  ${row('Months with negative cash flow', summary.monthsNegativeCashFlow + ' of 12')}
  ${row('Months below break-even', summary.monthsBelowBE + ' of 12')}
  </div>
@@ -7438,7 +7552,7 @@ function parseAndFormatInput(inputElement) {
  const dealStatus = (summary.dealValueNpv4 === null || !isFinite(summary.dealValueNpv4)) ? 'Warning' : (summary.dealValueNpv4>= 0 ? 'OK' : 'Risk');
  const cls = st => st === 'OK' ? 'style="color:#166534;font-weight:800"' : (st === 'Risk' ? 'style="color:#991b1b;font-weight:800"' : 'style="color:#92400e;font-weight:800"');
  return `
- <p class="note" style="margin-bottom:10px"><strong>Primary method — market multiple on operating profit (EBIT).</strong> Business value = the future stream of receipts (gross). Value gap vs. investment = business value minus the investment (net) — this is what is assessed. A conservative 4× multiple determines the verdict. Annual operating profit (EBIT): ${moneyPdf(summary.totalEbit || 0)}. All valuation figures are pre-tax.</p>
+ <p class="note" style="margin-bottom:10px"><strong>Primary method — market multiple on operating profit (EBIT).</strong> Indicative enterprise value is estimated using an EBIT multiple. The value gap equals the estimated value less the purchase price or initial investment — this is what is assessed. The indicative value range is 4–6 times annual EBIT, and a price above the upper bound raises a price flag without disqualifying the business. The 4× multiple is used separately as the assumed Year-5 exit value. The overall conclusion also weighs operating performance, project returns and financing risk. Annual operating profit (EBIT): ${moneyPdf(summary.totalEbit || 0)}. All valuation figures are pre-tax.</p>
  <table class="report-table">
  <tr><th>Method</th><th>Multiple</th><th>Business value</th><th>Notes</th></tr>
  <tr><td>Conservative — exit anchor</td><td>×4</td><td class="total-cell">${g(m.m4)}</td><td>Lower bound; high dependence on owner / key customer</td></tr>
@@ -7447,11 +7561,11 @@ function parseAndFormatInput(inputElement) {
  </table>
  <table class="report-table" style="margin-top:12px">
  <tr><th>Test</th><th>Status</th><th>Value</th><th>Meaning</th></tr>
- <tr><td>Conservative value gap vs. investment (4x)</td><td ${cls(dealStatus)}>${dealStatus}</td><td>${dealTxt}</td><td>The net value the deal creates. Negative = price exceeds the conservative value; the fair price at a 4x multiple is ${g(m.m4)}.</td></tr>
+ <tr><td>Conservative value gap vs. investment (4x)</td><td ${cls(dealStatus)}>${dealStatus}</td><td>${dealTxt}</td><td>The net value the deal creates. Negative = price exceeds the lower bound of the range; the implied price at a 4× multiple is ${g(m.m4)}.</td></tr>
  <tr><td>Value gap — DCF cross-check (Estimate 1)</td><td ${cls(summary.selectedNpv === null ? 'Warning' : (summary.selectedNpv>= 0 ? 'OK' : 'Risk'))}>${summary.selectedNpv === null ? 'Warning' : (summary.selectedNpv>= 0 ? 'OK' : 'Risk')}</td><td>${summary.selectedNpv === null || !isFinite(summary.selectedNpv) ? 'N/A' : moneyPdf(summary.selectedNpv)}</td><td>Cross-check: five years of EBIT discounted at the required return plus exit value at a 4x multiple. Indicative, not decisive.</td></tr>
  </table>
  ${buildPdfAdjustments(summary)}
- <p class="note" style="margin-top:10px">All valuations assume a business with no change (no growth or decline) over the period — a constant stream of receipts.${summary.adj && summary.adj.active ? '' : ' The valuation assumes a clean transaction: transfer with normal working capital, no financial debt or excess cash in the business, and no surplus assets — all balance-sheet adjustments are zero.'}</p>`;
+ <p class="note" style="margin-top:10px">All valuations assume a business with no change (no growth or decline) over the period — a constant annual EBIT.${summary.adj && summary.adj.active ? '' : ' The valuation assumes a clean transaction: transfer with normal working capital, no financial debt or excess cash in the business, and no surplus assets — all balance-sheet adjustments are zero.'}</p>`;
  }
 
 
@@ -7463,23 +7577,23 @@ function parseAndFormatInput(inputElement) {
  const rows = [];
  rows.push(`<tr><td>Business value — 4x multiple (before adjustments)</td><td>${g(summary.multDeal ? summary.multDeal.m4 : null)}</td><td></td></tr>`);
  if(adj.wcActive) rows.push(`<tr><td>Working capital adjustment (actual − normal)</td><td>${sgn(adj.wcAdj)}</td><td>normal ${g(adj.normalWC)} (${adj.normalDays} ) versus Actual ${g(adj.actualWC)} — ${adj.actualSrc}</td></tr>`);
- if(adj.netDebtActive) rows.push(`<tr><td>Net debt in the transferred business</td><td>${sgn(adj.netDebtAdj)}</td><td>Cash in the business less financial debt transferred with the business</td></tr>`);
+ if(adj.netDebtActive) rows.push(`<tr><td>Cash less debt adjustment</td><td>${sgn(adj.netDebtAdj)}</td><td>Cash in the business less financial debt transferred with the business</td></tr>`);
  if(adj.manualActive && adj.manualAdj !== 0) rows.push(`<tr><td>Manual adjustments${[adj.addLabel, adj.subLabel].filter(Boolean).length ? ' — ' + escapeHtml([adj.addLabel, adj.subLabel].filter(Boolean).join(' / ')) : ''}</td><td>${sgn(adj.manualAdj)}</td><td>Surplus assets / deductions entered manually</td></tr>`);
- rows.push(`<tr><td style="font-weight:800">Adjusted business value (4x multiple)</td><td style="font-weight:800">${g(summary.multDealAdj ? summary.multDealAdj.m4 : null)}</td><td>The adjustment multiple 4/5/6 -DCF</td></tr>`);
- if(summary.investment> 0) rows.push(`<tr><td style="font-weight:800">Conservative value gap vs. the investment — adjusted (4x multiple)</td><td style="font-weight:800;color:${(summary.dealValueAdj !== null && summary.dealValueAdj>= 0) ? '#166534' : '#991b1b'}">${summary.dealValueAdj === null || !isFinite(summary.dealValueAdj) ? 'N/A' : sgn(summary.dealValueAdj)}</td><td>Value Price / investment — The decision price threshold is tested against it</td></tr>`);
+ rows.push(`<tr><td style="font-weight:800">Adjusted business value (4x multiple)</td><td style="font-weight:800">${g(summary.multDealAdj ? summary.multDealAdj.m4 : null)}</td><td>The same adjustment is applied to the 4×, 5× and 6× valuations and to the DCF estimates.</td></tr>`);
+ if(summary.investment> 0) rows.push(`<tr><td style="font-weight:800">Conservative value gap vs. the investment — adjusted (4x multiple)</td><td style="font-weight:800;color:${(summary.dealValueAdj !== null && summary.dealValueAdj>= 0) ? '#166534' : '#991b1b'}">${summary.dealValueAdj === null || !isFinite(summary.dealValueAdj) ? 'N/A' : sgn(summary.dealValueAdj)}</td><td>Adjusted value less the purchase price or initial investment</td></tr>`);
  return `
- <p class="note" style="margin-top:14px"><strong>Balance Sheet Adjustments (entered user).</strong> Estimate clean transaction (normal working capital, No debt/Cash in the business, No Assets ). Adjustments entered Value, -Deal IRR, external -ROI versus Effective investment ${g(summary.effInvestment)}.</p>
+ <p class="note" style="margin-top:14px"><strong>Balance-sheet adjustments supplied by the user.</strong> The unadjusted valuation assumes normalized working capital, no financial debt, no excess cash and no surplus assets. The adjustments are added to or deducted from value and are reflected in the adjusted project IRR, payback period and cumulative ROI, using the effective investment of ${g(summary.effInvestment)}. Financing and equity-return metrics remain based on the financing inputs.</p>
  <table class="report-table">
  <tr><th></th><th>Total</th><th></th></tr>
  ${rows.join('')}
  </table>
- <p class="note" style="margin-top:8px">Note : Balance sheet ; ${adj.actualSrc.indexOf('Monthly')>= 0 ? 'Actual working capital was calculated as an average of monthly balances — higher accuracy.' : 'Actual working capital was taken from the year-end balance sheet — for seasonal businesses, monthly average balances are recommended for accuracy.'}</p>`;
+ <p class="note" style="margin-top:8px">Working capital basis: ${adj.actualSrcKind === 'monthly' ? 'Actual working capital was calculated as an average of monthly balances — higher accuracy.' : 'Actual working capital was taken from the year-end balance sheet — for seasonal businesses, monthly average balances are recommended for accuracy.'}</p>`;
  }
 
  function buildPdfKpiCards(summary) {
  const cards = S.appMode === 'new' ? [
  ['Investment (required price)', moneyPdf(summary.investment)],
- ['Operating Profit annual (EBIT)', moneyPdf(summary.totalEbit || 0)],
+ ['Annual operating profit (EBIT)', moneyPdf(summary.totalEbit || 0)],
  ['Business value (4x multiple)', summary.multDeal && isFinite(summary.multDeal.m4) ? moneyPdf(summary.multDeal.m4) : 'N/A'],
  ['Business value (5x multiple)', summary.multDeal && isFinite(summary.multDeal.m5) ? moneyPdf(summary.multDeal.m5) : 'N/A'],
  ['Business value (6x multiple)', summary.multDeal && isFinite(summary.multDeal.m6) ? moneyPdf(summary.multDeal.m6) : 'N/A'],
@@ -7489,7 +7603,7 @@ function parseAndFormatInput(inputElement) {
  ['Conservative value gap vs. the investment — adjusted (4x multiple)', summary.dealValueAdj === null || !isFinite(summary.dealValueAdj) ? 'N/A' : moneyPdf(summary.dealValueAdj)]
  ] : []),
  ['Deal IRR', pctPdf(summary.selectedIrrPct)],
- ['Return on equity (incl. sale, net of debt)', pctPdf(summary.equityRoiPct)],
+ ['Cumulative equity ROI (including exit proceeds, net of debt)', pctPdf(summary.equityRoiPct)],
  ['Payback period', summary.paybackOpTxt],
  ['DSCR', summary.dscrTxt || 'No debt']
  ] : [
@@ -7507,7 +7621,7 @@ function parseAndFormatInput(inputElement) {
  function buildPdfRiskAnalysisTable(summary, monthsData) {
  const annualNetProfitForRisk = Number.isFinite(summary.annualNetProfit) ? summary.annualNetProfit : (Number.isFinite(summary.totalNet) ? summary.totalNet : 0);
  const rows = [];
- rows.push({ label:'Net Profit annual', value:moneyPdf(annualNetProfitForRisk), status: annualNetProfitForRisk> 0 ? 'OK' : 'Risk', note: annualNetProfitForRisk> 0 ? 'Annual net profit is positive.' : 'Annual net profit is negative or zero and requires review.' });
+ rows.push({ label:'Annual net profit', value:moneyPdf(annualNetProfitForRisk), status: annualNetProfitForRisk> 0 ? 'OK' : 'Risk', note: annualNetProfitForRisk> 0 ? 'Annual net profit is positive.' : 'Annual net profit is negative or zero and requires review.' });
  if(S.appMode === 'new') {
  const m4 = summary.multDeal && isFinite(summary.multDeal.m4) ? summary.multDeal.m4 : null;
  rows.push({ label:'Business value (4x multiple)', value: m4 === null ? 'N/A' : moneyPdf(m4), status:'Info', note:'Business value based on a conservative 4x multiple of operating profit — gross, before investment.' });
@@ -7614,18 +7728,34 @@ function parseAndFormatInput(inputElement) {
  // returned 4 valuation caveats and EN returned 3 budgeting ones - an English
  // feasibility report reached the buyer without the caveats that matter for a deal.
  const out = [
- 'Full bank obligo, short-term liabilities and balance-sheet capital structure - these require external verification before a decision',
+ 'Total bank borrowings and credit commitments, short-term liabilities and balance-sheet capital structure - these require external verification before a decision',
  'The valuation assumes the business continues unchanged - growth the buyer still has to generate is not priced in',
  'All figures are exclusive of VAT or sales tax',
  'Owner drawings / dividends - not modeled',
  'One-time receipts or expenses that were not entered'
  ];
+ //  V-43 (HE-08) — when the sensitivity slider goes past the range, the
+ //  effective margin is clamped to 1%-100%. The screen shows this live;
+ //  the report said nothing. The clamp stays — only the disclosure is added.
+ (function(){
+ const _base = Number(S.grossMarginPct) || 0;
+ const _want = _base + (Number(S.sensMargin) || 0);
+ const _eff  = Math.max(1, Math.min(100, _want));
+ if(_want !== _eff) out.push('The sensitivity simulation requested a gross margin of ' + _want.toFixed(0) + '% - the model is limited to 1%-100% and the calculation used ' + _eff.toFixed(0) + '%');
+ })();
  if(!(((S.inputs.depreciation || 0) + (S.inputs.amortization || 0)) > 0)) {
  out.push('Depreciation and amortization are assumed to be 0 (EBIT = EBITDA) - no annual D&A or asset detail was entered');
  }
- if(typeof computeBalanceAdjustments === 'function' && S.appMode === 'new') {
- const _a = (function(){ try { return computeBalanceAdjustments(0, 0); } catch(e) { return null; } })();
- if(_a && !_a.active) out.push('Balance-sheet adjustments (working capital, net debt, surplus assets) - not entered, and assumed to be zero');
+ //  V-42 (HE-06) — the check ran with zero revenue and COGS, so normalWC was
+ //  null, wcActive was always false, and an entered working-capital adjustment
+ //  went undetected: the report said none were entered while they existed.
+ //  The fields themselves are checked, independent of activity levels.
+ if(S.appMode === 'new') {
+ const _adj = S.adjustments || {};
+ const _given = v => v !== null && v !== undefined && v !== '';
+ const _anyAdj = ['dso','dio','dpo','ar','inv','ap','debt','cash','addAmt','subAmt'].some(k => _given(_adj[k]))
+ || (Array.isArray(_adj.wcMonthly) && _adj.wcMonthly.some(_given));
+ if(!_anyAdj) out.push('Balance-sheet adjustments (working capital, net debt, surplus assets) - not entered, and assumed to be zero');
  }
  if(S.appMode === 'new' && S.investmentInputMode === 'breakdown' && (S.investmentBreakdown?.workingCapital || 0) > 0) {
  out.push('Working capital in the investment breakdown is included in the funding requirement but remains as opening cash - it is not a setup cost');
@@ -7636,7 +7766,10 @@ function parseAndFormatInput(inputElement) {
  if(((S.inputs.depreciation || 0) + (S.inputs.amortization || 0)) > 0) {
  out.push('Depreciation assumes a full year of use, spread evenly over 12 months - the purchase month is not considered');
  }
- if((S.financingCost || 0) > 0 || (S.principalRepayAnnual || 0) > 0) {
+ //  V-42 (HE-06) — restricted to the budgeting track. In the feasibility
+ //  track financing is derived from a real amortization schedule, so this
+ //  note contradicted the calculation — and misled outright under grace.
+ if(S.appMode !== 'new' && ((S.financingCost || 0) > 0 || (S.principalRepayAnnual || 0) > 0)) {
  out.push('Interest and principal are spread evenly over 12 months - an actual amortization schedule may differ');
  }
  if(S.appMode !== 'new' && Array.isArray(S.manpower) && S.manpower.length > 0) {
@@ -7665,6 +7798,21 @@ function parseAndFormatInput(inputElement) {
  <ul style="font-size:11px;color:#64748b;padding-inline-start:1.1rem;margin:0">${exclRows}</ul>
  </div>
  </details>`;
+ }
+
+ function beDisplay(summary) {
+ const un   = !!(summary && summary.beUnreachable);
+ const val  = Number(summary && summary.breakEvenPoint) || 0;
+ const mkt  = (S.appMode !== 'new' && (S.mktGrowth || 0) > 0 && (S.inputs.marketing || 0) > 0);
+ return {
+ available: !un,
+ value:  un ? null : val,
+ text:   un ? 'No break-even point' : ('$' + fmtILS(val)),
+ label:  'Monthly break-even revenue' + (!un && mkt ? ' (before the marketing uplift)' : ''),
+ caveat: un ? 'The contribution margin is not positive — no level of revenue covers costs under the current structure'
+            : (mkt ? 'Monthly revenue threshold to cover costs — before the marketing uplift as a growth driver'
+                   : 'Monthly revenue threshold to cover costs')
+ };
  }
 
  function buildPdfAssumptions(summary) {
@@ -7708,6 +7856,13 @@ function parseAndFormatInput(inputElement) {
  // as the screen and Excel, so the three outputs cannot show different numbers.
  // Both bases are emitted regardless of the on-screen toggle: a file sent to a client
  // must not depend on which tab happened to be open when export was pressed.
+ function actualsBasisCounts() {
+ if(typeof actualsCompletedCount !== 'function') return { acc:0, cash:0, any:0, both:0 };
+ const acc  = actualsCompletedCount('accrual');
+ const cash = actualsCompletedCount('cash');
+ return { acc, cash, any: Math.max(acc, cash), both: Math.min(acc, cash) };
+ }
+
  function buildPdfActualsSection() {
  try {
  if(!S.actuals || typeof actualsCompletedCount !== 'function') return '';
@@ -7749,15 +7904,15 @@ function parseAndFormatInput(inputElement) {
  if(profit!==null && cash!==null) {
  const other = cash-(profit+dep+ar+ap);
  const br = [['Net profit (accrual basis)',profit,'the starting point — profitability itself'],
- ['Add back: depreciation and amortization (D&A)',dep,'an accounting charge that is not cash'],
- ['Collection timing effect',ar,'revenue recognized less what was collected'],
+ ['Add back: depreciation and amortization (D&A)',dep,'a non-cash expense'],
+ ['Collection timing effect',ar,'cash collected less revenue recognized'],
  ['Supplier-payment timing effect',ap,'cost accrued less what was paid'],
  ['Tax and other timing differences',other,'tax paid versus tax accrued'],
- ['= Cash flow before principal repayments',cash,'what actually remained']]
+ ['= Cash flow before principal repayments',cash,'Cash flow before principal repayments']]
  .map(([lb,v,nt]) => `<tr><td>${htmlEscapePdfReport(lb)}</td><td>${v>=0?'+':'−'}${f(Math.abs(v))}</td><td>${htmlEscapePdfReport(nt)}</td></tr>`).join('');
  out += `<section class="page"><h1 class="section-title">Profit-to-cash bridge — sources of the gap</h1>
  <table class="report-table"><thead><tr><th>Line Item</th><th>Amount</th><th>Explanation</th></tr></thead><tbody>${br}</tbody></table>
- <p class="note">A cash hole comes from profitability or from timing, and each has a different fix: profitability is corrected in the price, the margin or the costs; timing is corrected in credit terms, deposits or the credit facility.</p>
+ <p class="note">A cash shortfall may reflect weak profitability, timing differences, or both, and each has a different fix: profitability is corrected in the price, the margin or the costs; timing is corrected in credit terms, deposits or the credit facility.</p>
  </section>`;
  }
  }
@@ -7784,11 +7939,11 @@ function generateProfessionalPdfReportDirect() {
  const insights = getPdfInsights(summary, monthsData);
 
  const executiveRows = S.appMode === 'new' ? [
- ['Investment (required price)', moneyPdf(summary.investment)], ['Operating Profit annual (EBIT)', moneyPdf(summary.totalEbit || 0)], ['Business value (4x multiple)', summary.multDeal && isFinite(summary.multDeal.m4) ? moneyPdf(summary.multDeal.m4) : 'N/A'], ['Conservative value gap vs. investment (4x)', summary.dealValueNpv4 === null || !isFinite(summary.dealValueNpv4) ? 'N/A' : moneyPdf(summary.dealValueNpv4)], ['Deal IRR', pctPdf(summary.selectedIrrPct)], ['Return on equity (incl. sale, net of debt)', pctPdf(summary.equityRoiPct)], ['Payback period', summary.paybackOpTxt],
+ ['Investment (required price)', moneyPdf(summary.investment)], ['Annual operating profit (EBIT)', moneyPdf(summary.totalEbit || 0)], ['Business value (4x multiple)', summary.multDeal && isFinite(summary.multDeal.m4) ? moneyPdf(summary.multDeal.m4) : 'N/A'], ['Conservative value gap vs. investment (4x)', summary.dealValueNpv4 === null || !isFinite(summary.dealValueNpv4) ? 'N/A' : moneyPdf(summary.dealValueNpv4)], ['Deal IRR', pctPdf(summary.selectedIrrPct)], ['Cumulative equity ROI (including exit proceeds, net of debt)', pctPdf(summary.equityRoiPct)], ['Payback period', summary.paybackOpTxt],
  ['Financing structure', summary.financingCfg.title], ['DSCR', summary.dscrTxt], ['Recommendation', statusTitle]
  ] : [
  ['Annual revenue', moneyPdf(summary.totalRev)], ['EBITDA', moneyPdf(summary.totalEbitda)], ['Net Profit', moneyPdf(summary.totalNet)],
- ['Cash Flow', moneyPdf(summary.annualCashFlow)], ['Monthly break-even revenue', moneyPdf(summary.breakEvenPoint)], ['Status', statusTitle]
+ ['Cash Flow', moneyPdf(summary.annualCashFlow)], [beDisplay(summary).label, beDisplay(summary).available ? moneyPdf(summary.breakEvenPoint) : beDisplay(summary).text], ['Status', statusTitle]
  ];
 
  const css = `
@@ -7796,7 +7951,7 @@ function generateProfessionalPdfReportDirect() {
 
  const html = `<!doctype html><html lang="en" dir="ltr"><head><meta charset="utf-8"><title>${htmlEscapePdfReport(title)} - ${htmlEscapePdfReport(company)}</title><style>${css}</style></head><body>
  <div class="footer">BudgetSmart · Ezra Eliezer — External CFO and Financial Consultant · +972 50-290-0102 · ezra@ezraeliezer.com · ezraeliezer.com · License FREE</div>
- <section class="page cover"><img class="brand-logo" src="${APP_ICON}" alt="BudgetSmart"><div class="brand">BudgetSmart</div><div class="subtitle">Financial planning, budgeting and feasibility analysis system</div><div class="report-title">${htmlEscapePdfReport(title)}</div><div class="meta-line"><strong>Business name:</strong> ${htmlEscapePdfReport(company)}</div><div class="meta-line"><strong>Project:</strong> ${htmlEscapePdfReport(project)}</div><div class="meta-line"><strong>Forecast year:</strong> ${FORECAST_YEAR}</div><div class="meta-line"><strong>Generated on:</strong> ${htmlEscapePdfReport(today)}</div><div class="meta-line" style="margin-top:10px;font-size:12px;color:#475569;line-height:1.6">This is a <strong>summary report</strong>. The full detail — every line, every month, and the tax and pre-tax profit rows — is in the Excel file exported from the same data.</div><div class="prepared">Prepared by<br><strong>${htmlEscapePdfReport(preparedBy)}</strong><br>External CFO and Financial Consultant<br>050-2900102 · ezra@ezraeliezer.com · ezraeliezer.com</div></section>
+ <section class="page cover"><img class="brand-logo" src="${APP_ICON}" alt="BudgetSmart"><div class="brand">BudgetSmart</div><div class="subtitle">Financial planning, budgeting and feasibility analysis system</div><div class="report-title">${htmlEscapePdfReport(title)}</div><div class="meta-line"><strong>Business name:</strong> ${htmlEscapePdfReport(company)}</div><div class="meta-line"><strong>Project:</strong> ${htmlEscapePdfReport(project)}</div><div class="meta-line"><strong>Forecast year:</strong> ${FORECAST_YEAR}</div><div class="meta-line"><strong>Generated on:</strong> ${htmlEscapePdfReport(today)}</div><div class="meta-line" style="margin-top:10px;font-size:12px;color:#475569;line-height:1.6">This is a <strong>summary report</strong>. The full detail — every line, every month, and the tax and pre-tax profit rows — is in the Excel file exported from the same data.</div><div class="prepared">Prepared by<br><strong>${htmlEscapePdfReport(preparedBy)}</strong><br>External CFO and Financial Consultant<br>+972 50-290-0102 · ezra@ezraeliezer.com · ezraeliezer.com</div></section>
  <section class="page"><h1 class="section-title">Executive Summary</h1><div class="status-box"><h2>${htmlEscapePdfReport(statusTitle)}</h2><div>${htmlEscapePdfReport(summary.conclusion || '')}</div></div><div class="summary-grid">${executiveRows.map(([k,v])=>`<div class="summary-item"><span>${htmlEscapePdfReport(k)}</span><strong>${htmlEscapePdfReport(v)}</strong></div>`).join('')}</div><p class="note">This summary presents the key results only and is based on the data and assumptions entered.</p></section>
  ${S.appMode === 'new' ? `<section class="page"><h1 class="section-title">Valuation</h1>${buildPdfValuation(summary)}</section>` : ''}
  <section class="page"><h1 class="section-title">Key KPIs</h1><div class="kpi-grid">${buildPdfKpiCards(summary)}</div></section>
@@ -7805,7 +7960,7 @@ function generateProfessionalPdfReportDirect() {
  ${buildPdfActualsSection()}
  <section class="page"><h1 class="section-title">Cash Flow</h1>${buildPdfCashFlowTable(monthsData)}<p class="note">Negative months are highlighted in red for early detection of cash-flow pressure.</p></section>
  <section class="page"><h1 class="section-title">Model Assumptions</h1>${buildPdfAssumptions(summary)}</section>
- <section class="page"><h1 class="section-title">Conclusions and Next Steps</h1><div class="insights"><div class="insight-box"><h3>Strengths</h3><p class="note">${insights.strengths.length} business strengths were identified based on the entered data.</p></div><div class="insight-box"><h3>Points for Attention</h3><p class="note">${insights.risks.length} points require deeper review.</p></div><div class="insight-box"><h3>Action Recommendations</h3><p class="note">${insights.recommendations.length} implementation recommendations, to be reviewed in a personal consultation.</p></div></div><div class="status-box" style="border-color:#1e3a8a;background:#eff6ff;color:#1e3a8a;margin-top:18px"><h2>Want to understand what the numbers say about your business?</h2><div>A deeper interpretation — identifying risks, leveraging strengths and finding ways to improve — is reviewed together in an initial consultation at no cost.<br><strong>Ezra Eliezer — External CFO and Financial Consultant</strong><br>050-2900102 · ezra@ezraeliezer.com · ezraeliezer.com</div></div><div class="disclaimer"><strong>Professional disclaimer:</strong> This report is based on the data and assumptions entered into BudgetSmart and does not constitute financial, business, legal, or investment advice. Actual results may differ from the forecast shown. We recommend reviewing the data with a qualified professional before making business or financial decisions.</div><div class="disclaimer" style="margin-top:6px">Generated with BudgetSmart Pro · Free edition · personal use FREE · © Ezra Eliezer</div></section>
+ <section class="page"><h1 class="section-title">Conclusions and Next Steps</h1><div class="insights"><div class="insight-box"><h3>Strengths</h3><p class="note">${insights.strengths.length} business strengths were identified based on the entered data.</p></div><div class="insight-box"><h3>Points for Attention</h3><p class="note">${insights.risks.length} points require deeper review.</p></div><div class="insight-box"><h3>Action Recommendations</h3><p class="note">${insights.recommendations.length} implementation recommendations, to be reviewed in a personal consultation.</p></div></div><div class="status-box" style="border-color:#1e3a8a;background:#eff6ff;color:#1e3a8a;margin-top:18px"><h2>Want to understand what the numbers say about your business?</h2><div>A deeper interpretation — identifying risks, leveraging strengths and finding ways to improve — is reviewed together in an initial consultation at no cost.<br><strong>Ezra Eliezer — External CFO and Financial Consultant</strong><br>+972 50-290-0102 · ezra@ezraeliezer.com · ezraeliezer.com</div></div><div class="disclaimer"><strong>Professional disclaimer:</strong> This report is based on the data and assumptions entered into BudgetSmart and does not constitute financial, business, legal, or investment advice. Actual results may differ from the forecast shown. We recommend reviewing the data with a qualified professional before making business or financial decisions.</div><div class="disclaimer" style="margin-top:6px">Generated with BudgetSmart Pro · Free edition · personal use FREE · © Ezra Eliezer</div></section>
  
 
 
@@ -7874,7 +8029,7 @@ function generateProfessionalPdfReportDirect() {
  },
   deal_nogo: {
  label: 'NO-GO',
- sentence: 'At the price entered the investment does not return - even including the exit value',
+ sentence: 'At the price entered the investment is not recovered under the model assumptions - even including the exit value',
  color: '#dc2626',
  bg: '#fef2f2',
  border: '#dc2626',
@@ -7988,7 +8143,7 @@ function generateProfessionalPdfReportDirect() {
  <div class="text-lg font-extrabold text-slate-900">$${fmtILS(summary.investment)}</div>
  </div>
  <div class="rounded-xl border border-slate-200 bg-white p-3">
- <div class="text-[11px] text-slate-500 font-bold">Net Profit annual</div>
+ <div class="text-[11px] text-slate-500 font-bold">Annual net profit</div>
  <div class="text-lg font-extrabold" style="color:${netColor.fg}">$${fmtILS(summary.totalNet)}</div>
  </div>
  <div class="rounded-xl border border-slate-200 bg-white p-3">
@@ -8018,11 +8173,11 @@ function generateProfessionalPdfReportDirect() {
  <div>
  <h3 class="text-sm font-bold text-slate-800 mb-3 flex items-center gap-2"><i data-lucide="gauge" class="w-4 h-4 text-indigo-600"></i> Additional investment metrics</h3>
  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-3">
- ${kpiCard('Deal IRR', formatPctValue(summary.selectedIrrPct) + adjMini(summary.unleveragedIrrAdjPct !== null ? formatPctValue(summary.unleveragedIrrAdjPct) : null), (summary.selectedIrrPct !== null && isFinite(summary.selectedIrrPct)) ? `versus (${summary.requiredRoi ?? 15}%) — ` : 'Operating return over the 5-year horizon', (summary.selectedIrrPct !== null && isFinite(summary.selectedIrrPct) && summary.selectedIrrPct < (summary.requiredRoi ?? 15)) ? { border:'#f59e0b', fg:'#92400e' } : { border:'#10b981', fg:'#065f46' })}
+ ${kpiCard('Deal IRR', formatPctValue(summary.selectedIrrPct) + adjMini(summary.unleveragedIrrAdjPct !== null ? formatPctValue(summary.unleveragedIrrAdjPct) : null), (summary.selectedIrrPct !== null && isFinite(summary.selectedIrrPct)) ? `Compared with your required return of ${summary.requiredRoi ?? 15}% (reference only)` : 'Operating return over the 5-year horizon', (summary.selectedIrrPct !== null && isFinite(summary.selectedIrrPct) && summary.selectedIrrPct < (summary.requiredRoi ?? 15)) ? { border:'#f59e0b', fg:'#92400e' } : { border:'#10b981', fg:'#065f46' })}
  ${kpiCard(`Cumulative ${summary.projectHorizonYears}-year ROI (undiscounted)`, formatPctValue(summary.projectRoiPct) + adjMini(summary.projectRoiAdjPct !== null ? formatPctValue(summary.projectRoiAdjPct) : null), `Information only — (cumulative ${summary.projectHorizonYears}-year EBIT − investment) ÷ investment. Intentionally excludes exit value: it measures how much profit accumulated, not how much it is worth to sell`, roiColor)}
- ${kpiCard(`${summary.projectHorizonYears}-year return on equity (incl. sale, net of debt)`, formatPctValue(summary.equityRoiPct), `Cumulative and undiscounted: the owner's cash flow over ${summary.projectHorizonYears} years, plus the sale value net of the outstanding debt, divided by equity invested. ${(summary.irrPct !== null && isFinite(summary.irrPct)) ? `The annual, discounted version of the same stream is the equity IRR — ${formatPctValue(summary.irrPct)}. Do not divide the figure above by the number of years` : 'The annual version of the same stream is the equity IRR'}`, equityRoiColor)}
+ ${kpiCard(`Cumulative equity ROI over ${summary.projectHorizonYears} years (including exit proceeds, net of debt)`, formatPctValue(summary.equityRoiPct), `Cumulative and undiscounted: the owner's cash flow over ${summary.projectHorizonYears} years, plus the sale value net of the outstanding debt, less the equity originally invested, divided by that equity. ${(summary.irrPct !== null && isFinite(summary.irrPct)) ? `The annualized internal rate of return on the same cash flows is the equity IRR — ${formatPctValue(summary.irrPct)}. Do not divide the figure above by the number of years` : 'The annual version of the same stream is the equity IRR'}`, equityRoiColor)}
  ${kpiCard('IRR on equity', formatPctValue(summary.irrPct), (summary.irrPct === null || !isFinite(summary.irrPct)) ? irrUnavailableNote(summary.equityIrrFailure) : `IRR on cash flows to equity holders after debt service`, irrColor)}
- ${kpiCard('Leverage effect', formatPctValue(summary.leverageEffectPct), 'Difference between equity IRR and deal IRR', getInvestmentColor(summary.leverageEffectPct, 'irr'))}
+ ${kpiCard('Leverage effect', (summary.leverageEffectPct === null || !isFinite(summary.leverageEffectPct)) ? FMT_NA : ((summary.leverageEffectPct > 0 ? '+' : '') + summary.leverageEffectPct.toFixed(1) + ' pp'), 'Equity IRR minus deal IRR, in percentage points', getInvestmentColor(summary.leverageEffectPct, 'irr'))}
  ${kpiCard('DSCR', summary.dscrTxt, summary.dscr === null ? 'No loan required' : (summary.dscrMin !== null && summary.dscrMinYear && summary.dscrMin < summary.dscr - 0.005 ? `Scanned across the whole loan life — governing year ${summary.dscrMinYear}, versus ${summary.dscrYear1Txt} in year 1` : 'Cash flow available for debt service ÷ annual debt service'), dscrColor)}
  </div>
  </div>
@@ -8046,7 +8201,7 @@ function generateProfessionalPdfReportDirect() {
  ${kpiCard('Forecast revenue', '$' + fmtILS(totalRevenue), 'Total revenue in the forecast year', { border:'#cbd5e1', fg:'#0f172a' })}
  ${kpiCard('EBITDA', '$' + fmtILS(totalEbitda), 'Profit before depreciation, amortization, interest and tax', getInvestmentColor(totalEbitda, 'profit'))}
  ${kpiCard('Net Profit', '$' + fmtILS(summary.totalNet), 'After depreciation, financing and tax', netColor)}
- ${kpiCard('Monthly break-even revenue', '$' + fmtILS(summary.breakEvenPoint), 'Monthly revenue threshold to cover costs', { border:'#cbd5e1', fg:'#0f172a' })}
+ ${kpiCard(beDisplay(summary).label, beDisplay(summary).text, beDisplay(summary).caveat, { border:'#cbd5e1', fg:'#0f172a' })}
  </div>
  </div>
  </div>
@@ -8054,7 +8209,7 @@ function generateProfessionalPdfReportDirect() {
  <div class="rounded-xl border border-slate-200 bg-white p-4 shadow-sm">
  <h3 class="text-sm font-bold text-slate-800 mb-3 flex items-center gap-2"><i data-lucide="list-checks" class="w-4 h-4 text-slate-600"></i> Supporting financial detail</h3>
  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-3">
- ${kpiCard(fundingLabel, '$' + fmtILS(fundingValue), 'Financing missing after Cash existing and Equity', { border:'#4f46e5', fg:'#312e81' })}
+ ${kpiCard(fundingLabel, '$' + fmtILS(fundingValue), 'Funding required after allocated cash and equity contributions', { border:'#4f46e5', fg:'#312e81' })}
  ${kpiCard('Investment risk', `${summary.riskCfg.emoji} ${summary.riskCfg.title}`, summary.riskCfg.sub, summary.riskCfg)}
  ${kpiCard('Payback period', summary.paybackOpTxt + adjMini(summary.paybackOpAdjTxt), (summary.paybackOpMonths === null || summary.paybackOpMonths> 120) ? 'More than 10 years — too long a horizon for an SMB (not disqualifying)' : (summary.paybackOpMonths> 60 ? 'More than 5 years — a relatively long payback' : 'Within 5 years — generally reasonable for an SMB'), (summary.paybackOpMonths === null || summary.paybackOpMonths> 120) ? { border:'#f43f5e', fg:'#9f1239' } : (summary.paybackOpMonths> 60 ? { border:'#f59e0b', fg:'#92400e' } : { border:'#10b981', fg:'#065f46' }))}
  ${kpiCard('Equity payback period', summary.paybackTxt, 'Equity ÷ annual cash flow to owners', { border:'#cbd5e1', fg:'#0f172a' })}
@@ -8093,9 +8248,9 @@ function generateProfessionalPdfReportDirect() {
  let wcDetail = '';
  if(adj.wcActive) {
  const dayTxt = adj.actualDays !== null
- ? ` · Actual working-capital days: <strong>${Math.round(adj.actualDays)}</strong> versus <strong>${Math.round(adj.normalDays)}</strong> normal${Math.round(adj.actualDays)> Math.round(adj.normalDays) ? ' — actual working capital is heavier than normal' : (Math.round(adj.actualDays) < Math.round(adj.normalDays) ? ' — Working capital normal' : '')}`
+ ? ` · Actual working-capital days: <strong>${Math.round(adj.actualDays)}</strong> versus <strong>${Math.round(adj.normalDays)}</strong> normal${Math.round(adj.actualDays)> Math.round(adj.normalDays) ? ' — actual working capital is heavier than normal' : (Math.round(adj.actualDays) < Math.round(adj.normalDays) ? ' — normalized working capital' : '')}`
  : '';
- wcDetail = `<p class="text-[11px] text-slate-500 mb-2 leading-relaxed">normal working capital: <strong>${gross(adj.normalWC)}</strong> (${adj.normalDays} days × revenue ÷ 365) · Actual: <strong>${gross(adj.actualWC)}</strong> (${adj.actualSrc})${dayTxt}.</p>`;
+ wcDetail = `<p class="text-[11px] text-slate-500 mb-2 leading-relaxed">Normalized working capital: <strong>${gross(adj.normalWC)}</strong> (${adj.normalDays} days equivalent; receivables on revenue, inventory and payables on COGS) · Actual: <strong>${gross(adj.actualWC)}</strong> (${adj.actualSrc})${dayTxt}.</p>`;
  } else if(adj.hasDays && adj.normalWC !== null) {
  wcDetail = `<p class="text-[11px] text-slate-500 mb-2 leading-relaxed">Normal working capital based on entered days: <strong>${gross(adj.normalWC)}</strong>. Enter balances (or 0 for a new business) to calculate the adjustment.</p>`;
  }
@@ -8117,7 +8272,7 @@ function generateProfessionalPdfReportDirect() {
  <h4 class="text-sm font-bold text-slate-800 mb-2 flex items-center gap-2">Adjustment bridge — balance-sheet impact on value</h4>
  ${wcDetail}
  ${rows.join('')}
- <p class="text-[10.5px] text-slate-400 mt-2 leading-relaxed">The adjustment (${money(adj.stockAdj)}) applies identically to all valuation models — multiple 4/5/6 -DCF — and is also reflected in the adjusted project IRR, payback period and cumulative ROI (against the effective investment ${gross(summary.effInvestment)}). The funding structure, loan schedule and equity-return metrics stay based on the financing you actually entered.</p>
+ <p class="text-[10.5px] text-slate-400 mt-2 leading-relaxed">The adjustment (${money(adj.stockAdj)}) applies identically to all valuation models — the 4×, 5× and 6× EBIT valuations and the DCF estimates — and is also reflected in the adjusted project IRR, payback period and cumulative ROI (against the effective investment ${gross(summary.effInvestment)}). The funding structure, loan schedule and equity-return metrics stay based on the financing you actually entered.</p>
  </div>`;
  }
 
@@ -8591,7 +8746,7 @@ function generateProfessionalPdfReportDirect() {
  },
  {
  type: 'line',
- label: 'Cash balance (runway)',
+ label: 'Closing cash balance',
  data: cumulativeData,
  borderColor: '#6366f1',
  backgroundColor: 'rgba(99,102,241,0.08)',
@@ -8821,11 +8976,11 @@ function generateProfessionalPdfReportDirect() {
  dataRow(4,'Forecast revenue','revenue','F8FAFC','0F172A');
  dataRow(5,'Cost of Goods Sold (COGS)','costOfGoods','FFFFFF','BE123C');
  dataRow(6,'Gross Profit','grossProfit','ECFDF5','065F46',{valbold:true});
- dataRow(7,'Marketing and advertising investment','mktCost','FFFFFF','334155');
+ dataRow(7,'Marketing and advertising expense','mktCost','FFFFFF','334155');
  dataRow(8,'Total payroll cost','payrollCost','F8FAFC','334155');
  dataRow(9,'Other fixed costs','fixedCost','FFFFFF','334155');
  dataRow(10,'Total Operating Expenses','opex','FFFBEB','92400E',{valbold:true});
- dataRow(11,'Operating Profit EBITDA','ebitda','FFFBEB','92400E',{valbold:true});
+ dataRow(11,'EBITDA','ebitda','FFFBEB','92400E',{valbold:true});
  dataRow(12,'Depreciation & Amortization (D&A)','depreciation','F5F3FF','5B21B6',{italic:true});
  dataRow(13,'EBIT — profit before financing and tax','ebit','3730A3','E0E7FF',{valbold:true});
  footerRow(14, foot);
@@ -8911,7 +9066,7 @@ function generateProfessionalPdfReportDirect() {
  const gm = (cachedOutput.marginGrossPct||0).toFixed(1);
  const em = (cachedOutput.marginEbitdaPct||0).toFixed(1);
  const ex = tRev>0 ? (tExp/tRev*100).toFixed(1) : '0';
- put2(1,1,`KPIs and Financial Budget Forecast Model | Ezra Eliezer, Business Consultant`, st('0F172A','FFFFFF',{bold:true,sz:14,alH:'center'}));
+ put2(1,1,`Financial Forecast and Key Performance Indicators | Ezra Eliezer, Business Consultant`, st('0F172A','FFFFFF',{bold:true,sz:14,alH:'center'}));
  for(let c=2;c<=14;c++) put2(1,c,'', st('0F172A','FFFFFF',{}));
  const AMB='FFFBEB';
  const cards = [
@@ -8919,7 +9074,7 @@ function generateProfessionalPdfReportDirect() {
  { lbl:'Gross Profit', val:Math.round(tGross), sub:`Gross margin: ${gm}%` },
  { lbl:'Total expenses', val:Math.round(tExp), sub:`${ex}% of revenue` },
  { lbl:' EBITDA — Profit before depreciation, amortization, interest and tax', val:Math.round(tEbitda),sub:`EBITDA margin: ${em}%` },
- { lbl:'Monthly break-even revenue', val:Math.round(be), sub:'Fixed costs ÷ contribution margin % (gross margin less %-of-revenue costs)' }
+ { lbl:beDisplay(existingBusinessSummary).label, val:beDisplay(existingBusinessSummary).available ? Math.round(be) : beDisplay(existingBusinessSummary).text, sub:'Fixed costs ÷ contribution margin % (gross margin less %-of-revenue costs)' }
  ];
  const starts=[1,4,7,10,13];
  cards.forEach((card,idx)=>{
@@ -8947,17 +9102,18 @@ function generateProfessionalPdfReportDirect() {
  for(let c=2;c<=span;c++) put3(r,c,'', st(fill,'FFFFFF',{}));
  };
 
- let complete3 = elapsed3> 0;
- for(let m=0;m<=lastIdx3;m++){
- if(A3.revenue[m]==null||A3.cogs[m]==null||A3.marketing[m]==null||A3.payroll[m]==null){ complete3=false; break; }
- }
+ //  V-45 (43-02) — complete3 required accrual fields for every month, so a
+ //  project with cash-basis data only got a "missing data" message instead of
+ //  the receipts-and-payments table — even though the software accepts and
+ //  displays that data. The check was redundant anyway:
+ //  actualsIsMonthFilled(m,'accrual') already requires exactly those four
+ //  fields. The message now appears only when neither basis has data.
+ const _n3 = actualsBasisCounts();
  const w3merges = [];
 
- if(!complete3){
+ if(!_n3.any){
  t3title(1,'Actual vs Forecast','0F766E',14); w3merges.push({s:{r:0,c:0},e:{r:0,c:13}});
- const msg = elapsed3===0
- ? 'No actual data has been entered yet. Enter month 1 to begin the comparison.'
- : 'Complete actual data has not been entered for all elapsed months. Complete the data on the Actual Performance page to include the comparison in the file.';
+ const msg = 'No actual data has been entered yet. Enter month 1 on the Actual Performance page, on either the budget basis or the cash basis.';
  put3(3,1,msg, st('FFF7ED','9A3412',{sz:11,alH:'left'}));
  for(let c=2;c<=14;c++) put3(3,c,'', st('FFF7ED','9A3412',{}));
  w3merges.push({s:{r:2,c:0},e:{r:2,c:13}});
@@ -9049,7 +9205,12 @@ function generateProfessionalPdfReportDirect() {
                     put3(rr,2, rnd(a), st('FFFFFF','0F172A',{sz:10}), fmtV);
                     put3(rr,3, rnd(pv), st('FFFFFF','0F172A',{sz:10}), fmtV);
                     put3(rr,4, devText(dev, isPct), st('FFFFFF', devColorHex(dev, hg).slice(1).toUpperCase(), {sz:10}));   // V-36
-                    put3(rr,5, good?'Favorable':'Adverse', st(good?'16A34A':'DC2626','FFFFFF',{bold:true,sz:10}));
+                    //  תיקון V-36a (EN-01) — רגרסיה שהוכנסה עם תיקון QA-04.
+                    //  שורת הסטטוס הוחלפה ל-_st אך התא עצמו נשאר על `good`, שכבר
+                    //  אינו מוגדר. acorn עבר — `good` הוא מזהה תקין בזמן ניתוח —
+                    //  והשגיאה מתרחשת רק בריצה, ולכן ייצוא Excel קרס בכל פעם שהיו
+                    //  נתוני ביצוע. העברית לא נפגעה; שם שתי השורות הוחלפו יחד.
+                    put3(rr,5, DEV_WORD[_st], st(DEV_XLFILL[_st],'FFFFFF',{bold:true,sz:10}));
                     put3(rr,6, rnd(eac), st('F0FDFA','134E4A',{bold:true,sz:10}), fmtV);
                     put3(rr,7, rnd(fAnn), st('F0FDFA','134E4A',{sz:10}), fmtV);
                     if(isPct) put3(rr,8, (vac>=0?'+':'')+(Math.round(vac*10)/10)+' pts', st('F0FDFA', vacGood?'166534':'DC2626', {bold:true,sz:10}));
@@ -9074,11 +9235,11 @@ function generateProfessionalPdfReportDirect() {
                     t3title(rr,'Profit-to-cash bridge — sources of the gap','0F766E',12); w3merges.push({s:{r:rr-1,c:0},e:{r:rr-1,c:13}});
                     rr++;
                     [['Net profit (accrual basis)',profit,'the starting point — profitability itself'],
-                     ['Add back: depreciation and amortization (D&A)',dep,'an accounting charge that is not cash'],
-                     ['Collection timing effect',ar,'revenue recognized less what was collected'],
+                     ['Add back: depreciation and amortization (D&A)',dep,'a non-cash expense'],
+                     ['Collection timing effect',ar,'cash collected less revenue recognized'],
                      ['Supplier-payment timing effect',ap,'cost accrued less what was paid'],
                      ['Tax and other timing differences',other,'tax paid versus tax accrued, and other timing gaps'],
-                     ['= Cash flow before principal repayments',cash,'what actually remained']].forEach(([lb,v,nt],ix)=>{
+                     ['= Cash flow before principal repayments',cash,'Cash flow before principal repayments']].forEach(([lb,v,nt],ix)=>{
                         const bold = ix===0 || ix===5;
                         put3(rr,1,lb, st(bold?'F8FAFC':'FFFFFF','0F172A',{bold,sz:10,alH:'left'}));
                         put3(rr,2,Math.round(v), st('FFFFFF', v<0?'DC2626':'166534', {bold:true,sz:10}), NUM);
@@ -9222,8 +9383,8 @@ function generateProfessionalPdfReportDirect() {
 
  const buildAssumptionsSheet = (summary) => {
  const seasonalityLabel = {
- past: 'Based on history — / Manual',
- stable: 'Even spread — 1/12 month',
+ past: 'Historical allocation / manual override',
+ stable: 'Even allocation — one-twelfth of annual revenue per month',
  summer: 'Mid-Year Peak — months 6–8',
  winter: 'Turn-of-Year Peak — months 11–1',
  q4_peak: 'Year-End Peak — months 10–12'
@@ -9232,7 +9393,7 @@ function generateProfessionalPdfReportDirect() {
  const taxTimingLabel = {
  monthly: 'Monthly — / Source',
  quarterly: 'Quarterly',
- annual: 'annual based on Report'
+ annual: 'Single annual payment at year-end'
  }[S.taxTiming] || 'Monthly';
  const payrollModeLabel = S.modes.payroll === 'pct' ? '% of revenue' : 'Monthly amount ($)';
  const marketingModeLabel = S.modes.marketing === 'pct' ? '% of revenue' : 'Monthly amount ($)';
@@ -9279,8 +9440,8 @@ function generateProfessionalPdfReportDirect() {
  ['Marketing (monthly / %)', S.modes.marketing === 'pct' ? ((S.inputs.marketing || 0) / 100) : Math.round(S.inputs.marketing || 0), S.modes.marketing === 'pct' ? pctFmt : NUM],
  ['Monthly fixed expenses', Math.round(S.inputs.fixed || 0), NUM],
  ['Marketing budget growth', (S.mktGrowth || 0) / 100, pctFmt],
- ['Marketing elasticity', (S.mktElasticity || 0) / 100, pctFmt],
- ['Revenue-generating headcount rows', Array.isArray(S.manpower) ? S.manpower.length : 0]
+ ['Marketing revenue-response coefficient (%)', (S.mktElasticity || 0) / 100, pctFmt],
+ ['Number of revenue-generating roles added', Array.isArray(S.manpower) ? S.manpower.length : 0]
  ]},
  { title:'Depreciation, tax and cash flow assumptions', rows:[
  ['Depreciation & amortization method', daModeLabel],
@@ -9310,7 +9471,7 @@ function generateProfessionalPdfReportDirect() {
  ['Additional equity contribution', Math.round(S.equityContribution || 0), NUM],
  ['Cash applied to the investment', Math.max(0, Math.round(summary ? summary.investment : 0) - Math.round(summary ? summary.equityContribution : (S.equityContribution || 0)) - Math.round(summary ? summary.loanRequired : (fin.loan || 0))), NUM],
  ['Required loan', Math.round(summary ? summary.loanRequired : (fin.loan || 0)), NUM],
- ['Repayment method', derivedFinMethodLabel()], // derived from actual sources, not a button
+ ['Financing structure', derivedFinMethodLabel()], // derived from actual sources, not a button
  ['Annual interest rate', ((fin.rate || 0) / 100), pctFmt],
  ['Loan term', fin.years || 0],
  ['Repayment method', repaymentLabel],
@@ -9320,20 +9481,22 @@ function generateProfessionalPdfReportDirect() {
  { title:'Decision ', rows:[
  ['GO', 'The business is operationally profitable, the financing structure is sound, and the value gap vs. investment (4× multiple) is positive — price is below the conservative value'],
  ['Conditional GO — financing risk', 'The business is profitable but the financing structure is borderline/risky (DSCR < 1 or negative cash flow after debt)'],
- ['Conditional GO — high price', 'The business is profitable and financing is sound, but the value gap vs. investment (4× multiple) is negative — at the current price the investment does not return the required yield. The fair price by a 4× multiple is shown'],
+ ['Conditional GO — high price', 'The business is profitable and financing is sound, but the value gap vs. investment (4× multiple) is negative — at the current price the investment is not recovered under the model assumptions the required yield. The fair price by a 4× multiple is shown'],
  ['NO-GO', 'The business is not operationally profitable — not worthwhile as an investment regardless of price'],
- ['Decision tiers', 'Primary: business strength — first operating profitability (EBIT), then the financing structure (DSCR/cash flow). Secondary: the value gap vs. investment by a 4× multiple (conservative) — a yellow price flag that warns on price without disqualifying the business. Third: DCF (cross-check) and IRR vs. your personal hurdle — informative, not disqualifying.'],
- ['Business value vs. value gap', 'Business value = the future stream of receipts (gross). Value gap vs. investment = business value minus the investment (net) — this is what is assessed.'],
+ ['Decision tiers', 'Primary: business strength — first operating profitability (EBIT), then the financing structure (DSCR/cash flow). Secondary: the price tested against the upper bound of the 4–6× indicative range — a yellow price flag that warns on price without disqualifying the business. The 4× multiple is used separately for the assumed exit value. Third: DCF (cross-check) and A positive project IRR below your required return raises a warning but does not disqualify the deal. A project IRR of zero or below can produce a NO-GO result.'],
+ ['Business value vs. value gap', 'Indicative enterprise value is estimated using an EBIT multiple. The value gap equals the estimated value less the purchase price or initial investment — this is what is assessed.'],
  ['Cumulative ROI / payback periods', 'Information metrics only — do not determine GO/NO-GO'],
  ['Risk Rating', 'A separate axis combining the value gap vs. investment, IRR, DSCR, and cash flow after debt'],
  ['Not included', 'Full credit exposure, short-term liabilities, and balance-sheet capital structure — external completion is required before a decision'],
- ['Note', 'The sheet shows the assumptions captured by the system and does not change financial formulas. All estimates assume an unchanged business over the period.']
+ ['Note', 'The sheet shows the assumptions captured by the system and does not change financial formulas. All estimates assume an unchanged business over the period.'],
+ //  V-44 (43-05) — the same exclusions shown on screen and in the PDF, one source
+ ...((typeof getModelExclusions === 'function' ? getModelExclusions() : []).map((t,i) => [i === 0 ? 'Not included in the calculation' : '', t]))
  ]}
  );
  } else {
  sections.push(
  { title:'Existing-Business Controls', rows:[
- [' Report', 'Budget Driven Forecast — Forecast'],
+ [' Report', 'Budgeting and forecasting'],
  ['Key metric', 'EBITDA'],
  ['Annual metrics', 'EBITDA %, Cash Flow, Net Profit, Monthly break-even revenue, Revenue, Gross Profit'],
  ['Actual vs. forecast', 'Enter actual performance against the forecast'],
@@ -9393,7 +9556,7 @@ function generateProfessionalPdfReportDirect() {
  ]},
  { title:'Cash Flow & Control Points', rows:[
  ['Forecast annual cash flow', Math.round(existingBusinessSummary.annualCashFlow), NUM],
- ['Monthly break-even revenue', Math.round(existingBusinessSummary.breakEvenPoint), NUM],
+ [beDisplay(existingBusinessSummary).label, beDisplay(existingBusinessSummary).available ? Math.round(existingBusinessSummary.breakEvenPoint) : beDisplay(existingBusinessSummary).text, beDisplay(existingBusinessSummary).available ? NUM : undefined],
  ['Months with negative cash flow', existingBusinessSummary.monthsNegativeCashFlow + ' of 12'],
  ['Months below break-even', existingBusinessSummary.monthsBelowBE + ' of 12']
  ]},
@@ -9432,9 +9595,9 @@ function generateProfessionalPdfReportDirect() {
  ...(feasibilitySummary.adj && feasibilitySummary.adj.active ? [
  ['— Balance Sheet Adjustments (entered) —', ''],
  ['Working capital adjustment (actual − normal)', feasibilitySummary.adj.wcActive ? Math.round(feasibilitySummary.adj.wcAdj) : 'not entered', feasibilitySummary.adj.wcActive ? NUM : undefined],
- ['normal working capital (days × revenue ÷ 365)', feasibilitySummary.adj.normalWC !== null ? Math.round(feasibilitySummary.adj.normalWC) : 'not entered', feasibilitySummary.adj.normalWC !== null ? NUM : undefined],
- ['Working capital Actual (' + (feasibilitySummary.adj.actualSrc || 'not entered') + ')', feasibilitySummary.adj.actualWC !== null ? Math.round(feasibilitySummary.adj.actualWC) : 'not entered', feasibilitySummary.adj.actualWC !== null ? NUM : undefined],
- ['net debt in the business (Cash − Debt)', feasibilitySummary.adj.netDebtActive ? Math.round(feasibilitySummary.adj.netDebtAdj) : 'not entered', feasibilitySummary.adj.netDebtActive ? NUM : undefined],
+ ['Normalized working capital (revenue × DSO ÷ 365 + COGS × DIO ÷ 365 − COGS × DPO ÷ 365)', feasibilitySummary.adj.normalWC !== null ? Math.round(feasibilitySummary.adj.normalWC) : 'not entered', feasibilitySummary.adj.normalWC !== null ? NUM : undefined],
+ ['Actual working capital (' + (feasibilitySummary.adj.actualSrc || 'not entered') + ')', feasibilitySummary.adj.actualWC !== null ? Math.round(feasibilitySummary.adj.actualWC) : 'not entered', feasibilitySummary.adj.actualWC !== null ? NUM : undefined],
+ ['Net-debt adjustment to equity value (cash less debt) (Cash − Debt)', feasibilitySummary.adj.netDebtActive ? Math.round(feasibilitySummary.adj.netDebtAdj) : 'not entered', feasibilitySummary.adj.netDebtActive ? NUM : undefined],
  ['Manual adjustments (additions − deductions)', feasibilitySummary.adj.manualActive ? Math.round(feasibilitySummary.adj.manualAdj) : 'not entered', feasibilitySummary.adj.manualActive ? NUM : undefined],
  ['Total balance-sheet adjustment', Math.round(feasibilitySummary.adj.stockAdj), NUM],
  ['Adjusted business value (4x multiple)', feasibilitySummary.multDealAdj && isFinite(feasibilitySummary.multDealAdj.m4) ? Math.round(feasibilitySummary.multDealAdj.m4) : 'N/A', feasibilitySummary.multDealAdj ? NUM : undefined],
@@ -9445,7 +9608,7 @@ function generateProfessionalPdfReportDirect() {
  ] : [
  ['Balance Sheet Adjustments', 'Not entered — valuation assumes a clean transaction (normal working capital, no debt/cash in the business, no surplus assets)']
  ]),
- ['Discount rate / downside risk (DCF, Estimate 3)', (feasibilitySummary.discountRatePct ?? 5) / 100, pctFmt],
+ ['Risk-free proxy rate — Estimate 3', (feasibilitySummary.discountRatePct ?? 5) / 100, pctFmt],
  ['Required return (discounted estimates 1–2)', (feasibilitySummary.requiredRoi ?? 15) / 100, pctFmt],
  ['Value gap — DCF cross-check (Estimate 1)', feasibilitySummary.selectedNpv === null || !isFinite(feasibilitySummary.selectedNpv) ? 'N/A' : Math.round(feasibilitySummary.selectedNpv), feasibilitySummary.selectedNpv === null || !isFinite(feasibilitySummary.selectedNpv) ? undefined : NUM],
  ['Deal IRR', feasibilitySummary.selectedIrrPct === null ? 'N/A' : feasibilitySummary.selectedIrrPct / 100, feasibilitySummary.selectedIrrPct === null ? undefined : pctFmt],
@@ -9453,8 +9616,8 @@ function generateProfessionalPdfReportDirect() {
  ]},
  { title:'Key Metrics', rows:[
  ['Annual revenue', Math.round(cachedOutput.totalRev || sum('revenue')), NUM],
- ['EBITDA annual', Math.round(cachedOutput.totalEbitda || sum('ebitda')), NUM],
- ['Net Profit annual', Math.round(totalNetForSummary), NUM],
+ ['Annual EBITDA', Math.round(cachedOutput.totalEbitda || sum('ebitda')), NUM],
+ ['Annual net profit', Math.round(totalNetForSummary), NUM],
  ['Annual cash flow after debt service', Math.round(feasibilitySummary.annualCashFlow), NUM],
  ['Total investment', Math.round(feasibilitySummary.investment), NUM],
  // V-35 - 'Required financing' was the same variable as 'Required loan'.
@@ -9462,12 +9625,22 @@ function generateProfessionalPdfReportDirect() {
  ['Cash applied to the investment', Math.max(0, Math.round(feasibilitySummary.investment) - Math.round(feasibilitySummary.equityContribution) - Math.round(feasibilitySummary.loanRequired)), NUM],
  ['Equity contributed', Math.round(feasibilitySummary.equityContribution), NUM],
  ['Required loan', Math.round(feasibilitySummary.loanRequired), NUM],
- ['Cumulative ROI (undiscounted)', (feasibilitySummary.projectRoiPct ?? feasibilitySummary.roiPct) / 100, pctFmt], ['Return on equity (incl. sale, net of debt)', (feasibilitySummary.equityRoiPct ?? feasibilitySummary.roiPct) / 100, pctFmt],
+ ['Cumulative ROI (undiscounted)', /*  V-40 — removed ?? feasibilitySummary.roiPct.
+ projectRoiPct is null only when investment <= 0, but computeInvestmentSummary
+ returns null in exactly that case and never produces a summary — so the
+ fallback was dead code. Worse: roiPct = totalNet/investment would be
+ Infinity/NaN in that same case, so the fallback pointed at a value that does
+ not exist. The two are also not interchangeable: projectRoiPct is cumulative
+ ROI over the whole horizon on EBIT, net of the investment; roiPct is a
+ one-year ratio on net profit after financing and tax, with nothing deducted.
+ The screen already read the field directly — Excel was the outlier.  */
+ feasibilitySummary.projectRoiPct / 100, pctFmt], ['Cumulative equity ROI (including exit proceeds, net of debt)', feasibilitySummary.equityRoiPct === null || feasibilitySummary.equityRoiPct === undefined ? 'N/A' : feasibilitySummary.equityRoiPct / 100, feasibilitySummary.equityRoiPct === null || feasibilitySummary.equityRoiPct === undefined ? undefined : pctFmt]   /* V-36a EN-03 */,
  ['Payback period', feasibilitySummary.paybackOpTxt],
  ['Equity payback period', feasibilitySummary.paybackTxt],
  ['IRR on equity', feasibilitySummary.irrPct === null ? 'N/A' : feasibilitySummary.irrPct / 100, feasibilitySummary.irrPct === null ? undefined : pctFmt],
  ['Leverage effect', feasibilitySummary.leverageEffectPct === null ? 'N/A' : feasibilitySummary.leverageEffectPct / 100, feasibilitySummary.leverageEffectPct === null ? undefined : pctFmt],
- ['DSCR', feasibilitySummary.dscr === null ? 'No debt' : feasibilitySummary.dscr, feasibilitySummary.dscr === null ? undefined : ratioFmt]
+ ['DSCR — governing year', feasibilitySummary.dscrTxt],
+                        ['DSCR — year 1', feasibilitySummary.dscrYear1Txt]   /* V-36a EN-02 */
  ]}
  ]);
  const invBreakdownRows = INVESTMENT_BREAKDOWN_ITEMS.map(item => [item.label, Math.round((S.investmentBreakdown && S.investmentBreakdown[item.key]) || 0), NUM]);
@@ -9504,7 +9677,7 @@ function generateProfessionalPdfReportDirect() {
  ['% external financing', investmentBase> 0 ? Math.max(0, feasibilitySummary.loanRequired) / investmentBase : 0, pctFmt]
  ]},
  { title:'Loan & Debt Service', rows:[
- ['Repayment method', derivedFinMethodLabel()], // derived from actual sources, not a button
+ ['Financing structure', derivedFinMethodLabel()], // derived from actual sources, not a button
  ['Annual interest rate', (finObj.rate || 0) / 100, pctFmt],
  ['Loan term in years', finObj.years || 0],
  ['Repayment method', finObj.repay === 'bullet' ? 'Interest-only; principal due at maturity (bullet)' : (finObj.repay === 'grace' ? 'Interest-only period, then amortizing' : 'Fully amortizing — principal and interest')],
@@ -9520,13 +9693,14 @@ function generateProfessionalPdfReportDirect() {
  ['Cash applied to the investment', Math.max(0, Math.round(feasibilitySummary.investment) - Math.round(feasibilitySummary.equityContribution) - Math.round(feasibilitySummary.loanRequired)), NUM],
  ['Equity contributed', Math.round(feasibilitySummary.equityContribution), NUM],
  ['Required loan', Math.round(feasibilitySummary.loanRequired), NUM],
- ['ROI on the business', (feasibilitySummary.projectRoiPct ?? feasibilitySummary.roiPct) / 100, pctFmt], ['Return on equity (incl. sale, net of debt)', (feasibilitySummary.equityRoiPct ?? feasibilitySummary.roiPct) / 100, pctFmt],
+ ['ROI on the business', feasibilitySummary.projectRoiPct / 100, pctFmt], ['Cumulative equity ROI (including exit proceeds, net of debt)', feasibilitySummary.equityRoiPct === null || feasibilitySummary.equityRoiPct === undefined ? 'N/A' : feasibilitySummary.equityRoiPct / 100, feasibilitySummary.equityRoiPct === null || feasibilitySummary.equityRoiPct === undefined ? undefined : pctFmt]   /* V-36a EN-03 */,
  ['Payback period', feasibilitySummary.paybackOpTxt],
  ['Equity payback period', feasibilitySummary.paybackTxt],
  ['Deal IRR (unleveraged)', feasibilitySummary.unleveragedIrrPct === null ? 'N/A' : feasibilitySummary.unleveragedIrrPct / 100, feasibilitySummary.unleveragedIrrPct === null ? undefined : pctFmt],
  ['IRR on equity', feasibilitySummary.irrPct === null ? 'N/A' : feasibilitySummary.irrPct / 100, feasibilitySummary.irrPct === null ? undefined : pctFmt],
  ['Leverage effect', feasibilitySummary.leverageEffectPct === null ? 'N/A' : feasibilitySummary.leverageEffectPct / 100, feasibilitySummary.leverageEffectPct === null ? undefined : pctFmt],
- ['DSCR', feasibilitySummary.dscr === null ? 'No debt' : feasibilitySummary.dscr, feasibilitySummary.dscr === null ? undefined : ratioFmt]
+ ['DSCR — governing year', feasibilitySummary.dscrTxt],
+                        ['DSCR — year 1', feasibilitySummary.dscrYear1Txt]   /* V-36a EN-02 */
  ]},
  { title:'Decision & Risk', rows:[
  ['GO / CAUTION / NO-GO', feasibilitySummary.decisionCfg.title],
@@ -9536,13 +9710,14 @@ function generateProfessionalPdfReportDirect() {
  ]);
  wFeas = buildInfoSheet('Investment Feasibility Metrics', [
  { title:'Feasibility Metrics', rows:[
- ['ROI on the business', (feasibilitySummary.projectRoiPct ?? feasibilitySummary.roiPct) / 100, pctFmt], ['Return on equity (incl. sale, net of debt)', (feasibilitySummary.equityRoiPct ?? feasibilitySummary.roiPct) / 100, pctFmt],
+ ['ROI on the business', feasibilitySummary.projectRoiPct / 100, pctFmt], ['Cumulative equity ROI (including exit proceeds, net of debt)', feasibilitySummary.equityRoiPct === null || feasibilitySummary.equityRoiPct === undefined ? 'N/A' : feasibilitySummary.equityRoiPct / 100, feasibilitySummary.equityRoiPct === null || feasibilitySummary.equityRoiPct === undefined ? undefined : pctFmt]   /* V-36a EN-03 */,
  ['Payback period', feasibilitySummary.paybackOpTxt],
  ['Equity payback period', feasibilitySummary.paybackTxt],
  ['Deal IRR (unleveraged)', feasibilitySummary.unleveragedIrrPct === null ? 'N/A' : feasibilitySummary.unleveragedIrrPct / 100, feasibilitySummary.unleveragedIrrPct === null ? undefined : pctFmt],
  ['IRR on equity', feasibilitySummary.irrPct === null ? 'N/A' : feasibilitySummary.irrPct / 100, feasibilitySummary.irrPct === null ? undefined : pctFmt],
  ['Leverage effect', feasibilitySummary.leverageEffectPct === null ? 'N/A' : feasibilitySummary.leverageEffectPct / 100, feasibilitySummary.leverageEffectPct === null ? undefined : pctFmt],
- ['DSCR', feasibilitySummary.dscr === null ? 'No debt' : feasibilitySummary.dscr, feasibilitySummary.dscr === null ? undefined : ratioFmt],
+ ['DSCR — governing year', feasibilitySummary.dscrTxt],
+                        ['DSCR — year 1', feasibilitySummary.dscrYear1Txt]   /* V-36a EN-02 */,
  ['Annual Cash Flow after debt service', Math.round(feasibilitySummary.annualCashFlow), NUM],
  ['Annual Debt Service', Math.round(feasibilitySummary.annualDebtService || 0), NUM]
  ]},
@@ -9583,7 +9758,7 @@ function generateProfessionalPdfReportDirect() {
  if(wAssumptions) XLSX.utils.book_append_sheet(wb, wAssumptions, 'Model Assumptions');
  XLSX.utils.book_append_sheet(wb, w1, 'Budget Forecast ' + fy);
  if(wFunding) XLSX.utils.book_append_sheet(wb, wFunding, 'Investment & Financing');
- if(wFeas) XLSX.utils.book_append_sheet(wb, wFeas, 'Feasibility metric');
+ if(wFeas) XLSX.utils.book_append_sheet(wb, wFeas, 'Feasibility Metrics');
  if(wRisk) XLSX.utils.book_append_sheet(wb, wRisk, 'Risk Analysis');
  XLSX.utils.book_append_sheet(wb, w2, 'KPIs');
  XLSX.utils.book_append_sheet(wb, w3, 'Actual vs Forecast');
@@ -9718,7 +9893,7 @@ function generateProfessionalPdfReportDirect() {
  let h = _nA ? line('💰','Budget:', `cumulative profit $${fmtILS(Math.round(profit))}`, profit >= 0) : _pending('Profitability:');
  h += _nC ? line('🏦','Cash:', negMonths.length
  ? `negative month-end balance in months ${negMonths.join(', ')} · lowest balance −$${fmtILS(Math.round(Math.abs(minCum)))}`
- : `cumulative $${fmtILS(Math.round(cash))} · the balance stayed positive`,
+ : `cumulative $${fmtILS(Math.round(cash))} · the balance did not fall below zero`,
  negMonths.length === 0) : _pending('Cash:');
 
  // ── alerts that exist only because both bases are present ──
@@ -9781,6 +9956,7 @@ function generateProfessionalPdfReportDirect() {
  const csh = { receipts:[], payments:[], gross:[], net:[], netCf:[], cum:[], tax:[] };
  const bridge = { arDelta:[], apDelta:[], dep:[], profit:[], cash:[] };
  let cumEBT=0, prevYTDtax=0, bal=openBal, qAccrual=0;
+            let _cashTaxNone = false, _cashTaxPartial = false;   // V-46 (43-04)
  let taxCredit=0; // excess tax paid offsets FUTURE payments only
  for(let m=0;m<12;m++){
  if(m>lastIdx){
@@ -9818,6 +9994,17 @@ function generateProfessionalPdfReportDirect() {
  if(taxDue<0){ taxCredit+=-taxDue; }
  else { const off=Math.min(taxCredit,taxDue); taxCredit-=off; taxCash=taxDue-off; }
  csh.tax[m]=taxCash;
+                    //  V-41 (HE-04) — cash-basis tax derives from cumEBT, which comes from
+                    //  revenue and COGS. A month entered on the cash basis alone leaves those
+                    //  null, they are treated as zero, and the result is a tax of 0 presented
+                    //  as if measured. Flagged, not fixed: tax cannot be derived from receipts.
+                    //  V-46 (43-04) — שני מצבים נפרדים, ולכן שני דגלים:
+                    //  אין בסיס כלל (שניהם חסרים) ⇒ המס באמת 0.
+                    //  בסיס חלקי (אחד מהם חסר) ⇒ המס מחושב אך על נתון חסר.
+                    if(A.receipts[m] != null && A.payments[m] != null) {
+                        if(A.revenue[m] == null && A.cogs[m] == null) _cashTaxNone = true;
+                        else if(A.revenue[m] == null || A.cogs[m] == null) _cashTaxPartial = true;
+                    }
 
  csh.gross[m]=rc-pm;
  csh.net[m]=rc-pm-mkt-pay-fix-fin-taxCash;              // cash flow before principal
@@ -9825,7 +10012,7 @@ function generateProfessionalPdfReportDirect() {
  csh.netCf[m]=ncf; bal+=ncf; csh.cum[m]=bal;
 
  // ── V-34 — profit ↔ cash bridge ──
- // A cash hole comes from one of two causes with two completely different fixes:
+ // A cash shortfall may reflect weak profitability, timing differences, or both — and the two have completely different fixes:
  // profitability, and the timing between paying suppliers and collecting from customers.
  // Every line here is a difference between two already-computed bases — no new assumption.
  bridge.profit[m]  = acc.net[m];
@@ -9839,6 +10026,7 @@ function generateProfessionalPdfReportDirect() {
  const active = activeIsAccrual ? acc : csh;
  return {
  accrual: acc, cash: csh, bridge, basis: activeIsAccrual ? 'accrual' : 'cash',
+                cashTaxNone: _cashTaxNone, cashTaxPartial: _cashTaxPartial,   // V-46 (43-04)
  gross: active.gross,
  net:   active.net,
  netCf: activeIsAccrual ? acc.net : csh.netCf,
@@ -10067,6 +10255,18 @@ function generateProfessionalPdfReportDirect() {
  const sourceNote = _isAcc
  ? 'Depreciation and finance are shown from the forecast — they have no separate actuals input. Tax is computed from the actual profit you entered.'
  : 'Finance is shown from the forecast — it has no separate actuals input. Tax is computed from the actual profit you entered.';
+ //  V-41 (HE-04) — a month entered on the cash basis alone gives no base for
+ //  tax, and the result is a 0 that looks measured. Stated explicitly.
+ //  V-46 (43-04) — two states, two wordings. The previous note always said
+ //  "shown as zero", contradicting the figure when the base was partial.
+ const _taxNote = !_isAcc && d
+ ? (d.cashTaxNone
+ ? ' Note: months entered on the cash basis only have no revenue or COGS, so tax cannot be derived and is shown as zero. Enter the accrual figures for those months to show tax correctly.'
+ : (d.cashTaxPartial
+ ? ' Note: in some months only part of the accrual data was entered — revenue or COGS. Tax is computed on an incomplete base and is not a full measurement. Complete both fields for a correct tax figure.'
+ : ''))
+ : '';
+ const sourceNoteFull = sourceNote + _taxNote;
 
  const rows = [
  [L.rev, aRev, pRev, eRev, fRev, true, false],
@@ -10079,14 +10279,14 @@ function generateProfessionalPdfReportDirect() {
  [otherLabel, aOther, pOther, eOther, fOther, false, false],   // V-36 — closes the account
  [L.bottom, aNet, pNet, eNet, fNet, true, false],
  ];
- return { rows, labels: L, title: L.title, basis: _isAcc ? 'accrual' : 'cash', sourceNote,
+ return { rows, labels: L, title: L.title, basis: _isAcc ? 'accrual' : 'cash', sourceNote: sourceNoteFull,
  values: { aRev,aCogs,aGross,aNet, pRev,pCogs,pGross,pNet, fRev,fCogs,fGross,fNet, eRev,eCogs,eGross,eNet,
  aMkt,aPay,aFix, pMkt,pPay,pFix, fMkt,fPay,fFix, eMkt,ePay,eFix, aMargin,pMargin,eMargin,fMargin } };
  }
 
  // ══════════════════════════════════════════════════════════════
  //  V-34 — profit ↔ cash bridge
- //  A cash hole comes from one of two causes with completely different fixes:
+ //  A cash shortfall may reflect weak profitability, timing differences, or both — and the two have completely different fixes:
  //  profitability (fix the price, the margin or the costs) and timing (fix credit terms,
  //  deposits or the facility — the business itself is fine). This table separates them.
  //  Every line is a difference between two already-computed bases — no new assumption, no new input.
@@ -10118,7 +10318,7 @@ function generateProfessionalPdfReportDirect() {
  <td style="padding:6px 8px;border:1px solid #e2e8f0;text-align:center;color:#cbd5e1;font-weight:700">•••</td>
  <td style="padding:6px 8px;border:1px solid #e2e8f0"></td></tr>`).join('')}
  </table>
- <p style="font-size:12px;color:#475569;margin-top:10px;line-height:1.6">Your profit is computed from the data you entered. <strong>The gap between it and the cash in the bank</strong> — how much is collection that stalled and how much is margin erosion — requires the cash basis, available in the Pro edition.</p>
+ <p style="font-size:12px;color:#475569;margin-top:10px;line-height:1.6">Your profit is computed from the data you entered. <strong>The gap between it and the cash in the bank</strong> — how much is delayed collections and how much is margin erosion — requires the cash basis, available in the Pro edition.</p>
  </div>`;
  }
  if(!_both) return '';
@@ -10138,14 +10338,14 @@ function generateProfessionalPdfReportDirect() {
  return `<div style="margin-top:18px">
  <h3 style="font-size:15px;font-weight:800;color:#0f172a;margin-bottom:4px">Profit-to-cash bridge — sources of the gap${_both === 1 ? ' (month 1)' : ` (months 1–${_both})`}</h3>
  ${_partial ? `<p style="font-size:11.5px;color:#9f1239;font-weight:700;margin-bottom:6px">Bridging ${_both === 1 ? 'one month only' : _both + ' months'} — the budget basis was entered through month ${_nA} and the cash basis through month ${_nC}. A comparison between the bases is defined only where both were measured.</p>` : ''}
- <p style="font-size:12px;color:#64748b;margin-bottom:10px">A cash hole comes from profitability or from timing, and each has a different fix: profitability is corrected in the price, the margin or the costs; timing is corrected in credit terms, deposits or the credit facility.</p>
+ <p style="font-size:12px;color:#64748b;margin-bottom:10px">A cash shortfall may reflect weak profitability, timing differences, or both, and each has a different fix: profitability is corrected in the price, the margin or the costs; timing is corrected in credit terms, deposits or the credit facility.</p>
  <table style="width:100%;border-collapse:collapse;background:#fff">
  ${row('Net profit (accrual basis)', profit, 'the starting point — profitability itself', true)}
- ${row('Add back: depreciation and amortization (D&A)', dep, 'an accounting charge that is not cash')}
- ${row('Collection timing effect', ar, 'revenue recognized less what was collected')}
+ ${row('Add back: depreciation and amortization (D&A)', dep, 'a non-cash expense')}
+ ${row('Collection timing effect', ar, 'cash collected less revenue recognized')}
  ${row('Supplier-payment timing effect', ap, 'cost accrued less what was paid — financing from suppliers')}
  ${row('Tax and other timing differences', other, 'tax paid versus tax accrued, and other timing gaps')}
- ${row('= Cash flow before principal repayments', cash, 'what actually remained', true)}
+ ${row('= Cash flow before principal repayments', cash, 'Cash flow before principal repayments', true)}
  </table>
  </div>`;
  }
@@ -10320,7 +10520,7 @@ function generateProfessionalPdfReportDirect() {
  }
 
  wrap.innerHTML = `<table style="border-collapse:collapse;width:100%;direction:ltr"><thead><tr>${head}</tr></thead><tbody>${body}</tbody></table>
- <p style="font-size:11px;color:#94a3b8;margin-top:6px">SG&A expenses default to the forecast (${_actFmt(fixedDefault)} per month) — edit only if changed.</p>
+ <p style="font-size:11px;color:#94a3b8;margin-top:6px">SG&A expenses default to the forecast (${_actFmt(fixedDefault)} per month) — Update these amounts if actual expenses differ from the forecast.</p>
  ${buildRecognitionNote()}`;
 
  renderActualsBasisUI(d);   // V-34 — the toggle and strip refresh with the page
@@ -10422,12 +10622,12 @@ function generateProfessionalPdfReportDirect() {
  { label: 'Forecast sales', key: 'totalRev', fmt: fmtK },
  { label: 'Gross Profit', key: 'totalGross', fmt: fmtK },
  { label: 'gross margin %', key: 'grossPct', fmt: v => v+'%' },
- { label: 'EBITDA (Before Depreciation)', key: 'totalEbitda', fmt: fmtK },
+ { label: 'EBITDA', key: 'totalEbitda', fmt: fmtK },
  { label: 'EBITDA margin %', key: 'ebitdaPct', fmt: v => v+'%' },
  { label: 'Net Profit', key: 'totalNet', fmt: fmtK },
  { label: 'Net profit margin %', key: 'netPct', fmt: v => v+'%' },
  { label: 'Monthly break-even revenue', key: 'breakEven', fmt: fmtK },
- { label: 'Defined gross margin', key: 'grossMargin', fmt: v => v+'%' },
+ { label: 'Assumed gross margin', key: 'grossMargin', fmt: v => v+'%' },
  { label: 'SG&A expenses (excluding payroll and marketing)', key: 'costOther', fmt: fmtK },
  { label: 'Payroll costs', key: 'costPayroll', fmt: fmtK },
  { label: 'Marketing costs', key: 'costMkt', fmt: fmtK },
