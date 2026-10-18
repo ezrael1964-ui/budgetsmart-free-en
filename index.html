@@ -2487,7 +2487,7 @@ gtag("config", "G-NGB6JB9MYM", { anonymize_ip: true });
 
  <script>
 
- const APP_VERSION = 'V-54';
+ const APP_VERSION = 'V-55';
  // V-35 - the forecast year was stated three different ways: the screen and the PDF
  // said "next year", while Excel stamped new Date().getFullYear() - the CURRENT year.
  // A client could receive a PDF saying "next year" beside a workbook named 2026 for a
@@ -2522,7 +2522,7 @@ gtag("config", "G-NGB6JB9MYM", { anonymize_ip: true });
         const arr12 = (v, d = 0) => { const a = Array.isArray(v) ? v.slice(0, 12) : [];
             while (a.length < 12) a.push(d);
             return a.map(x => (x === null ? null : num(x, d))); };
- const APP_BUILD_DATE = '20.09.2026';
+ const APP_BUILD_DATE = '18.10.2026';
  const APP_PLAN = 'free';
 
 
@@ -7884,7 +7884,18 @@ function parseAndFormatInput(inputElement) {
  +  `<td>${devText(dev, isPct)}</td><td>${DEV_WORD[_st]}</td>`
  +  `<td>${isPct?p(e):f(e)}</td><td>${isPct?p(fy):f(fy)}</td></tr>`;
  });
+ //  V-55 — the monthly actuals table with a cumulative total column, from the same
+ //  actualsMonthlyRows as the screen and Excel. Months outside the run stay blank.
+ const _mrP = actualsMonthlyRows(_bas, dB, _eB - 1);
+ const _cellP = (v, isPct) => (v === null || v === undefined || !isFinite(v)) ? '' : (isPct ? p(v) : f(v));
+ const _monthly = `<table class="report-table"><thead><tr><th>Line Item</th>${monthNames.map(mn => `<th>${htmlEscapePdfReport(mn)}</th>`).join('')}<th>Cumulative total</th></tr></thead><tbody>`
+ + _mrP.rows.filter(rw => !(_bas === 'accrual' && rw.key === 'cum')).map(rw =>
+ `<tr><td>${htmlEscapePdfReport(rw.label)}</td>${monthNames.map((_, m) => `<td>${_cellP(rw.at(m), rw.kind === 'pct')}</td>`).join('')}<td class="total-cell">${_cellP(rw.total, rw.kind === 'pct')}</td></tr>`).join('')
+ + `</tbody></table>`;
  out += `<section class="page"><h1 class="section-title">${htmlEscapePdfReport(c.title)}</h1>
+ <p class="note"><strong>Monthly actuals — ${_bas === 'accrual' ? 'accrual basis (budget)' : 'cash basis (cash flow)'}</strong> · cumulative total through month ${_eB}</p>
+ ${_monthly}
+ <p class="note" style="margin-top:14px"><strong>Comparison with the forecast</strong></p>
  <table class="report-table"><thead><tr>
  <th>Line Item</th><th>Actual YTD</th><th>Forecast YTD</th><th>Variance</th><th>Status</th>
  <th>Projected year-end</th><th>Annual forecast</th>
@@ -9058,6 +9069,13 @@ function generateProfessionalPdfReportDirect() {
  w1['!views'] = [{ RTL:false }];
 
 
+ //  V-55 — crash fix: the break-even card on sheet 2 read existingBusinessSummary
+ //  hundreds of lines before its const declaration, so the whole export failed with a
+ //  ReferenceError before any file was produced. The declarations moved here, with no
+ //  change to the calculation — same inputs, same function.
+ const totalNetForSummary = sum('netIncome');
+ const feasibilitySummary = computeInvestmentSummary(totalNetForSummary, M);
+ const existingBusinessSummary = computeExistingBusinessSummary(totalNetForSummary, M);
  const w2 = {};
  const put2 = (r,c,v,s,z) => { w2[addr(r,c)] = C(v,s,z); };
  const tRev=cachedOutput.totalRev, tGross=cachedOutput.totalGross, tEbitda=cachedOutput.totalEbitda;
@@ -9139,7 +9157,7 @@ function generateProfessionalPdfReportDirect() {
                 // It used to sit outside with hard-coded row numbers (6..15), so it appeared
                 // once only and followed the on-screen toggle. rr is dynamic now, as in the PDF,
                 // so each basis gets its own monthly table plus its own comparison table.
-                const aRow = (r, label, fcol, valuesFn, fmt, fill, bold, lastIdxB) => {
+                const aRow = (r, label, fcol, valuesFn, fmt, fill, bold, lastIdxB, total) => {
                     put3(r,1,label, st(fill||'F8FAFC', fcol, {bold:true,sz:10,alH:'left'}));
                     for(let m=0;m<12;m++){
                         const v = (m<=lastIdxB) ? valuesFn(m) : null;
@@ -9149,12 +9167,14 @@ function generateProfessionalPdfReportDirect() {
                             put3(r,2+m, cellValue, st(fill||'FFFFFF',fcol,{bold}), fmt);
                         }
                     }
-                    put3(r,14,'', st(fill||'FFFFFF',fcol,{}));
+                    //  V-55 — cumulative total column (from actualsMonthlyRows, same source as the screen)
+                    if(total===null||total===undefined||!isFinite(total)) put3(r,14,'', st('E2E8F0',fcol,{}));
+                    else put3(r,14, (fmt===PCT) ? (Math.round(total*10)/1000) : Math.round(total), st('E2E8F0',fcol,{bold:true}), fmt);
                 };
                 const monthHeader = (r, lastIdxB) => {
                     put3(r,1,'Line Item', st('1E3A8A','FFFFFF',{bold:true,sz:10,alH:'left'}));
                     for(let m=0;m<12;m++) put3(r,2+m, MONTHS[m], st(m<=lastIdxB?'1E3A8A':'94A3B8','FFFFFF',{bold:true,sz:10}));
-                    put3(r,14,'', st('1E3A8A','FFFFFF',{}));
+                    put3(r,14,'Cumulative total', st('0F172A','FFFFFF',{bold:true,sz:10}));
                 };
 
                 const hdrs=['Line Item','Actual YTD','Forecast YTD','Variance','Status','Projected year-end','Annual forecast','Projected year-end variance'];
@@ -9173,21 +9193,19 @@ function generateProfessionalPdfReportDirect() {
                 w3merges.push({s:{r:rr-1,c:0},e:{r:rr-1,c:13}});
                 rr++;
                 monthHeader(rr, _liB); rr++;
-                aRow(rr++, _cmpB.labels.rev,   '0F172A', m => _bas==='accrual' ? A3.revenue[m] : _dB.cash.receipts[m], NUM, 'F8FAFC', false, _liB);
-                aRow(rr++, _cmpB.labels.cogs,  'BE123C', m => _bas==='accrual' ? A3.cogs[m]    : _dB.cash.payments[m], NUM, 'FFFFFF', false, _liB);
-                aRow(rr++, _cmpB.labels.margin,'64748B', m => { const set = _bas==='accrual'
-                        ? {r:A3.revenue[m], c:A3.cogs[m]} : {r:_dB.cash.receipts[m], c:_dB.cash.payments[m]};
-                        return (set.r && set.c!=null) ? ((set.r-set.c)/set.r*100) : null; }, PCT, 'FFFFFF', false, _liB);
-                aRow(rr++, _cmpB.labels.gross, '065F46', m => (_bas==='accrual' ? _dB.accrual.gross[m] : _dB.cash.gross[m]), NUM, 'ECFDF5', true, _liB);
-                aRow(rr++, 'Marketing','334155', m => A3.marketing[m], NUM, 'FFFFFF', false, _liB);
-                aRow(rr++, 'Payroll','334155',   m => A3.payroll[m],   NUM, 'F8FAFC', false, _liB);
-                aRow(rr++, 'SG&A expenses (excluding payroll and marketing)','334155', m => (A3.fixed[m]!==null?A3.fixed[m]:fixedDef3), NUM, 'FFFFFF', false, _liB);
-                aRow(rr++, _cmpB.labels.bottom,'0F172A', m => (_bas==='accrual' ? _dB.accrual.net[m] : _dB.cash.net[m]), NUM, 'FFFBEB', true, _liB);
-                if(_bas === 'cash') {
-                    // The cash rows exist only on the cash basis — on accrual they were profit under a wrong heading.
-                    aRow(rr++, 'Net monthly cash flow','1E40AF', m => _dB.cash.netCf[m], NUM, 'DBEAFE', true, _liB);
-                    aRow(rr++, 'Cash balance at month end','0F172A', m => _dB.cash.cum[m], NUM, 'EFF6FF', true, _liB);
-                }
+                //  V-55 — rows and totals from actualsMonthlyRows, the same source as the screen and the PDF.
+                //  The cash rows (net cash flow, balance) exist on the cash basis only. Accrual
+                //  "cumulative profit" stays on screen only — in the file it equals the net profit total.
+                const _XS = { top:['0F172A','F8FAFC',false], bot:['BE123C','FFFFFF',false], margin:['64748B','FFFFFF',false],
+                              gross:['065F46','ECFDF5',true], mkt:['334155','FFFFFF',false], pay:['334155','F8FAFC',false],
+                              fix:['334155','FFFFFF',false], op:['92400E','FEF3C7',true], other:['334155','FFFFFF',false],
+                              net:['0F172A','FFFBEB',true], netCf:['1E40AF','DBEAFE',true], cum:['0F172A','EFF6FF',true] };
+                const _mrB = actualsMonthlyRows(_bas, _dB, _liB);
+                _mrB.rows.forEach(rw => {
+                    if(_bas === 'accrual' && rw.key === 'cum') return;
+                    const [fc, fl, bd] = _XS[rw.key];
+                    aRow(rr++, rw.label, fc, rw.at, rw.kind === 'pct' ? PCT : NUM, fl, bd, _liB, rw.total);
+                });
                 rr += 2;
 
                 // ── the comparison table for the same basis ──
@@ -9232,7 +9250,7 @@ function generateProfessionalPdfReportDirect() {
                     const profit=sm(B.profit), dep=sm(B.dep), ar=sm(B.arDelta), ap=sm(B.apDelta), cash=sm(B.cash);
                     if(profit===null || cash===null) return;
                     const other = cash-(profit+dep+ar+ap);
-                    t3title(rr,'Profit-to-cash bridge — sources of the gap','0F766E',12); w3merges.push({s:{r:rr-1,c:0},e:{r:rr-1,c:13}});
+                    t3title(rr,'Profit-to-cash bridge — sources of the gap' + (_both === 1 ? ' (month 1)' : ` (months 1–${_both})`),'0F766E',12); w3merges.push({s:{r:rr-1,c:0},e:{r:rr-1,c:13}});
                     rr++;
                     [['Net profit (accrual basis)',profit,'the starting point — profitability itself'],
                      ['Add back: depreciation and amortization (D&A)',dep,'a non-cash expense'],
@@ -9252,7 +9270,7 @@ function generateProfessionalPdfReportDirect() {
  w3['!ref'] = `A1:${addr(rr+1,14)}`;
  }
  w3['!merges'] = w3merges;
- w3['!cols'] = [{wch:18}, ...Array(12).fill({wch:11}), {wch:13}];
+ w3['!cols'] = [{wch:18}, ...Array(12).fill({wch:11}), {wch:14}];
  w3['!views'] = [{ RTL:false }];
 
  const buildInfoSheet = (title, sections) => {
@@ -9524,9 +9542,7 @@ function generateProfessionalPdfReportDirect() {
  };
 
 
- const totalNetForSummary = sum('netIncome');
- const feasibilitySummary = computeInvestmentSummary(totalNetForSummary, M);
- const existingBusinessSummary = computeExistingBusinessSummary(totalNetForSummary, M);
+ //  V-55 — the three summaries were moved above sheet 2 (see there).
  let wSummary = null, wAssumptions = buildAssumptionsSheet(feasibilitySummary), wFunding = null, wFeas = null, wRisk = null;
  if(S.appMode === 'existing' && existingBusinessSummary) {
  const pctFmt = '0.0%';
@@ -9953,7 +9969,7 @@ function generateProfessionalPdfReportDirect() {
  // A month not entered stays empty and drops out of the comparison — an estimate would
  // be replacing a measurement with a guess, which is always worse.
  const acc = { gross:[], ebitda:[], ebit:[], net:[], tax:[] };
- const csh = { receipts:[], payments:[], gross:[], net:[], netCf:[], cum:[], tax:[] };
+ const csh = { receipts:[], payments:[], gross:[], op:[], net:[], netCf:[], cum:[], tax:[] };
  const bridge = { arDelta:[], apDelta:[], dep:[], profit:[], cash:[] };
  let cumEBT=0, prevYTDtax=0, bal=openBal, qAccrual=0;
             let _cashTaxNone = false, _cashTaxPartial = false;   // V-46 (43-04)
@@ -9961,7 +9977,7 @@ function generateProfessionalPdfReportDirect() {
  for(let m=0;m<12;m++){
  if(m>lastIdx){
  ['gross','ebitda','ebit','net','tax'].forEach(k=>acc[k][m]=null);
- ['receipts','payments','gross','net','netCf','cum','tax'].forEach(k=>csh[k][m]=null);
+ ['receipts','payments','gross','op','net','netCf','cum','tax'].forEach(k=>csh[k][m]=null);
  ['arDelta','apDelta','dep','profit','cash'].forEach(k=>bridge[k][m]=null);
  continue;
  }
@@ -10007,7 +10023,8 @@ function generateProfessionalPdfReportDirect() {
                     }
 
  csh.gross[m]=rc-pm;
- csh.net[m]=rc-pm-mkt-pay-fix-fin-taxCash;              // cash flow before principal
+ csh.op[m]=rc-pm-mkt-pay-fix;                           // V-55 — operating cash flow before financing and tax
+ csh.net[m]=csh.op[m]-fin-taxCash;                      // cash flow before principal
  const ncf=csh.net[m]-((F[m]&&F[m].loanPrincipal)||0);
  csh.netCf[m]=ncf; bal+=ncf; csh.cum[m]=bal;
 
@@ -10043,6 +10060,73 @@ function generateProfessionalPdfReportDirect() {
  });
  handleSensitivityChange();
  }
+ // ══════════════════════════════════════════════════════════════
+ //  V-55 — the monthly table and its "Cumulative total" column — one source.
+ //  The screen, the PDF and Excel all call this function, just as the comparison
+ //  table is built only in buildActualsComparison. The total runs from month 1 to
+ //  lastIdx — the same run the comparison is built on — so it equals the
+ //  "Actual YTD" column there by definition. A month after a gap is not summed.
+ //  Percent: weighted on the totals, never an average of percentages.
+ //  Balance (cash balance, cumulative profit): the last month's value — balances do not add.
+ //  Operating profit less "depreciation, finance and tax" = the bottom line, every month and in total.
+ // ══════════════════════════════════════════════════════════════
+ function actualsMonthlyRows(basis, d, lastIdx) {
+ const A = S.actuals, fixedDefault = S.inputs.fixed || 0;
+ const acc = basis === 'accrual';
+ const fixAt = m => (A.fixed[m] !== null && A.fixed[m] !== undefined) ? A.fixed[m] : fixedDefault;
+ const sum = fn => { if(lastIdx < 0) return null; let t = 0; for(let m = 0; m <= lastIdx; m++) t += (fn(m) || 0); return t; };
+ const top = m => acc ? A.revenue[m] : d.cash.receipts[m];
+ const bot = m => acc ? A.cogs[m] : d.cash.payments[m];
+ const B = acc ? d.accrual : d.cash;
+ const opAt = m => acc ? d.accrual.ebitda[m] : d.cash.op[m];
+ const tTop = sum(top), tBot = sum(bot);
+ const mk = (key, label, fn, kind, total) => ({
+ key, label, kind: kind || 'num',
+ at: m => (m <= lastIdx ? fn(m) : null),
+ total: total !== undefined ? total : sum(fn)
+ });
+ const rows = [
+ mk('top',    acc ? 'Recognized revenue' : 'Actual receipts', top),
+ mk('bot',    acc ? 'Cost of goods sold (COGS)' : 'Supplier payments', bot),
+ mk('margin', acc ? 'Gross margin %' : 'Cash surplus margin % (of receipts)',
+ m => { const r = top(m), c = bot(m); return (r && c != null) ? ((r - c) / r * 100) : null; },
+ 'pct', (lastIdx < 0 || !tTop) ? null : ((tTop - tBot) / tTop * 100)),
+ mk('gross',  acc ? 'Gross profit' : 'Cash surplus before operating expenses', m => B.gross[m]),
+ mk('mkt',    'Marketing', m => A.marketing[m]),
+ mk('pay',    'Payroll',   m => A.payroll[m]),
+ mk('fix',    'SG&A expenses (excluding payroll and marketing)', fixAt),
+ mk('op',     acc ? 'Operating profit before depreciation, financing and tax (EBITDA)' : 'Operating cash flow before financing and tax', opAt),
+ mk('other',  acc ? 'Depreciation, finance and tax' : 'Finance and tax paid', m => { const o = opAt(m), n = B.net[m]; return (o == null || n == null) ? null : (o - n); }),
+ mk('net',    acc ? 'Net profit' : 'Cash flow before principal', m => B.net[m]),
+ ];
+ if(acc) {
+ rows.push(mk('cum', 'Cumulative profit', m => d.cum && d.basis === 'accrual' ? d.cum[m] : null, 'bal',
+ lastIdx < 0 ? null : sum(m => d.accrual.net[m])));
+ } else {
+ rows.push(mk('netCf', 'Net monthly cash flow', m => d.cash.netCf[m]));
+ rows.push(mk('cum',   'Cash balance at month end', m => d.cash.cum[m], 'bal', lastIdx < 0 ? null : d.cash.cum[lastIdx]));
+ }
+ const byKey = {}; rows.forEach(r => { byKey[r.key] = r; });
+ return { rows, byKey, lastIdx };
+ }
+ function actualsTotalText(r) {
+ if(!r || r.total === null || r.total === undefined || !isFinite(r.total)) return '';
+ return r.kind === 'pct' ? (r.total.toFixed(1) + '%') : _actFmt0(r.total);
+ }
+ // Fills the on-screen total column — called on full build and on every keystroke.
+ function renderActualsTotals(d, lastIdx) {
+ const _bas = actualsBasis() === 'accrual' ? 'accrual' : 'cash';
+ const mr = actualsMonthlyRows(_bas, d, lastIdx);
+ const hdr = document.getElementById('actt-hdr');
+ if(hdr) hdr.textContent = lastIdx < 0 ? '' : (lastIdx === 0 ? 'Month 1' : `Months 1–${lastIdx + 1}`);
+ mr.rows.forEach(r => {
+ const el = document.getElementById(`actt-${r.key}`);
+ if(!el) return;
+ el.textContent = actualsTotalText(r);
+ if(r.kind !== 'pct' && r.total !== null && ['gross','op','net','cum','netCf'].includes(r.key))
+ el.style.color = r.total < 0 ? '#dc2626' : '#0f172a';
+ });
+ }
  function updateActualsComputed() {
  const _sb = document.getElementById('actuals-sens-banner');
  if(_sb) {
@@ -10059,15 +10143,30 @@ function generateProfessionalPdfReportDirect() {
  }
  if(!cachedOutput) return;
  const elapsed = actualsCompletedCount(); const lastIdx = elapsed-1;
- if(elapsed===0) return;
  const A = S.actuals;
  const d = computeActualsDerived(lastIdx);
- for(let m=0;m<=lastIdx;m++){
- const g=document.getElementById(`actc-gross-${m}`); if(g) g.textContent=_actFmt0(d.gross[m]);
- const nt=document.getElementById(`actc-net-${m}`); if(nt){ nt.textContent=_actFmt0(d.net[m]); nt.style.color=d.net[m]<0?'#dc2626':'#0f172a'; }
- const c=document.getElementById(`actc-cf-${m}`); if(c) c.textContent=_actFmt0(d.netCf[m]);
- const u=document.getElementById(`actc-cum-${m}`); if(u){ u.textContent=_actFmt0(d.cum[m]); u.style.color=d.cum[m]<0?'#dc2626':'#166534'; }
+ //  V-55 — a month that dropped out of the run (a value was deleted) is cleared,
+ //  otherwise it kept a stale figure beside a total that no longer includes it.
+ const _mr = actualsMonthlyRows(actualsBasis() === 'accrual' ? 'accrual' : 'cash', d, lastIdx);
+ for(let m=0;m<12;m++){
+ const on = m<=lastIdx;
+ const g=document.getElementById(`actc-gross-${m}`); if(g) g.textContent=on?_actFmt0(d.gross[m]):'';
+ const op=document.getElementById(`actc-op-${m}`); if(op){ const v=_mr.byKey.op.at(m); op.textContent=on?_actFmt0(v):''; op.style.color=(on&&v<0)?'#dc2626':'#92400e'; }
+ const ot=document.getElementById(`actc-other-${m}`); if(ot) ot.textContent=on?_actFmt0(_mr.byKey.other.at(m)):'';
+ const nt=document.getElementById(`actc-net-${m}`); if(nt){ nt.textContent=on?_actFmt0(d.net[m]):''; nt.style.color=(on&&d.net[m]<0)?'#dc2626':'#0f172a'; }
+ const c=document.getElementById(`actc-cf-${m}`); if(c) c.textContent=on?_actFmt0(d.netCf[m]):'';
+ const u=document.getElementById(`actc-cum-${m}`); if(u){ u.textContent=on?_actFmt0(d.cum[m]):''; u.style.color=(on&&d.cum[m]<0)?'#dc2626':'#166534'; }
  }
+ //  V-55 — the SG&A default enters the calculation as soon as the revenue row is filled,
+ //  but the field was shown only on a full page build. A month filled by typing stayed
+ //  blank to the eye, and the visible cells did not add up to the total column. Now shown.
+ { const _accU = actualsBasis() === 'accrual';
+ for(let m=0;m<12;m++){ const fe=document.getElementById(`act-fixed-${m}`);
+ if(!fe || document.activeElement===fe) continue;
+ const _top=_accU?A.revenue[m]:A.receipts[m];
+ if(A.fixed[m]===null && fe.value==='' && _top!=null) fe.value=_actFmt0(S.inputs.fixed||0); } }
+ renderActualsTotals(d, lastIdx);
+ if(elapsed===0) return;
  renderActualsBasisUI(d);   // V-34 — the toggle and strip refresh with the page
  renderActualsResults(elapsed, lastIdx, d);
  }
@@ -10214,7 +10313,7 @@ function generateProfessionalPdfReportDirect() {
  const eEbt=(eGross-(eMkt+ePay+eFix))-DA-FIN;
  eNet=eEbt-Math.max(0,eEbt)*rate;
  L={rev:'Recognized revenue', cogs:'Cost of goods sold (COGS)', margin:'gross margin %', gross:'Gross profit',
- bottom:'Net profit', title:`Actual vs. Budget — YTD through month ${lastIdx+1}`};
+ bottom:'Net profit', ebitda:'Operating profit before depreciation, financing and tax (EBITDA)', title:`Actual vs. Budget — YTD through month ${lastIdx+1}`};
  } else {
  aRev=_sumSet(d.cash.receipts); aCogs=_sumSet(d.cash.payments); aGross=aRev-aCogs;
  aNet=_sumSet(d.cash.net);
@@ -10225,7 +10324,7 @@ function generateProfessionalPdfReportDirect() {
  eRev=seasonalEAC(aRev); eCogs=seasonalEAC(aCogs); eGross=eRev-eCogs;
  eNet=eGross-(eMkt+ePay+eFix)-FIN-annF('taxCash');
  L={rev:'Actual receipts', cogs:'Supplier payments', margin:'cash surplus margin % (of receipts)', gross:'Cash surplus before operating expenses',
- bottom:'Cash flow before principal', title:`Cash forecast vs actual — cumulative through month ${lastIdx+1}`};
+ bottom:'Cash flow before principal', ebitda:'Operating cash flow before financing and tax', title:`Cash forecast vs actual — cumulative through month ${lastIdx+1}`};
  }
 
  const pct = (g,r)=> r? (g/r*100) : 0;
@@ -10252,6 +10351,13 @@ function generateProfessionalPdfReportDirect() {
  const eOther = _belowOp(eGross, eMkt, ePay, eFix, eNet);
  const fOther = _belowOp(fGross, fMkt, fPay, fFix, fNet);
  const otherLabel = _isAcc ? 'Depreciation, finance and tax' : 'Finance and tax paid';
+ //  V-55 — operating profit before depreciation, financing and tax. Derived only from
+ //  the rows above it, so operating profit less "depreciation, finance and tax" equals
+ //  the bottom line by definition. On the cash basis there is no depreciation, and the
+ //  row is operating cash flow before financing and tax.
+ const _opOf = (gross, mkt, pay, fix) => gross - (mkt + pay + fix);
+ const aEbitda = _opOf(aGross, aMkt, aPay, aFix), pEbitda = _opOf(pGross, pMkt, pPay, pFix);
+ const eEbitda = _opOf(eGross, eMkt, ePay, eFix), fEbitda = _opOf(fGross, fMkt, fPay, fFix);
  const sourceNote = _isAcc
  ? 'Depreciation and finance are shown from the forecast — they have no separate actuals input. Tax is computed from the actual profit you entered.'
  : 'Finance is shown from the forecast — it has no separate actuals input. Tax is computed from the actual profit you entered.';
@@ -10276,12 +10382,14 @@ function generateProfessionalPdfReportDirect() {
  ['Marketing', aMkt, pMkt, eMkt, fMkt, false, false],
  ['Payroll', aPay, pPay, ePay, fPay, false, false],
  ['SG&A expenses (excluding payroll and marketing)', aFix, pFix, eFix, fFix, false, false],
+ [L.ebitda, aEbitda, pEbitda, eEbitda, fEbitda, true, false],   // V-55
  [otherLabel, aOther, pOther, eOther, fOther, false, false],   // V-36 — closes the account
  [L.bottom, aNet, pNet, eNet, fNet, true, false],
  ];
  return { rows, labels: L, title: L.title, basis: _isAcc ? 'accrual' : 'cash', sourceNote: sourceNoteFull,
  values: { aRev,aCogs,aGross,aNet, pRev,pCogs,pGross,pNet, fRev,fCogs,fGross,fNet, eRev,eCogs,eGross,eNet,
- aMkt,aPay,aFix, pMkt,pPay,pFix, fMkt,fPay,fFix, eMkt,ePay,eFix, aMargin,pMargin,eMargin,fMargin } };
+ aMkt,aPay,aFix, pMkt,pPay,pFix, fMkt,fPay,fFix, eMkt,ePay,eFix, aMargin,pMargin,eMargin,fMargin,
+ aEbitda,pEbitda,eEbitda,fEbitda, aOther,pOther,eOther,fOther } };
  }
 
  // ══════════════════════════════════════════════════════════════
@@ -10362,7 +10470,7 @@ function generateProfessionalPdfReportDirect() {
  if(!results) return false;
  const cols = ['Actual to date','Forecast to date','Variance','Flag','Year-end estimate (EAC)','Annual forecast'];
  const labels = ['Revenue','COGS','Gross margin %','Gross profit','Marketing','Payroll',
- 'SG&A expenses (excluding payroll and marketing)','Depreciation, finance and tax','Net profit'];
+ 'SG&A expenses (excluding payroll and marketing)','Operating profit before depreciation, financing and tax (EBITDA)','Depreciation, finance and tax','Net profit'];
  let h = `<h3 style="font-size:15px;font-weight:800;color:#0f172a;margin-bottom:4px">Actual vs. forecast</h3>
  <p style="font-size:12px;color:#64748b;margin-bottom:12px">This is how the comparison will look once actual data is entered.</p>
  <div style="overflow-x:auto"><table style="border-collapse:collapse;width:100%;direction:ltr;font-size:13px">
@@ -10478,11 +10586,15 @@ function generateProfessionalPdfReportDirect() {
  `<td style="padding:5px;border:1px solid #e2e8f0;text-align:center;font-size:12px;color:${color};font-weight:700;background:#f8fafc"><span id="${id}">${txt}</span></td>`;
  const rowStart = (label,color,bold=true) =>
  `<td style="padding:5px 8px;border:1px solid #e2e8f0;text-align:left;font-size:12px;color:${color};${bold?'font-weight:700':''};background:#f8fafc;${stkL()}min-width:120px">${label}</td>`;
+ //  V-55 — the cumulative total column. Filled by renderActualsTotals.
+ const totCell = key =>
+ `<td style="padding:5px;border:1px solid #cbd5e1;border-left:2px solid #0f172a;text-align:center;font-size:12px;font-weight:800;color:#0f172a;background:#e2e8f0;min-width:92px"><span id="actt-${key}"></span></td>`;
 
  const d = computeActualsDerived(lastIdx);
 
  let head = '<th style="padding:6px;border:1px solid #e2e8f0;background:#0f766e;color:#fff;font-size:12px;position:sticky;left:0;min-width:120px">Line Item</th>';
  for(let m=0;m<12;m++) head += `<th style="padding:6px;border:1px solid #e2e8f0;font-size:11px;background:${m<=lastIdx?'#0f766e':'#94a3b8'};color:#fff;min-width:78px">${monthNames[m]}</th>`;
+ head += `<th style="padding:6px;border:1px solid #e2e8f0;border-left:2px solid #fff;font-size:11px;background:#0f172a;color:#fff;min-width:92px">Cumulative total<div id="actt-hdr" style="font-size:10px;font-weight:400;opacity:.85"></div></th>`;
 
  let body='';
  const mg = m => { const rev=A.revenue[m], cogs=A.cogs[m]; return (rev&&cogs!=null)?(((rev-cogs)/rev)*100).toFixed(1):null; };
@@ -10492,18 +10604,22 @@ function generateProfessionalPdfReportDirect() {
  // to suppliers is not the cost of what was collected but the payment actually made.
  const _accIn = actualsBasis() === 'accrual';
  if(_accIn){
- body += `<tr>${rowStart('Recognized revenue','#0f172a')}`; for(let m=0;m<12;m++) body+=inputCell(m,'revenue',A.revenue[m],'Enter'); body+='</tr>';
- body += `<tr>${rowStart('Cost of goods sold (COGS)','#be123c',false)}`; for(let m=0;m<12;m++) body+=inputCell(m,'cogs',A.cogs[m]); body+='</tr>';
- body += `<tr>${rowStart('— or gross margin %','#64748b',false)}`; for(let m=0;m<12;m++){ const v=mg(m); body+=inputCell(m,'margin',v==null?null:parseFloat(v),'%'); } body+='</tr>';
+ body += `<tr>${rowStart('Recognized revenue','#0f172a')}`; for(let m=0;m<12;m++) body+=inputCell(m,'revenue',A.revenue[m],'Enter'); body+=totCell('top')+'</tr>';
+ body += `<tr>${rowStart('Cost of goods sold (COGS)','#be123c',false)}`; for(let m=0;m<12;m++) body+=inputCell(m,'cogs',A.cogs[m]); body+=totCell('bot')+'</tr>';
+ body += `<tr>${rowStart('— or gross margin %','#64748b',false)}`; for(let m=0;m<12;m++){ const v=mg(m); body+=inputCell(m,'margin',v==null?null:parseFloat(v),'%'); } body+=totCell('margin')+'</tr>';
  } else {
- body += `<tr>${rowStart('Actual receipts','#0f172a')}`; for(let m=0;m<12;m++) body+=inputCell(m,'receipts',A.receipts[m],'Enter'); body+='</tr>';
- body += `<tr>${rowStart('Supplier payments','#be123c',false)}`; for(let m=0;m<12;m++) body+=inputCell(m,'payments',A.payments[m]); body+='</tr>';
+ body += `<tr>${rowStart('Actual receipts','#0f172a')}`; for(let m=0;m<12;m++) body+=inputCell(m,'receipts',A.receipts[m],'Enter'); body+=totCell('top')+'</tr>';
+ body += `<tr>${rowStart('Supplier payments','#be123c',false)}`; for(let m=0;m<12;m++) body+=inputCell(m,'payments',A.payments[m]); body+=totCell('bot')+'</tr>';
  }
- body += `<tr>${rowStart(_accIn?'Gross profit':'Cash surplus before operating expenses','#065f46')}`; for(let m=0;m<12;m++) body+= m<=lastIdx?compCell(`actc-gross-${m}`,_actFmt0(d.gross[m]),'#065f46'):compCell(`actc-gross-${m}`,'','#065f46'); body+='</tr>';
- body += `<tr>${rowStart('Marketing','#334155',false)}`; for(let m=0;m<12;m++) body+=inputCell(m,'marketing',A.marketing[m]); body+='</tr>';
- body += `<tr>${rowStart('Payroll','#334155',false)}`; for(let m=0;m<12;m++) body+=inputCell(m,'payroll',A.payroll[m]); body+='</tr>';
- body += `<tr>${rowStart('SG&A expenses (excluding payroll and marketing)','#334155',false)}`; for(let m=0;m<12;m++){ const _top=_accIn?A.revenue[m]:A.receipts[m]; const val=(A.fixed[m]!==null?A.fixed[m]:(_top!=null?fixedDefault:null)); body+=inputCell(m,'fixed',val); } body+='</tr>';
- body += `<tr>${rowStart(_accIn?'Net profit':'Cash flow before principal','#0f172a')}`; for(let m=0;m<12;m++) body+= m<=lastIdx?compCell(`actc-net-${m}`,_actFmt0(d.net[m]),d.net[m]<0?'#dc2626':'#0f172a'):compCell(`actc-net-${m}`,'','#0f172a'); body+='</tr>';
+ body += `<tr>${rowStart(_accIn?'Gross profit':'Cash surplus before operating expenses','#065f46')}`; for(let m=0;m<12;m++) body+= m<=lastIdx?compCell(`actc-gross-${m}`,_actFmt0(d.gross[m]),'#065f46'):compCell(`actc-gross-${m}`,'','#065f46'); body+=totCell('gross')+'</tr>';
+ body += `<tr>${rowStart('Marketing','#334155',false)}`; for(let m=0;m<12;m++) body+=inputCell(m,'marketing',A.marketing[m]); body+=totCell('mkt')+'</tr>';
+ body += `<tr>${rowStart('Payroll','#334155',false)}`; for(let m=0;m<12;m++) body+=inputCell(m,'payroll',A.payroll[m]); body+=totCell('pay')+'</tr>';
+ body += `<tr>${rowStart('SG&A expenses (excluding payroll and marketing)','#334155',false)}`; for(let m=0;m<12;m++){ const _top=_accIn?A.revenue[m]:A.receipts[m]; const val=(A.fixed[m]!==null?A.fixed[m]:(_top!=null?fixedDefault:null)); body+=inputCell(m,'fixed',val); } body+=totCell('fix')+'</tr>';
+ //  V-55 — operating profit before depreciation, financing and tax, and the row that closes it to the bottom line.
+ const _mrG = actualsMonthlyRows(_accIn ? 'accrual' : 'cash', d, lastIdx);
+ body += `<tr>${rowStart(_mrG.byKey.op.label,'#92400e')}`; for(let m=0;m<12;m++){ const v=_mrG.byKey.op.at(m); body+= m<=lastIdx?compCell(`actc-op-${m}`,_actFmt0(v),v<0?'#dc2626':'#92400e'):compCell(`actc-op-${m}`,'','#92400e'); } body+=totCell('op')+'</tr>';
+ body += `<tr>${rowStart(_mrG.byKey.other.label,'#334155',false)}`; for(let m=0;m<12;m++) body+= m<=lastIdx?compCell(`actc-other-${m}`,_actFmt0(_mrG.byKey.other.at(m)),'#334155'):compCell(`actc-other-${m}`,'','#334155'); body+=totCell('other')+'</tr>';
+ body += `<tr>${rowStart(_accIn?'Net profit':'Cash flow before principal','#0f172a')}`; for(let m=0;m<12;m++) body+= m<=lastIdx?compCell(`actc-net-${m}`,_actFmt0(d.net[m]),d.net[m]<0?'#dc2626':'#0f172a'):compCell(`actc-net-${m}`,'','#0f172a'); body+=totCell('net')+'</tr>';
  // ── V-34 — the cash rows exist only on the cash basis ──
  // They used to appear on the accrual basis too, with accrual figures under the headings
  // "net cash flow" and "cash balance at month end". Revenue recognized but not yet
@@ -10513,16 +10629,17 @@ function generateProfessionalPdfReportDirect() {
  for(let m=0;m<12;m++) body+= m<=lastIdx
  ? compCell(`actc-cum-${m}`,_actFmt0(d.cum[m]),d.cum[m]<0?'#dc2626':'#166534')
  : compCell(`actc-cum-${m}`,'','#166534');
- body+='</tr>';
+ body+=totCell('cum')+'</tr>';
  } else {
- body += `<tr>${rowStart('Net monthly cash flow','#1e40af')}`; for(let m=0;m<12;m++) body+= m<=lastIdx?compCell(`actc-cf-${m}`,_actFmt0(d.netCf[m]),'#1e40af'):compCell(`actc-cf-${m}`,'','#1e40af'); body+='</tr>';
- body += `<tr>${rowStart('Cash balance at month end','#0f172a')}`; for(let m=0;m<12;m++) body+= m<=lastIdx?compCell(`actc-cum-${m}`,_actFmt0(d.cum[m]),d.cum[m]<0?'#dc2626':'#166534'):compCell(`actc-cum-${m}`,'','#166534'); body+='</tr>';
+ body += `<tr>${rowStart('Net monthly cash flow','#1e40af')}`; for(let m=0;m<12;m++) body+= m<=lastIdx?compCell(`actc-cf-${m}`,_actFmt0(d.netCf[m]),'#1e40af'):compCell(`actc-cf-${m}`,'','#1e40af'); body+=totCell('netCf')+'</tr>';
+ body += `<tr>${rowStart('Cash balance at month end','#0f172a')}`; for(let m=0;m<12;m++) body+= m<=lastIdx?compCell(`actc-cum-${m}`,_actFmt0(d.cum[m]),d.cum[m]<0?'#dc2626':'#166534'):compCell(`actc-cum-${m}`,'','#166534'); body+=totCell('cum')+'</tr>';
  }
 
  wrap.innerHTML = `<table style="border-collapse:collapse;width:100%;direction:ltr"><thead><tr>${head}</tr></thead><tbody>${body}</tbody></table>
  <p style="font-size:11px;color:#94a3b8;margin-top:6px">SG&A expenses default to the forecast (${_actFmt(fixedDefault)} per month) — Update these amounts if actual expenses differ from the forecast.</p>
  ${buildRecognitionNote()}`;
 
+ renderActualsTotals(d, lastIdx);   // V-55
  renderActualsBasisUI(d);   // V-34 — the toggle and strip refresh with the page
  renderActualsResults(elapsed, lastIdx, d);
  }
